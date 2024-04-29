@@ -40,7 +40,7 @@ class CourseController extends Controller
         $messages = [
             'course_name.required' => 'コース名は必須です',
             'course_name.unique' => 'そのコース名はすでに登録されています',
-            'fee' => '料金設定は必須です',
+            'fee.required' => '料金設定は必須です',
             'description.required' => 'コース内容の説明は必須です'
         ];
 
@@ -89,9 +89,45 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
-    {
-        //
+    public function update(Course $course_id, Request $request)
+    {dd($course_id);
+        $rules = [
+            'course_name' => 'required',
+            'fee' => 'required',
+            'description' => 'required'
+        ];
+
+        $messages = [
+            'course_name.required' => 'コース名は必須です',
+            'fee' => '料金設定は必須です',
+            'description.required' => 'コース内容の説明は必須です'
+        ];
+
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('course')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        try{
+            DB::beginTransaction();
+            $course = $course_id;
+            $course->course_name = $request->input('course_name');
+            $course->fee = $request->input('fee');
+            $course->description = $request->input('description');
+            $course->save();
+            DB::commit();
+            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の変更ができました。']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Course Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'コースの内容の更新に失敗しました');
+        }
+        
+        
     }
 
     /**
