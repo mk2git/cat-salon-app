@@ -58,7 +58,7 @@ class CourseController extends Controller
             $course->description = $request->input('description');
             $course->save();
             DB::commit();
-            return redirect()->route('course.index')->with(['message' => '「'.$course->name.'」の登録ができました。']);
+            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の登録ができました。']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Course Store', ['message' => $th->getMessage()]);
