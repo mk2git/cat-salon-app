@@ -14,7 +14,8 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return view('course.index');
+        $courses = Course::all();
+        return view('course.index', compact('courses'));
     }
 
     /**
@@ -32,12 +33,14 @@ class CourseController extends Controller
     {
         $rules = [
             'course_name' => 'required|unique:courses',
+            'fee' => 'required',
             'description' => 'required'
         ];
 
         $messages = [
             'course_name.required' => 'コース名は必須です',
             'course_name.unique' => 'そのコース名はすでに登録されています',
+            'fee' => '料金設定は必須です',
             'description.required' => 'コース内容の説明は必須です'
         ];
 
@@ -55,6 +58,7 @@ class CourseController extends Controller
             DB::beginTransaction();
             $course = new Course();
             $course->course_name = $request->input('course_name');
+            $course->fee = $request->input('fee');
             $course->description = $request->input('description');
             $course->save();
             DB::commit();
