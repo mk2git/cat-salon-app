@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReserveCreateController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,3 +19,9 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+Route::middleware('auth')->group(function () {
+    Route::controller(ReserveCreateController::class)->group(function(){
+        Route::get('reserve/create', 'index')->name('reserveCreate.index');
+    });
+});
