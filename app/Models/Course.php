@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     use HasFactory;
+
+    public function reserveCreates(){
+        return $this->hasMany(ReserveCreate::class);
+    }
 }
