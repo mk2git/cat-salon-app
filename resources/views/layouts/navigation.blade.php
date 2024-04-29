@@ -30,6 +30,12 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('course.index')">
+                            コースを作成
+                         </x-dropdown-link>
+                        <x-dropdown-link :href="route('reserveCreate.index')">
+                           予約を作成
+                        </x-dropdown-link>
 
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
