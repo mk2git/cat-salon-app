@@ -31,12 +31,13 @@ class CourseController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required',
+            'course_name' => 'required|unique:courses',
             'description' => 'required'
         ];
 
         $messages = [
-            'name.required' => 'コース名は必須です',
+            'course_name.required' => 'コース名は必須です',
+            'course_name.unique' => 'そのコース名はすでに登録されています',
             'description.required' => 'コース内容の説明は必須です'
         ];
 
@@ -53,11 +54,11 @@ class CourseController extends Controller
         try{
             DB::beginTransaction();
             $course = new Course();
-            $course->name = $request->input('name');
+            $course->course_name = $request->input('course_name');
             $course->description = $request->input('description');
             $course->save();
             DB::commit();
-            return redirect()->route('course.index')->with(['message' => '「'.$course->name.'」の登録ができました。', 'type' => 'success']);
+            return redirect()->route('course.index')->with(['message' => '「'.$course->name.'」の登録ができました。']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Course Store', ['message' => $th->getMessage()]);
