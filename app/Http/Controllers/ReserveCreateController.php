@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReserveCreate;
+use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ReserveCreateController extends Controller
 {
@@ -12,7 +15,9 @@ class ReserveCreateController extends Controller
      */
     public function index()
     {
-        return view('reserve-create.index');
+        $courses = Course::all();
+
+        return view('reserve-create.index', compact('courses'));
     }
 
     /**
@@ -28,7 +33,41 @@ class ReserveCreateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            'date' => 'required',
+            'time' => 'required',
+            'course_id' => 'required'
+        ];
+
+        $messages = [
+            'date.required' => '日付選択は必須です',
+            'time.required' => '時間設定は必須です',
+            'course_id.required' => 'コースの選択は必須です'
+        ];
+
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('reserve/create')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        try{
+            DB::beginTransaction();
+            $reserve_create = new ReserveCreate();
+            $reserve_create->date = $request->input('date');
+            $reserve_create->time = $request->input('time');
+            $reserve_create->course_id = $request->input('course_id');
+            $reserve_create->save();
+            DB::commit();
+            return redirect()->route('reserveCreate.index')->with(['message' => '予約可能日の登録ができました。']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error ReserveCreate Store', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約設定の追加に失敗しました');
+        }
     }
 
     /**
