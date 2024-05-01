@@ -17,7 +17,7 @@
       focus:invalid:border-pink-500 focus:invalid:ring-pink-500
     "/>
   </label>
-  <label class="block mx-auto mb-6">
+  <label class="block mx-auto mb-3">
     <span class="block text-sm font-medium text-slate-700">オプション内容</span>
     <textarea id="message" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="オプション内容を入力してください">{{$optionDesc}}</textarea>
   </label> 
