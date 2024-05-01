@@ -14,7 +14,9 @@ class ReserveOptionController extends Controller
      */
     public function index()
     {
-        return view('reserve-option.index');
+        $options = ReserveOption::all();
+
+        return view('reserve-option.index', compact('options'));
     }
 
     /**
@@ -31,7 +33,7 @@ class ReserveOptionController extends Controller
     public function store(Request $request)
     {
         $rules = [
-            'name' => 'required|unique:options',
+            'name' => 'required|unique:reserve_options',
             'fee' => 'required',
             'description' => 'required'
         ];
@@ -48,20 +50,20 @@ class ReserveOptionController extends Controller
 
         // バリデーションエラー時の処理
         if ($validator->fails()) {
-            return redirect('resrve/option')
+            return redirect('option')
                         ->withErrors($validator)
                         ->withInput();
         }
 
         try{
             DB::beginTransaction();
-            $option = new Option();
+            $option = new ReserveOption();
             $option->name = $request->input('name');
             $option->fee = $request->input('fee');
             $option->description = $request->input('description');
             $option->save();
             DB::commit();
-            return redirect()->route('course.index')->with(['message' => '「'.$option->name.'」の登録ができました。']);
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の登録ができました。']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Option Store', ['message' => $th->getMessage()]);
