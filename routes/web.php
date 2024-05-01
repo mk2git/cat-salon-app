@@ -40,4 +40,6 @@ Route::middleware('auth')->group(function () {
     
     Route::get('option', [ReserveOptionController::class, 'index'])->name('reserve-option.index');
     Route::post('option', [ReserveOptionController::class, 'store'])->name('reserve-option.store');
+    Route::put('option/{id}', [ReserveOptionController::class, 'update'])->name('reserve-option.update');
+    Route::delete('option/{id}', [ReserveOptionController::class, 'destroy'])->name('reserve-option.delete');
 });
