@@ -9,6 +9,12 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'course_name',
+        'fee',
+        'description'
+    ];
+
     public function reserveCreates(){
         return $this->hasMany(ReserveCreate::class);
     }

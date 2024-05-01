@@ -9,6 +9,12 @@ class ReserveCreate extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'date',
+        'time',
+        'course_id'
+    ];
+
     public function course(){
         return $this->belongsTo(Course::class);
     }
