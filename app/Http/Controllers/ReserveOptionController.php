@@ -114,7 +114,7 @@ class ReserveOptionController extends Controller
             $option->description = $request->input('description');
             $option->save();
             DB::commit();
-            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の更新ができました。']);
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の更新をしました']);
 
         }catch(\Throwable $th){
             DB::rollBack();
