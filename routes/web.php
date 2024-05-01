@@ -28,6 +28,8 @@ require __DIR__.'/auth.php';
 Route::middleware('auth')->group(function () {
     Route::controller(CourseController::class)->group(function(){
         Route::get('course', 'index')->name('course.index');
+        // Route::get('/course/{id}', [CourseController::class, 'show']);
+
         Route::post('course', 'store')->name('course.store');
         Route::put('course/{id}', 'update')->name('course.update');
     });
@@ -35,8 +37,7 @@ Route::middleware('auth')->group(function () {
         Route::get('reserve/create', 'index')->name('reserveCreate.index');
         Route::post('reserve/create', 'store')->name('reserveCreate.store');
     });
-    Route::controller(ReserveOptionController::class)->group(function(){
-        Route::get('reserve/option', 'index')->name('option.index');
-        Route::post('reserve/option', 'store')->name('option.store');
-    });
+    
+    Route::get('option', [ReserveOptionController::class, 'index'])->name('reserve-option.index');
+    Route::post('option', [ReserveOptionController::class, 'store'])->name('reserve-option.store');
 });
