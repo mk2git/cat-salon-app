@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\ReserveOptionController;
 use App\Http\Controllers\ReserveCreateController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,5 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::controller(ReserveCreateController::class)->group(function(){
         Route::get('reserve/create', 'index')->name('reserveCreate.index');
         Route::post('reserve/create', 'store')->name('reserveCreate.store');
+    });
+    Route::controller(ReserveOptionController::class)->group(function(){
+        Route::get('reserve/option', 'index')->name('option.index');
+        Route::post('reserve/option', 'store')->name('option.store');
     });
 });
