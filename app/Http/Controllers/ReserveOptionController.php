@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\ReserveOption;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class ReserveOptionController extends Controller
 {
@@ -12,7 +14,7 @@ class ReserveOptionController extends Controller
      */
     public function index()
     {
-        return view('option-create.index');
+        return view('reserve-option.index');
     }
 
     /**
@@ -46,7 +48,7 @@ class ReserveOptionController extends Controller
 
         // バリデーションエラー時の処理
         if ($validator->fails()) {
-            return redirect('course')
+            return redirect('resrve/option')
                         ->withErrors($validator)
                         ->withInput();
         }
