@@ -133,7 +133,7 @@ class ReserveOptionController extends Controller
             DB::beginTransaction();
             $id->delete();
             DB::commit();
-            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」を削除しました。']);
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$id->name.'」を削除しました。']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error ReserveOption Destroy', ['message' => $th->getMessage()]);
