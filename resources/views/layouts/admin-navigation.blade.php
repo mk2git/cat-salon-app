@@ -33,6 +33,9 @@
                         <x-dropdown-link :href="route('course.index')">
                             コースを作成
                          </x-dropdown-link>
+                         <x-dropdown-link :href="route('reserve-option.index')">
+                            オプションを作成
+                         </x-dropdown-link>
                         <x-dropdown-link :href="route('reserveCreate.index')">
                            予約を作成
                         </x-dropdown-link>
