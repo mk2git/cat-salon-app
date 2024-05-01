@@ -90,9 +90,46 @@ class ReserveOptionController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ReserveOption $reserveOption)
+    public function update(ReserveOption $id, Request $request)
     {
-        //
+        $rules = [
+            'name' => 'required',
+            'fee' => 'required',
+            'description' => 'required'
+        ];
+
+        $messages = [
+            'name.required' => 'オプション名は必須です',
+            'fee.required' => '料金設定は必須です',
+            'description.required' => 'オプション内容の説明は必須です'
+        ];
+
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('option')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+
+        try{
+            DB::beginTransaction();
+            $option = $id;
+            $option->name = $request->input('name');
+            $option->fee = $request->input('fee');
+            $option->description = $request->input('description');
+            $option->save();
+            DB::commit();
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の更新ができました。']);
+
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error ReserveOption Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'オプションの更新に失敗しました');
+        }
+
     }
 
     /**
