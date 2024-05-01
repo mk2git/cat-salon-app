@@ -135,8 +135,18 @@ class ReserveOptionController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ReserveOption $reserveOption)
+    public function destroy(ReserveOption $id)
     {
-        //
+        try{
+            DB::beginTransaction();
+            $id->delete();
+            DB::commit();
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」を削除しました。']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error ReserveOption Destroy', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'オプションの削除に失敗しました');
+        }
+        
     }
 }
