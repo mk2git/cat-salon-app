@@ -47,9 +47,7 @@
           </form>
       </div>
       <div>
-        <p>カレンダー</p>
-        <div id="calendar"></div>
-       
+        <div id='calendar' data-events='@json($events)'></div>
       </div>
     </div>
    
