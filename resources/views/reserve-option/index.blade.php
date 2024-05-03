@@ -18,14 +18,14 @@
         </form>
       </div>
       <div>
-        <p class="text-center">オプションの編集</p>
+        <p class="text-center mb-3">オプションの編集</p>
         @foreach ($options as $option)
           <div class="border rounded p-4 mb-3">
             <form action="{{route('reserve-option.update', $option->id)}}" method="post" class="block mb-3">
               @csrf
               @method('put')
               <x-option-form :option-name="$option->name" :option-fee="$option->fee" :option-desc="$option->description" />
-              <button type="submit" class="py-2 px-5 bg-teal-600 text-white font-semibold rounded-full shadow-md hover:bg-teal-600 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">更新</button>
+              <button type="submit" class="py-2 px-5 bg-teal-600 text-white font-semibold rounded-full shadow-md hover:bg-teal-800 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">更新</button>
             </form>
             <hr>
             <div class="mt-3 text-right">
