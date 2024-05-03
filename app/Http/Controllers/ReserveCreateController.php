@@ -16,8 +16,17 @@ class ReserveCreateController extends Controller
     public function index()
     {
         $courses = Course::all();
+        $reserves = ReserveCreate::select('date', 'time', 'course_id')->get();
+        $events = [];
 
-        return view('reserve-create.index', compact('courses'));
+        foreach($reserves as $reserve){
+            $events[] = [
+                'title' => $reserve->course->course_name. '：' .$reserve->course->description,
+                'start' => $reserve->date . 'T' . $reserve->time,
+            ];
+        }
+
+        return view('reserve-create.index', compact('courses', 'events'));
     }
 
     /**
