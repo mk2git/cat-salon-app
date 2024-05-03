@@ -26,15 +26,25 @@
                         </button>
                     </x-slot>
 
+                   
                     <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
-
+                        @can('admin')
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('course.index')">
+                                コースを作成
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('reserve-option.index')">
+                                オプションを作成
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('reserveCreate.index')">
+                            予約を作成
+                            </x-dropdown-link>
+                        @endcan   
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
