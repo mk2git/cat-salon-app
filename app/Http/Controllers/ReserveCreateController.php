@@ -20,8 +20,14 @@ class ReserveCreateController extends Controller
         $events = [];
 
         foreach($reserves as $reserve){
+            if($reserve->course->course_name == 'コース１'){
+                $color = '#257e4a';
+            }else{
+                $color =  '#ff9f89';
+            }
             $events[] = [
                 'title' => $reserve->course->course_name. '：' .$reserve->course->description,
+                'color' => $color,
                 'start' => $reserve->date . 'T' . $reserve->time,
             ];
         }
