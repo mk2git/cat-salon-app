@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   const events = JSON.parse(calendarEl.dataset.events); // data-eventsの値を取得
-
+  const today = new Date(); // 今日の日付を取得
   const calendar = new Calendar(calendarEl, {
     plugins: [ interactionPlugin, dayGridPlugin, timeGridPlugin, listPlugin ],
     headerToolbar: {
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
       center: 'title',
       right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
     },
-    initialDate: '2018-01-12',
+    initialDate: today,
     navLinks: true, // can click day/week names to navigate views
     editable: true,
     dayMaxEvents: true, // allow "more" link when too many events
