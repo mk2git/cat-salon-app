@@ -7,7 +7,7 @@
     @if ($errors->any())
            <x-error-message />
     @endif
-    <div class="flex">
+    <div class="flex mb-8">
       <div class="flex-2 me-8">
           <p class="text-lg text-center">予約可能日の追加</p>
           <form action="{{route('reserveCreate.store')}}" method="post" class="block w-80 mx-auto mt-3">
@@ -67,6 +67,7 @@
         const config = {
           // マジックナンバー
           // キー:値
+          // 表示させたい月の数の数字を書く（例：2ヶ月分を表示させたかったら show:2と書く）
           show: 1,
           // 1年分のカレンダーを表示するためのもの。下記のfunction内でmaxYearSpanを利用したコード書く必要あり
           maxYearSpan: 1,
@@ -128,19 +129,28 @@
                 // 1行目で1日の曜日の前
                 let num = lastMonthendDayCount - startDay + d + 1
                 // console.log(num);
-                calendarHtml += '<td class="text-gray-300">' + num + '</td>'
+                calendarHtml += '<td class="text-gray-300">' + num
+                calendarHtml += '<div style="height:100px;"></div>'
+                calendarHtml += '</td>'
               } else if (dayCount > endDayCount) {
                 // 末尾の日数を超えた
                 let num = dayCount - endDayCount
                 // console.log(num);
-                calendarHtml += '<td class="text-gray-300">' + num + '</td>'
+                calendarHtml += '<td class="text-gray-300">' + num 
+                calendarHtml += '<div style="height:100px;"></div>'
+                calendarHtml += '</td>'
                 dayCount++
               } else {
                 if (dayCount == tDate && month == tMonth && year ==tYear){
-                  calendarHtml += '<td class = "font-bold w-12 h-12"><span class="bg-green-400 py-1 px-2 rounded-full">' + dayCount + '</span></td>'
+                  calendarHtml += '<td class = "border font-bold w-12 h-12"><span class="bg-green-400 py-1 px-2 rounded-full">' + dayCount
+                  calendarHtml += '</span>'
+                  calendarHtml += '<div style="height:100px;"></div>'
+                  calendarHtml += '</td>'
                   dayCount++         
                 }else{
-                  calendarHtml += '<td class = "w-12 h-12 border">' + dayCount + '</td>'
+                  calendarHtml += '<td class = "w-12 h-12 border">' + dayCount 
+                  calendarHtml += '<div style="height:100px;"></div>'
+                  calendarHtml += '</td>'
                   dayCount++
                 }        
               }
