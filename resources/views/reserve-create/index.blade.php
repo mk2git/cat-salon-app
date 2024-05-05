@@ -7,8 +7,8 @@
     @if ($errors->any())
            <x-error-message />
     @endif
-    <div class="grid gap-6 grid-cols-2">
-      <div>
+    <div class="flex">
+      <div class="flex-2 me-8">
           <p class="text-lg text-center">予約可能日の追加</p>
           <form action="{{route('reserveCreate.store')}}" method="post" class="block w-80 mx-auto mt-3">
             @csrf
@@ -46,11 +46,13 @@
             <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">追加</button>
           </form>
       </div>
-      <div>
+      <div class="flex-1 ms-8">
+        {{-- FullCalendarを利用する場合は51行目のコードが必要 --}}
         {{-- <div id='calendar' data-events='@json($events)'></div> --}}
-        <div class="d-flex justify-content-between">
-          <button id="prev" type="button" class="btn btn-primary">前の月</button>
-          <button id="next" type="button" class="btn btn-primary">次の月</button>
+
+        <div class="flex justify-between">
+          <button id="prev" type="button" class="py-2 px-5 bg-green-500 rouded text-white">前の月</button>
+          <button id="next" type="button" class="py-2 px-5 bg-green-500 rouded text-white">次の月</button>
         </div>
         <hr>
         <div id="calendar"></div>
@@ -65,7 +67,7 @@
         const config = {
           // マジックナンバー
           // キー:値
-          show: 2,
+          show: 1,
           // 1年分のカレンダーを表示するためのもの。下記のfunction内でmaxYearSpanを利用したコード書く必要あり
           maxYearSpan: 1,
         }
@@ -104,8 +106,8 @@
           let dayCount = 1 // 日にちのカウント
           let calendarHtml = '' // HTMLを組み立てる変数
           
-          calendarHtml += '<h1><small>' + year  + '</small>/' + month + '</h1>'
-          calendarHtml += '<table class="table">'
+          calendarHtml += '<p class="text-base">' + year  + ' / ' + '<span class="text-xl">' + month + '</span></p>'
+          calendarHtml += '<table class="w-full">'
           
           // 曜日の行を作成
           calendarHtml += '<tr>'
@@ -120,25 +122,25 @@
           }
           calendarHtml += '</tr>'
           for (let w = 0; w < 6; w++) {
-            calendarHtml += '<tr>'
+            calendarHtml += '<tr class="">'
             for (let d = 0; d < 7; d++) {
               if (w == 0 && d < startDay) {
                 // 1行目で1日の曜日の前
                 let num = lastMonthendDayCount - startDay + d + 1
                 // console.log(num);
-                calendarHtml += '<td class="disabled">' + num + '</td>'
+                calendarHtml += '<td class="text-gray-300">' + num + '</td>'
               } else if (dayCount > endDayCount) {
                 // 末尾の日数を超えた
                 let num = dayCount - endDayCount
                 // console.log(num);
-                calendarHtml += '<td class="disabled">' + num + '</td>'
+                calendarHtml += '<td class="text-gray-300">' + num + '</td>'
                 dayCount++
               } else {
                 if (dayCount == tDate && month == tMonth && year ==tYear){
-                  calendarHtml += '<td style = "font-weight: bold; color: green;">' + dayCount + '</td>'
+                  calendarHtml += '<td class = "font-bold w-12 h-12"><span class="bg-green-400 py-1 px-2 rounded-full">' + dayCount + '</span></td>'
                   dayCount++         
                 }else{
-                  calendarHtml += '<td>' + dayCount + '</td>'
+                  calendarHtml += '<td class = "w-12 h-12 border">' + dayCount + '</td>'
                   dayCount++
                 }        
               }
