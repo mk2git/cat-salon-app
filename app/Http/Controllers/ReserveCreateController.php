@@ -16,21 +16,29 @@ class ReserveCreateController extends Controller
     public function index()
     {
         $courses = Course::all();
-        $reserves = ReserveCreate::select('date', 'time', 'course_id')->get();
+        $reserves = ReserveCreate::all();
         $events = [];
 
         foreach($reserves as $reserve){
-            if($reserve->course->course_name == 'コース１'){
-                $color = '#257e4a';
+            $reserve->unix_timestamp = strtotime($reserve->date);
+            if(isset($events[$reserve->unix_timestamp])){
+                $events[$reserve->unix_timestamp][] = [
+                    'id' => $reserve->id,
+                   'date' => $reserve->date,
+                   'time' => $reserve->time,
+                   'course_name' => $reserve->course->course_name
+               ];
             }else{
-                $color =  '#ff9f89';
+                $events[$reserve->unix_timestamp] = [];
+                $events[$reserve->unix_timestamp] = [
+                     'id' => $reserve->id,
+                    'date' => $reserve->date,
+                    'time' => $reserve->time,
+                    'course_name' => $reserve->course->course_name
+                ];
             }
-            $events[] = [
-                'title' => $reserve->course->course_name. '：' .$reserve->course->description,
-                'color' => $color,
-                'start' => $reserve->date . 'T' . $reserve->time,
-            ];
-        }
+        }    
+       $events = json_encode($events);
 
         return view('reserve-create.index', compact('courses', 'events'));
     }
