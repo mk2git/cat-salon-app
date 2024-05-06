@@ -15,30 +15,31 @@ class ReserveCreateController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
+        $courses  = Course::all();
         $reserves = ReserveCreate::all();
-        $events = [];
+        $events   = [];
 
-        foreach($reserves as $reserve){
+        foreach ($reserves as $reserve) {
             $reserve->unix_timestamp = strtotime($reserve->date);
-            if(isset($events[$reserve->unix_timestamp])){
+            if (isset($events[$reserve->unix_timestamp])) {
                 $events[$reserve->unix_timestamp][] = [
-                    'id' => $reserve->id,
-                   'date' => $reserve->date,
-                   'time' => $reserve->time,
-                   'course_name' => $reserve->course->course_name
-               ];
-            }else{
+                    'id'          => $reserve->id,
+                    'date'        => $reserve->date,
+                    'time'        => $reserve->time,
+                    'course_name' => $reserve->course->course_name
+                ];
+            } else {
                 $events[$reserve->unix_timestamp] = [];
-                $events[$reserve->unix_timestamp] = [
-                     'id' => $reserve->id,
-                    'date' => $reserve->date,
-                    'time' => $reserve->time,
+                $events[$reserve->unix_timestamp][] = [
+                    'id'          => $reserve->id,
+                    'date'        => $reserve->date,
+                    'time'        => $reserve->time,
                     'course_name' => $reserve->course->course_name
                 ];
             }
-        }    
-       $events = json_encode($events);
+        }
+        $events = json_encode($events);
+
 
         return view('reserve-create.index', compact('courses', 'events'));
     }
@@ -74,10 +75,10 @@ class ReserveCreateController extends Controller
         // バリデーションエラー時の処理
         if ($validator->fails()) {
             return redirect('reserve/create')
-                        ->withErrors($validator)
-                        ->withInput();
+                ->withErrors($validator)
+                ->withInput();
         }
-        try{
+        try {
             DB::beginTransaction();
             $reserve_create = new ReserveCreate();
             $reserve_create->date = $request->input('date');
@@ -86,7 +87,7 @@ class ReserveCreateController extends Controller
             $reserve_create->save();
             DB::commit();
             return redirect()->route('reserveCreate.index')->with(['message' => '予約可能日の登録ができました。']);
-        }catch(\Throwable $th){
+        } catch (\Throwable $th) {
             DB::rollBack();
             logger('Error ReserveCreate Store', ['message' => $th->getMessage()]);
             return redirect()->back()->with('error', '予約設定の追加に失敗しました');

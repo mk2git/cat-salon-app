@@ -2,9 +2,9 @@
   // 関数外での変数定義はグローバル変数という。ここで定義されたものは関数で引数として()内に書かなくても使える
   // 例：　function showCalendar()のyearとmonthを引数として書かなくてもJavaScriptでは問題はない
 const weeks = ['月', '火', '水', '木', '金', '土', '日']
-const date = new Date()
-let year = date.getFullYear()
-let month = date.getMonth() + 1
+const date  = new Date()
+let year    = date.getFullYear()
+let month   = date.getMonth() + 1
 
 // config内に各種設定値を書くと便利
 const config = {
@@ -77,15 +77,15 @@ function createCalendar(year, month, events) {
       if (w == 0 && d < startDay) {
         // 1行目で1日の曜日の前
         let num = lastMonthendDayCount - startDay + d + 1
-        // console.log(num);
-        calendarHtml += '<td class="text-gray-300">' + num
+        let unixTime = new Date(year, month-1, num).getTime()/1000
+        calendarHtml += '<td class="text-gray-300" id="' + unixTime + '">' + num
         calendarHtml += '<div style="height:100px;"></div>'
         calendarHtml += '</td>'
       } else if (dayCount > endDayCount) {
         // 末尾の日数を超えた
         let num = dayCount - endDayCount
-        // console.log(num);
-        calendarHtml += '<td class="text-gray-300">' + num 
+        let unixTime = new Date(year, month-1, num).getTime()/1000
+        calendarHtml += '<td class="text-gray-300" id="' + unixTime + '">' + num 
         calendarHtml += '<div style="height:100px;"></div>'
         calendarHtml += '</td>'
         dayCount++
@@ -97,15 +97,27 @@ function createCalendar(year, month, events) {
           // console.log(event);
           
         // });
-
+        let unixTime = new Date(year, month-1, dayCount).getTime()/1000
         if (dayCount == tDate && month == tMonth && year == tYear) {
-          calendarHtml += '<td class = "border font-bold w-12 h-12"><span class="bg-orange-300 py-1 px-2 rounded-full">' + dayCount + '</span>';
+          calendarHtml += '<td class = "border font-bold w-12 h-12" id="' + unixTime + '"><span class="bg-orange-300 py-1 px-2 rounded-full">' + dayCount + '</span>';
           calendarHtml += '<div style="height:100px;">' + eventCourseName + '</div>';
           calendarHtml += '</td>';
-          dayCount++;        
+          dayCount++;
         } else {
-          calendarHtml += '<td class = "w-12 h-12 border">' + dayCount;
-          calendarHtml += '<div style="height:100px;">' + eventCourseName + '</div>';
+          let reservesHTML = ''
+          let reserve_key = Object.keys(events).filter(unixKey => unixKey == unixTime);
+          if (reserve_key == unixTime) {
+            let reserves = events[reserve_key[0]];
+            reserves.forEach(reserve => {
+              reservesHTML += '<div>';
+              reservesHTML += '<span class="p-1">ID: ' + reserve.id + '</span>';
+              reservesHTML += '<span class="p-1">Time: ' + reserve.time + '</span>';
+              reservesHTML += '<span class="p-1">Course: ' + reserve.course_name + '</span>';
+              reservesHTML += '</div>';
+            });
+          }
+          calendarHtml += '<td class = "w-12 h-12 border" id="' + unixTime + '">' + dayCount;
+          calendarHtml += '<div style="height:100px;">' + reservesHTML + '</div>';
           calendarHtml += '</td>';
           dayCount++;
         } 
