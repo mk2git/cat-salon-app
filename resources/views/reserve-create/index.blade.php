@@ -56,7 +56,7 @@
           </div>
           <hr>
           <div id="calendar"></div>
-          <x-calendar :reserves="$reserves" />
+          <x-calendar :events="$events" />
       </div>
     </div>
   </div>
