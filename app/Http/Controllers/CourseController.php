@@ -73,9 +73,11 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Course $course)
+    public function show($id)
     {
-        //
+        $course = Course::findOrFail($id); // 指定されたIDに基づいてコースを取得します。存在しない場合は404エラーを返します。
+
+    return view('courses.show', compact('course')); 
     }
 
     /**
