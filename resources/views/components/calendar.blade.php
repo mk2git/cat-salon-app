@@ -92,17 +92,13 @@ function createCalendar(year, month, events) {
       } else {
         let eventCourseName = '';
         let eventTime = '';
-        // オブジェクトの値を配列に変換してから forEach メソッドを使用  （Object.values() を使用）
+        // オブジェクトの値を配列に変換してから forEach メソッドを使用  （Object.values() などを使用）
         // Object.entries(events).forEach(event => {
           // console.log(event);
-          // const eventDate = new Date(event.date);
-          // if (dayCount == eventDate.getDate() && month == eventDate.getMonth() + 1 && year == eventDate.getFullYear()) {
-          //   eventCourseName = event.course_name;
-          // }
+          
         // });
 
         if (dayCount == tDate && month == tMonth && year == tYear) {
-          // console.log(dayCount);
           calendarHtml += '<td class = "border font-bold w-12 h-12"><span class="bg-orange-300 py-1 px-2 rounded-full">' + dayCount + '</span>';
           calendarHtml += '<div style="height:100px;">' + eventCourseName + '</div>';
           calendarHtml += '</td>';
@@ -112,23 +108,7 @@ function createCalendar(year, month, events) {
           calendarHtml += '<div style="height:100px;">' + eventCourseName + '</div>';
           calendarHtml += '</td>';
           dayCount++;
-        }
-        
-        // if (dayCount == tDate && month == tMonth && year ==tYear && event->date == tYear.'-'.tMonth.'-'.tDate){
-        //   calendarHtml += '<td class = "border font-bold w-12 h-12"><span class="bg-orange-300 py-1 px-2 rounded-full">' + dayCount
-        //   calendarHtml += '</span>'
-        //   calendarHtml += '<div style="height:100px;">'
-          
-        //   calendarHtml += '</div>'
-        //   calendarHtml += '</td>'
-        //   dayCount++         
-        // }else{
-        //   calendarHtml += '<td class = "w-12 h-12 border">' + dayCount 
-        //   calendarHtml += '<div style="height:100px;">'
-        //   calendarHtml += '</div>'
-        //   calendarHtml += '</td>'
-        //   dayCount++
-        // }    
+        } 
       
       }
     }
