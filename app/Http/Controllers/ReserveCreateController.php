@@ -115,9 +115,22 @@ class ReserveCreateController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ReserveCreate $reserveCreate)
+    public function update(Request $request, ReserveCreate $id)
     {
-        //
+        $reserve_create = $id;
+        try{
+            DB::beginTransaction();
+            $reserve_create->date = $request->input('date');
+            $reserve_create->time = $request->input('time');
+            $reserve_create->course_id = $request->input('course_id');
+            $reserve_create->save();
+            DB::commit();
+            return redirect()->route('reserveCreate.index')->with(['message' => '予約可能日の修正ができました。']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error ReserveCreate Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約可能日の編集に失敗しました');
+        }
     }
 
     /**
