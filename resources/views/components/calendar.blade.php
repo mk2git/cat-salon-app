@@ -38,7 +38,6 @@ function showCalendar(year, month, events, course1, course2, course3) {
 }
 
 function createCalendar(year, month, events, course1, course2, course3) {
-  console.log(course3);
   // console.log(Array.isArray(events)); // true または false を確認  falseの場合は取得したデータが期待通りに配列に変換されていない可能性がある
 
   // ()内の最後を1にすることで1日になる
@@ -103,10 +102,19 @@ function createCalendar(year, month, events, course1, course2, course3) {
             reserves.forEach(reserve => {
               let time = reserve.time;
               let id = reserve.id;
+              let course_id = reserve.course_id;
               let formattedTime = time.replace(":00", "");
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              reservesHTML += '<a href="' + editUrl + '">';
+              if(course1 == course_id){
+                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500">';
+              }
+              if(course2 == course_id){
+                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500">';
+              }
+              if(course3 == course_id){
+                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500">';
+              }
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
               reservesHTML += '</a>';
