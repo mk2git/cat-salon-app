@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::post('reserve/create', 'store')->name('reserveCreate.store');
         Route::get('reserve/create/edit/{id}', 'edit')->name('reserveCreate.edit');
         Route::put('reserve/create/edit/{id}', 'update')->name('reserveCreate.update');
+        Route::delete('reserve/create/edit/{id}', 'destroy')->name('reserveCreate.destroy');
     });
     
     Route::get('option', [ReserveOptionController::class, 'index'])->name('reserve-option.index');
