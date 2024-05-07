@@ -26,6 +26,7 @@ class ReserveCreateController extends Controller
                     'id'          => $reserve->id,
                     'date'        => $reserve->date,
                     'time'        => $reserve->time,
+                    'course_id' => $reserve->course_id,
                     'course_name' => $reserve->course->course_name
                 ];
             } else {
@@ -34,6 +35,7 @@ class ReserveCreateController extends Controller
                     'id'          => $reserve->id,
                     'date'        => $reserve->date,
                     'time'        => $reserve->time,
+                    'course_id' => $reserve->course_id,
                     'course_name' => $reserve->course->course_name
                 ];
             }
