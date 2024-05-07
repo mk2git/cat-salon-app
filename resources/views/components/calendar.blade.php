@@ -16,10 +16,9 @@ const config = {
 
 const events = {!! $events !!};
 // console.log(events); // デバッグ用にeventsをコンソールに出力
-const course1 = @json(config('course.コース１'));
-const course2 = @json(config('course.コース２'));
-const course3 = @json(config('course.コース３'));
-
+  const course1 = @json(config('course.course1'));
+  const course2 = @json(config('course.course2'));
+  const course3 = @json(config('course.course3'));
 
 // 関数内での定義はローカル変数であるため、他の関数内で同じ名前で変数や定数の定義をしても別物として認識される
 function showCalendar(year, month, events, course1, course2, course3) {
@@ -128,13 +127,13 @@ function createCalendar(year, month, events, course1, course2, course3) {
               let formattedTime = time.replace(":00", "");
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              if(course_id == course1){
+              if(course1 == course_id){
                 reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500">';
               }
-              if(course_id == course2){
+              if(course2 == course_id){
                 reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500">';
               }
-              if(course_id == course3){
+              if(course3 == course_id){
                 reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500">';
               }
               
@@ -182,5 +181,5 @@ function moveCalendar(e) {
 
 document.querySelector('#prev').addEventListener('click', moveCalendar)
 document.querySelector('#next').addEventListener('click', moveCalendar)
-showCalendar(year, month, events)
+showCalendar(year, month, events, course1, course2, course3)
 </script>
