@@ -16,9 +16,13 @@ const config = {
 
 const events = {!! $events !!};
 // console.log(events); // デバッグ用にeventsをコンソールに出力
+const course1 = @json(config('course.コース１'));
+const course2 = @json(config('course.コース２'));
+const course3 = @json(config('course.コース３'));
+
 
 // 関数内での定義はローカル変数であるため、他の関数内で同じ名前で変数や定数の定義をしても別物として認識される
-function showCalendar(year, month, events) {
+function showCalendar(year, month, events, course1, course2, course3) {
   for ( i = 0; i < config.show; i++) {
     // createCalendarでinnerHTMLを使用しないのはカレンダーを表示する数を調整するのに便利だから
     const calendarHtml = createCalendar(year, month, events)
@@ -34,7 +38,7 @@ function showCalendar(year, month, events) {
   }
 }
 
-function createCalendar(year, month, events) {
+function createCalendar(year, month, events, course1, course2, course3) {
   // console.log(Array.isArray(events)); // true または false を確認  falseの場合は取得したデータが期待通りに配列に変換されていない可能性がある
 
   // ()内の最後を1にすることで1日になる
@@ -120,10 +124,20 @@ function createCalendar(year, month, events) {
             reserves.forEach(reserve => {
               let time = reserve.time;
               let id = reserve.id;
+              let course_id = reserve.course_id;
               let formattedTime = time.replace(":00", "");
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              reservesHTML += '<a href="' + editUrl + '">';
+              if(course_id == course1){
+                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300">';
+              }
+              if(course_id == course2){
+                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300">';
+              }
+              if(course_id == course3){
+                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300">';
+              }
+              
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
               reservesHTML += '</a>';
@@ -163,7 +177,7 @@ function moveCalendar(e) {
     }
 
   }
-  showCalendar(year, month, events)
+  showCalendar(year, month, events, course1, course2, course3)
 }
 
 document.querySelector('#prev').addEventListener('click', moveCalendar)
