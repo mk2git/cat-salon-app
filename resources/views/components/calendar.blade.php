@@ -15,7 +15,7 @@ const config = {
 
 
 const events = {!! $events !!};
-console.log(events); // デバッグ用にeventsをコンソールに出力
+// console.log(events); // デバッグ用にeventsをコンソールに出力
 
 // 関数内での定義はローカル変数であるため、他の関数内で同じ名前で変数や定数の定義をしても別物として認識される
 function showCalendar(year, month, events) {
@@ -95,14 +95,17 @@ function createCalendar(year, month, events) {
           let reservesHTML = ''
           let reserve_key = Object.keys(events).filter(unixKey => unixKey == unixTime);
           if (reserve_key == unixTime) {
-            let reserves = events[reserve_key[0]];
+            let reserves = events[reserve_key[0]];          
             reserves.forEach(reserve => {
               let time = reserve.time;
+              let id = reserve.id;
               let formattedTime = time.replace(":00", "");
-              reservesHTML += '<div>';
+              let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
+              let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
+              reservesHTML += '<a href="' + editUrl + '">';
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
-              reservesHTML += '</div>';
+              reservesHTML += '</a>';
             });
           }
           calendarHtml += '<td class = "border w-12 h-12" id="' + unixTime + '"><span class="font-bold bg-orange-300 py-1 px-2 rounded-full">' + dayCount + '</span>';
@@ -116,11 +119,14 @@ function createCalendar(year, month, events) {
             let reserves = events[reserve_key[0]];
             reserves.forEach(reserve => {
               let time = reserve.time;
+              let id = reserve.id;
               let formattedTime = time.replace(":00", "");
-              reservesHTML += '<div>';
+              let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
+              let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
+              reservesHTML += '<a href="' + editUrl + '">';
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
-              reservesHTML += '</div>';
+              reservesHTML += '</a>';
             });
           }
           calendarHtml += '<td class = "w-12 h-12 border" id="' + unixTime + '">' + dayCount;
