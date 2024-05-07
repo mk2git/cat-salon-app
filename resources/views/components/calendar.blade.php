@@ -20,11 +20,21 @@ const course1 = @json(config('course.course1'));
 const course2 = @json(config('course.course2'));
 const course3 = @json(config('course.course3'));
 
+function getColor(course_id) {
+  if (course_id === course1) {
+    return 'green'; 
+  } else if (course_id === course2) {
+    return 'yellow'; 
+  } else if (course_id === course3) {
+    return 'blue'; 
+  } 
+}
+
 // 関数内での定義はローカル変数であるため、他の関数内で同じ名前で変数や定数の定義をしても別物として認識される
-function showCalendar(year, month, events, course1, course2, course3) {
+function showCalendar(year, month, events) {
   for ( i = 0; i < config.show; i++) {
     // createCalendarでinnerHTMLを使用しないのはカレンダーを表示する数を調整するのに便利だから
-    const calendarHtml = createCalendar(year, month, events, course1, course2, course3)
+    const calendarHtml = createCalendar(year, month, events)
     // ここからDOM操作
     const sec = document.createElement('section')
     sec.innerHTML = calendarHtml
@@ -37,7 +47,7 @@ function showCalendar(year, month, events, course1, course2, course3) {
   }
 }
 
-function createCalendar(year, month, events, course1, course2, course3) {
+function createCalendar(year, month, events) {
   // console.log(Array.isArray(events)); // true または false を確認  falseの場合は取得したデータが期待通りに配列に変換されていない可能性がある
 
   // ()内の最後を1にすることで1日になる
@@ -106,15 +116,9 @@ function createCalendar(year, month, events, course1, course2, course3) {
               let formattedTime = time.replace(":00", "");
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              if(course1 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500 rounded-full">';
-              }
-              if(course2 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500 rounded-full">';
-              }
-              if(course3 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500 rounded-full">';
-              }
+              let color = getColor(course_id);
+
+              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full">';
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
               reservesHTML += '</a>';
@@ -136,15 +140,8 @@ function createCalendar(year, month, events, course1, course2, course3) {
               let formattedTime = time.replace(":00", "");
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              if(course1 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500 rounded-full">';
-              }
-              if(course2 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500 rounded-full">';
-              }
-              if(course3 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500 rounded-full">';
-              }
+              let color = getColor(course_id);
+              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full">';
               
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
@@ -185,10 +182,10 @@ function moveCalendar(e) {
     }
 
   }
-  showCalendar(year, month, events, course1, course2, course3)
+  showCalendar(year, month, events)
 }
 
 document.querySelector('#prev').addEventListener('click', moveCalendar)
 document.querySelector('#next').addEventListener('click', moveCalendar)
-showCalendar(year, month, events, course1, course2, course3)
+showCalendar(year, month, events)
 </script>
