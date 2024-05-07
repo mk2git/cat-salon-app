@@ -90,17 +90,23 @@ function createCalendar(year, month, events) {
         calendarHtml += '</td>'
         dayCount++
       } else {
-        let eventCourseName = '';
-        let eventTime = '';
-        // オブジェクトの値を配列に変換してから forEach メソッドを使用  （Object.values() などを使用）
-        // Object.entries(events).forEach(event => {
-          // console.log(event);
-          
-        // });
         let unixTime = new Date(year, month-1, dayCount).getTime()/1000
         if (dayCount == tDate && month == tMonth && year == tYear) {
-          calendarHtml += '<td class = "border font-bold w-12 h-12" id="' + unixTime + '"><span class="bg-orange-300 py-1 px-2 rounded-full">' + dayCount + '</span>';
-          calendarHtml += '<div style="height:100px;">' + eventCourseName + '</div>';
+          let reservesHTML = ''
+          let reserve_key = Object.keys(events).filter(unixKey => unixKey == unixTime);
+          if (reserve_key == unixTime) {
+            let reserves = events[reserve_key[0]];
+            reserves.forEach(reserve => {
+              let time = reserve.time;
+              let formattedTime = time.replace(":00", "");
+              reservesHTML += '<div>';
+              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
+              reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
+              reservesHTML += '</div>';
+            });
+          }
+          calendarHtml += '<td class = "border w-12 h-12" id="' + unixTime + '"><span class="font-bold bg-orange-300 py-1 px-2 rounded-full">' + dayCount + '</span>';
+          calendarHtml += '<div style="height:100px;">' + reservesHTML+ '</div>';
           calendarHtml += '</td>';
           dayCount++;
         } else {
@@ -109,10 +115,11 @@ function createCalendar(year, month, events) {
           if (reserve_key == unixTime) {
             let reserves = events[reserve_key[0]];
             reserves.forEach(reserve => {
+              let time = reserve.time;
+              let formattedTime = time.replace(":00", "");
               reservesHTML += '<div>';
-              reservesHTML += '<span class="p-1">ID: ' + reserve.id + '</span>';
-              reservesHTML += '<span class="p-1">Time: ' + reserve.time + '</span>';
-              reservesHTML += '<span class="p-1">Course: ' + reserve.course_name + '</span>';
+              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
+              reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
               reservesHTML += '</div>';
             });
           }
@@ -150,7 +157,7 @@ function moveCalendar(e) {
     }
 
   }
-  showCalendar(year, month)
+  showCalendar(year, month, events)
 }
 
 document.querySelector('#prev').addEventListener('click', moveCalendar)
