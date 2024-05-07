@@ -136,8 +136,21 @@ class ReserveCreateController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ReserveCreate $reserveCreate)
+    public function destroy(ReserveCreate $id)
     {
-        //
+        $reserve_create = $id;
+        try{
+            DB::beginTransaction();
+            $time = substr($reserve_create->time, 0, 5); // 時刻部分のみを取得
+            $message = $reserve_create->date.' '.$time.' '.$reserve_create->course->course_name;
+            $reserve_create->delete();
+            DB::commit();
+            return redirect()->route('reserveCreate.index')->with(['message' => '「'.$message.'」を削除しました。', 'type' => 'red']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error ReserveCreate Destroy', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約可能日の削除に失敗しました');
+        }
+
     }
 }
