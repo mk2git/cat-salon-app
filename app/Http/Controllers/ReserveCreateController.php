@@ -105,9 +105,11 @@ class ReserveCreateController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ReserveCreate $reserveCreate)
+    public function edit(ReserveCreate $id)
     {
-        //
+        $reserve = $id;
+        $courses  = Course::all();
+        return view('reserve-create.edit', compact('reserve', 'courses'));
     }
 
     /**
