@@ -16,15 +16,15 @@ const config = {
 
 const events = {!! $events !!};
 // console.log(events); // デバッグ用にeventsをコンソールに出力
-  const course1 = @json(config('course.course1'));
-  const course2 = @json(config('course.course2'));
-  const course3 = @json(config('course.course3'));
+const course1 = @json(config('course.course1'));
+const course2 = @json(config('course.course2'));
+const course3 = @json(config('course.course3'));
 
 // 関数内での定義はローカル変数であるため、他の関数内で同じ名前で変数や定数の定義をしても別物として認識される
 function showCalendar(year, month, events, course1, course2, course3) {
   for ( i = 0; i < config.show; i++) {
     // createCalendarでinnerHTMLを使用しないのはカレンダーを表示する数を調整するのに便利だから
-    const calendarHtml = createCalendar(year, month, events)
+    const calendarHtml = createCalendar(year, month, events, course1, course2, course3)
     // ここからDOM操作
     const sec = document.createElement('section')
     sec.innerHTML = calendarHtml
@@ -38,6 +38,7 @@ function showCalendar(year, month, events, course1, course2, course3) {
 }
 
 function createCalendar(year, month, events, course1, course2, course3) {
+  console.log(course3);
   // console.log(Array.isArray(events)); // true または false を確認  falseの場合は取得したデータが期待通りに配列に変換されていない可能性がある
 
   // ()内の最後を1にすることで1日になる
