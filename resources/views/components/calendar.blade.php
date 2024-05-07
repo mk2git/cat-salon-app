@@ -129,13 +129,13 @@ function createCalendar(year, month, events, course1, course2, course3) {
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
               if(course_id == course1){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500">';
               }
               if(course_id == course2){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500">';
               }
               if(course_id == course3){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500">';
               }
               
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
