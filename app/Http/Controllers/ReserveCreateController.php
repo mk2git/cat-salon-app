@@ -86,7 +86,7 @@ class ReserveCreateController extends Controller
             $reserve_create->course_id = $request->input('course_id');
             $reserve_create->save();
             DB::commit();
-            return redirect()->route('reserveCreate.index')->with(['message' => '予約可能日の登録ができました。']);
+            return redirect()->route('reserveCreate.index')->with(['message' => '予約可能日の登録ができました。', 'type' => 'orange']);
         } catch (\Throwable $th) {
             DB::rollBack();
             logger('Error ReserveCreate Store', ['message' => $th->getMessage()]);
@@ -125,7 +125,7 @@ class ReserveCreateController extends Controller
             $reserve_create->course_id = $request->input('course_id');
             $reserve_create->save();
             DB::commit();
-            return redirect()->route('reserveCreate.index')->with(['message' => '予約可能日の修正ができました。']);
+            return redirect()->route('reserveCreate.index')->with(['message' => '予約可能日の修正ができました。', 'type' => 'orange']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error ReserveCreate Update', ['message' => $th->getMessage()]);
