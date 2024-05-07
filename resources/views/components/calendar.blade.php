@@ -107,20 +107,20 @@ function createCalendar(year, month, events, course1, course2, course3) {
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
               if(course1 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500 rounded-full">';
               }
               if(course2 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500 rounded-full">';
               }
               if(course3 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500 rounded-full">';
               }
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
               reservesHTML += '</a>';
             });
           }
-          calendarHtml += '<td class = "border w-12 h-12" id="' + unixTime + '"><span class="font-bold bg-orange-300 py-1 px-2 rounded-full">' + dayCount + '</span>';
+          calendarHtml += '<td class = "border w-12 h-12" id="' + unixTime + '"><span class="font-bold bg-orange-200 py-1 px-2 rounded-full">' + dayCount + '</span>';
           calendarHtml += '<div style="height:100px;">' + reservesHTML+ '</div>';
           calendarHtml += '</td>';
           dayCount++;
@@ -137,13 +137,13 @@ function createCalendar(year, month, events, course1, course2, course3) {
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
               if(course1 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-green-300 hover:bg-green-500 rounded-full">';
               }
               if(course2 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-yellow-300 hover:bg-yellow-500 rounded-full">';
               }
               if(course3 == course_id){
-                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500">';
+                reservesHTML += '<a href="' + editUrl + '" class="bg-blue-300 hover:bg-blue-500 rounded-full">';
               }
               
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
