@@ -19,14 +19,6 @@ class CourseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -83,9 +75,10 @@ class CourseController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Course $course)
+    public function edit(Course $id)
     {
-        //
+        $course = $id;
+        return view('course.edit', compact('course'));
     }
 
     /**
@@ -136,8 +129,19 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Course $course)
+    public function destroy(Course $id)
     {
-        //
+        $course = $id;
+        try{
+            DB::beginTransaction();
+            $message = '「'.$course->course_name.'」を削除しました。';
+            $course->delete();
+            DB::commit();
+            return redirect()->route('course.index')->with(['message' => $message, 'type' => 'red']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Course Destroy', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'コースの内容の削除に失敗しました');
+        }
     }
 }
