@@ -55,7 +55,7 @@ class ReserveOptionController extends Controller
             $option->description = $request->input('description');
             $option->save();
             DB::commit();
-            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の登録ができました。']);
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の登録ができました。', 'type' => 'orange']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Option Store', ['message' => $th->getMessage()]);
@@ -114,7 +114,7 @@ class ReserveOptionController extends Controller
             $option->description = $request->input('description');
             $option->save();
             DB::commit();
-            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の更新をしました']);
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$option->name.'」の更新をしました', 'type' => 'green']);
 
         }catch(\Throwable $th){
             DB::rollBack();
@@ -133,7 +133,7 @@ class ReserveOptionController extends Controller
             DB::beginTransaction();
             $id->delete();
             DB::commit();
-            return redirect()->route('reserve-option.index')->with(['message' => '「'.$id->name.'」を削除しました。']);
+            return redirect()->route('reserve-option.index')->with(['message' => '「'.$id->name.'」を削除しました。', 'type' => 'red']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error ReserveOption Destroy', ['message' => $th->getMessage()]);
