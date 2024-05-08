@@ -41,17 +41,17 @@
       <div class="container mx-auto mt-6">
         @foreach ($courses as $course)
         <div class="">
-          <button data-modal-target="crud-modal{{$course->id}}" data-modal-toggle="crud-modal" class="block bg-amber-300 hover:bg-amber-400 font-medium rounded-lg shadow-lg hover:drop-shadow-xl m-3 edit-course w-full" type="button" data-course-id="{{ $course->id }}">
-              <div class="m-6">
-                <p class="text-2xl">{{$course->course_name}}</p>
-                <p class="mt-3"><small>料金：</small>&yen;{{number_format($course->fee)}}</p>
-                <p><small>コース内容：</small>{{$course->description}}</p>
-              </div>
+          <button type="button" class="block bg-amber-300 hover:bg-amber-400 font-medium rounded-lg shadow-lg hover:drop-shadow-xl m-3 edit-course w-full" data-bs-toggle="modal" data-bs-target="#exampleModal{{$course->id}}">
+            <div class="m-6">
+              <p class="text-2xl">{{$course->course_name}}</p>
+              <p class="mt-3"><small>料金：</small>&yen;{{number_format($course->fee)}}</p>
+              <p><small>コース内容：</small>{{$course->description}}</p>
+            </div>
           </button>
           <x-modal-course-edit :course-id="$course->id" :course-name="$course->course_name" :course-fee="$course->fee" :course-desc="$course->description" />
           </div>  
         @endforeach
       </div>
     </div>      
-  </div>
+  </div>  
 </x-app-layout>
