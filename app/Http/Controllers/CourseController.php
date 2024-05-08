@@ -91,8 +91,9 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Course $course_id, Request $request)
-    {dd($course_id);
+    public function update(Course $id, Request $request)
+    {
+        // dd($id);
         $rules = [
             'course_name' => 'required',
             'fee' => 'required',
@@ -116,13 +117,13 @@ class CourseController extends Controller
         }
         try{
             DB::beginTransaction();
-            $course = $course_id;
+            $course = $id;
             $course->course_name = $request->input('course_name');
             $course->fee = $request->input('fee');
             $course->description = $request->input('description');
             $course->save();
             DB::commit();
-            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の変更ができました。']);
+            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の変更ができました。', 'type' => 'green']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Course Update', ['message' => $th->getMessage()]);
