@@ -1,7 +1,7 @@
 <x-app-layout>
   <div class="container mt-8 mx-auto">
     @if (session('message'))
-      <x-alert-message :message="session('message')" />
+      <x-alert-message :message="session('message')" :type="session('type')" />
     @endif
 
     @if ($errors->any())
