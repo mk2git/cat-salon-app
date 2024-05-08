@@ -29,10 +29,10 @@ require __DIR__.'/auth.php';
 Route::middleware('auth')->group(function () {
     Route::controller(CourseController::class)->group(function(){
         Route::get('course', 'index')->name('course.index');
-        // Route::get('/course/{id}', [CourseController::class, 'show']);
-
         Route::post('course', 'store')->name('course.store');
-        Route::put('course/{id}', 'update')->name('course.update');
+        Route::get('course/{id}', 'edit')->name('course.edit');
+        Route::put('course/edit/{id}', 'update')->name('course.update');
+        Route::delete('course/{id}', 'destroy')->name('course.destroy');
     });
     Route::controller(ReserveCreateController::class)->group(function(){
         Route::get('reserve/create', 'index')->name('reserveCreate.index');
