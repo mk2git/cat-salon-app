@@ -27,11 +27,11 @@
                     </x-slot>
 
                    
-                    <x-slot name="content">
-                        @can('admin')
+                    <x-slot name="content">                      
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('Profile') }}
                             </x-dropdown-link>
+                        @can('admin')
                             <x-dropdown-link :href="route('course.index')">
                                 コースを作成
                             </x-dropdown-link>
@@ -43,6 +43,16 @@
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('reserveCreate.status')">
                                 現在の予約状況
+                            </x-dropdown-link>
+                        @else
+                            <x-dropdown-link :href="route('reserveCreate.status')">
+                                予約する
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('reserveCreate.status')">
+                                予約履歴
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('reserveCreate.status')">
+                                スタンプカード
                             </x-dropdown-link>
                         @endcan   
                         <!-- Authentication -->
