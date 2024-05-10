@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reserve;
 use App\Models\ReserveCreate;
+use App\Models\ReserveOption;
 use Illuminate\Http\Request;
 
 class ReserveController extends Controller
@@ -47,9 +48,12 @@ class ReserveController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create($id)
     {
-        
+        $reserve = ReserveCreate::find($id);
+        $reserve_options = ReserveOption::all();
+
+        return view('reserve.create', compact('reserve', 'reserve_options'));
     }
 
     /**
