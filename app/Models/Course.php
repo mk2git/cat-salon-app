@@ -12,7 +12,8 @@ class Course extends Model
     protected $fillable = [
         'course_name',
         'fee',
-        'description'
+        'description',
+        'color'
     ];
 
     public function reserveCreates(){
