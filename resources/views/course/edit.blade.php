@@ -20,6 +20,16 @@
                <label for="description" class="form-label">コース内容</label>
                <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" name="description">{{$course->description}}</textarea>                    
            </div>
+           <div class="col-span-2 sm:col-span-1">
+            <label for="color" class="form-label">色</label>
+            <select name="color" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
+              <option value="green" @if($course->color == 'green') selected @endif>green</option>
+              <option value="yellow" @if($course->color == 'yellow') selected @endif>yellow</option>
+              <option value="blue" @if($course->color == 'blue') selected @endif>blue</option>
+              <option value="teal" @if($course->color == 'teal') selected @endif>teal</option>
+              <option value="orange" @if($course->color == 'orange') selected @endif>orange</option>
+            </select>
+        </div>
        </div>
        <button type="submit" class="py-2 px-5 bg-green-700 text-white font-semibold rounded-full shadow-md hover:bg-green-800 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto w-2/4 my-4">
            更新
