@@ -56,7 +56,7 @@
       </div>
       <div class="container mx-auto mt-6">
         @foreach ($courses as $course)
-          <a href="{{route('course.edit', $course->id)}}" class="block bg-amber-300 hover:bg-amber-400 font-medium rounded-lg shadow-lg hover:drop-shadow-xl m-3 p-5 text-center w-full">
+          <a href="{{route('course.edit', $course->id)}}" class="block bg-{{$course->color}}-300 hover:bg-{{$course->color}}-400 font-medium rounded-lg shadow-lg hover:drop-shadow-xl m-3 p-5 text-center w-full">
               <p class="text-2xl">{{$course->course_name}}</p>
               <p class="mt-3"><small>料金：</small>&yen;{{number_format($course->fee)}}</p>
               <p><small>コース内容：</small>{{$course->description}}</p>
