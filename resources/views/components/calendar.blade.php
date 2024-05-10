@@ -16,19 +16,6 @@ const config = {
 
 const events = {!! $events !!};
 // console.log(events); // デバッグ用にeventsをコンソールに出力
-const course1 = @json(config('course.course1'));
-const course2 = @json(config('course.course2'));
-const course3 = @json(config('course.course3'));
-
-function getColor(course_id) {
-  if (course_id === course1) {
-    return 'green'; 
-  } else if (course_id === course2) {
-    return 'yellow'; 
-  } else if (course_id === course3) {
-    return 'blue'; 
-  } 
-}
 
 // 関数内での定義はローカル変数であるため、他の関数内で同じ名前で変数や定数の定義をしても別物として認識される
 function showCalendar(year, month, events) {
@@ -109,15 +96,14 @@ function createCalendar(year, month, events) {
           let reserve_key = Object.keys(events).filter(unixKey => unixKey == unixTime);
           if (reserve_key == unixTime) {
             let reserves = events[reserve_key[0]];          
-            reserves.forEach(reserve => {
+            reserves.forEach(reserve => {            
               let time = reserve.time;
               let id = reserve.id;
-              let course_id = reserve.course_id;
+              let color = reserve.color;          
               let formattedTime = time.replace(":00", "");
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              let color = getColor(course_id);
-
+              
               reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full">';
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
@@ -136,13 +122,12 @@ function createCalendar(year, month, events) {
             reserves.forEach(reserve => {
               let time = reserve.time;
               let id = reserve.id;
-              let course_id = reserve.course_id;
+              let color = reserve.color;
               let formattedTime = time.replace(":00", "");
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              let color = getColor(course_id);
-              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full">';
-              
+
+              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full">';             
               reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
               reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
               reservesHTML += '</a>';
