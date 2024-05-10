@@ -41,6 +41,9 @@
                             <x-dropdown-link :href="route('reserveCreate.index')">
                             予約を作成
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('reserveCreate.status')">
+                                現在の予約状況
+                            </x-dropdown-link>
                         @endcan   
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
