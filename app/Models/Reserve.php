@@ -13,4 +13,8 @@ class Reserve extends Model
         'user_id',
         'reserve_create_id'
     ];
+
+    public function reserveCreate(){
+        return $this->hasOne(ReserveCreate::class);
+    }
 }

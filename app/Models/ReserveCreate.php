@@ -18,4 +18,8 @@ class ReserveCreate extends Model
     public function course(){
         return $this->belongsTo(Course::class);
     }
+
+    public function reserve(){
+        return $this->belongsTo(Reserve::class);
+    }
 }
