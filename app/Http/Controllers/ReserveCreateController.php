@@ -48,13 +48,6 @@ class ReserveCreateController extends Controller
         return view('reserve-create.index', compact('courses', 'events'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -103,9 +96,38 @@ class ReserveCreateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ReserveCreate $reserveCreate)
+    public function showStatus(ReserveCreate $reserveCreate)
     {
-        //
+        $reserves = ReserveCreate::all();
+        $events   = [];
+
+        foreach ($reserves as $reserve) {
+            $reserve->unix_timestamp = strtotime($reserve->date);
+            if (isset($events[$reserve->unix_timestamp])) {
+                $events[$reserve->unix_timestamp][] = [
+                    'id'          => $reserve->id,
+                    'date'        => $reserve->date,
+                    'time'        => $reserve->time,
+                    'course_id' => $reserve->course_id,
+                    'course_name' => $reserve->course->course_name,
+                    'color' => $reserve->course->color
+                ];
+            } else {
+                $events[$reserve->unix_timestamp] = [];
+                $events[$reserve->unix_timestamp][] = [
+                    'id'          => $reserve->id,
+                    'date'        => $reserve->date,
+                    'time'        => $reserve->time,
+                    'course_id' => $reserve->course_id,
+                    'course_name' => $reserve->course->course_name,
+                    'color' => $reserve->course->color
+                ];
+            }
+        }
+        $events = json_encode($events);
+
+
+        return view('reserve-create.reserve-status', compact('events'));
     }
 
     /**
