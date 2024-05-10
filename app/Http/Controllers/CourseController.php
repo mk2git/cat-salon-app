@@ -26,14 +26,16 @@ class CourseController extends Controller
         $rules = [
             'course_name' => 'required|unique:courses',
             'fee' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'color' => 'required'
         ];
 
         $messages = [
             'course_name.required' => 'コース名は必須です',
             'course_name.unique' => 'そのコース名はすでに登録されています',
             'fee.required' => '料金設定は必須です',
-            'description.required' => 'コース内容の説明は必須です'
+            'description.required' => 'コース内容の説明は必須です',
+            'color.required' => '色の設定は必須です'
         ];
 
         // バリデータの作成
@@ -52,9 +54,10 @@ class CourseController extends Controller
             $course->course_name = $request->input('course_name');
             $course->fee = $request->input('fee');
             $course->description = $request->input('description');
+            $course->color = $request->input('color');
             $course->save();
             DB::commit();
-            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の登録ができました。']);
+            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の登録ができました。', 'type' => 'orange']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Course Store', ['message' => $th->getMessage()]);
