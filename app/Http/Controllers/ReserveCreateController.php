@@ -27,7 +27,8 @@ class ReserveCreateController extends Controller
                     'date'        => $reserve->date,
                     'time'        => $reserve->time,
                     'course_id' => $reserve->course_id,
-                    'course_name' => $reserve->course->course_name
+                    'course_name' => $reserve->course->course_name,
+                    'color' => $reserve->course->color
                 ];
             } else {
                 $events[$reserve->unix_timestamp] = [];
@@ -36,7 +37,8 @@ class ReserveCreateController extends Controller
                     'date'        => $reserve->date,
                     'time'        => $reserve->time,
                     'course_id' => $reserve->course_id,
-                    'course_name' => $reserve->course->course_name
+                    'course_name' => $reserve->course->course_name,
+                    'color' => $reserve->course->color
                 ];
             }
         }
