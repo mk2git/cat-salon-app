@@ -31,9 +31,25 @@
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
             "/>
           </label>
-          <label class="block mx-auto mb-6">
+          <label class="block mx-auto mb-3">
             <span class="block text-sm font-medium text-slate-700">コース内容</span>
             <textarea id="message" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="コース内容を入力してください"></textarea>
+          </label>
+          <label class="block mx-auto mb-6">
+            <span class="block text-sm font-medium text-slate-700">色</span>
+            <select name="color" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+              focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+              disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
+              invalid:border-pink-500 invalid:text-pink-600
+              focus:invalid:border-pink-500 focus:invalid:ring-pink-500
+            ">
+              <option disabled selected>色を選択してください</option>
+              <option value="green">green</option>
+              <option value="yellow">yellow</option>
+              <option value="blue">blue</option>
+              <option value="teal">teal</option>
+              <option value="orange">orange</option>
+            </select>
           </label>
           <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">登録</button>
         </form>
