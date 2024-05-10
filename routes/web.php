@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(ReserveController::class)->group(function(){
         Route::get('reserve', 'index')->name('reserve.index');
+        Route::get('reserve/{id}', 'create')->name('reserve.create');
     });
     
 
