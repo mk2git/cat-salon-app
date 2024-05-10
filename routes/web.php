@@ -47,7 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('option/{id}', [ReserveOptionController::class, 'destroy'])->name('reserve-option.delete');
 
     Route::controller(ReserveController::class)->group(function(){
-        Route::get('reserve', 'create')->name('reserve.create');
+        Route::get('reserve', 'index')->name('reserve.index');
     });
     
 
