@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function () {
     });
     Route::controller(ReserveCreateController::class)->group(function(){
         Route::get('reserve/create', 'index')->name('reserveCreate.index');
+        Route::get('reserve/status', 'showStatus')->name('reserveCreate.status');
         Route::post('reserve/create', 'store')->name('reserveCreate.store');
         Route::get('reserve/create/edit/{id}', 'edit')->name('reserveCreate.edit');
         Route::put('reserve/create/edit/{id}', 'update')->name('reserveCreate.update');
