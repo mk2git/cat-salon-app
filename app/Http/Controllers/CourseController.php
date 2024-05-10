@@ -80,7 +80,7 @@ class CourseController extends Controller
      */
     public function edit(Course $id)
     {
-        $course = $id;
+        $course = $id;   
         return view('course.edit', compact('course'));
     }
 
@@ -93,13 +93,15 @@ class CourseController extends Controller
         $rules = [
             'course_name' => 'required',
             'fee' => 'required',
-            'description' => 'required'
+            'description' => 'required',
+            'color' => 'required'
         ];
 
         $messages = [
             'course_name.required' => 'コース名は必須です',
             'fee' => '料金設定は必須です',
-            'description.required' => 'コース内容の説明は必須です'
+            'description.required' => 'コース内容の説明は必須です',
+            'color' => '色の設定は必須です',
         ];
 
         // バリデータの作成
@@ -117,6 +119,7 @@ class CourseController extends Controller
             $course->course_name = $request->input('course_name');
             $course->fee = $request->input('fee');
             $course->description = $request->input('description');
+            $course->color = $request->input('color');
             $course->save();
             DB::commit();
             return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の変更ができました。', 'type' => 'green']);
