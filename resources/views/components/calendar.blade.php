@@ -110,7 +110,7 @@ function createCalendar(year, month, events) {
               reservesHTML += '</a>';
             });
           }
-          calendarHtml += '<td class = "border w-12 h-12" id="' + unixTime + '"><span class="font-bold bg-orange-200 py-1 px-2 rounded-full">' + dayCount + '</span>';
+          calendarHtml += '<td class = "border w-12 h-12" id="' + unixTime + '"><span class="font-bold underline decoration-double decoration-red-600">' + dayCount + '</span>';
           calendarHtml += '<div style="height:100px;">' + reservesHTML+ '</div>';
           calendarHtml += '</td>';
           dayCount++;
