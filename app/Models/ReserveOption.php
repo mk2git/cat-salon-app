@@ -15,7 +15,7 @@ class ReserveOption extends Model
         'description'
     ];
 
-    public function reserveOptionLists(){
+    public function reserve_option_lists(){
         return $this->hasMany(ReserveOptionList::class);
     }
 }
