@@ -53,6 +53,7 @@ Route::middleware('auth')->group(function () {
         Route::get('reserve', 'index')->name('reserve.index');
         Route::get('reserve/{id}', 'create')->name('reserve.create');
         Route::post('reserve', 'store')->name('reserve.store');
+        Route::get('reserve/edit/{reserve_id}', 'edit')->name('reserve.edit');
     });
     
 
