@@ -7,6 +7,7 @@ use App\Models\ReserveCreate;
 use App\Models\ReserveOption;
 use App\Models\ReserveOptionList;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ReserveController extends Controller
@@ -65,16 +66,15 @@ class ReserveController extends Controller
     {
         try {
             DB::beginTransaction();
-            $data = $request->all();
-            
-            
-            $reserve = new Reserve();
-            $reserve->user_id = $data['user_id'];
-            $reserve->reserve_create_id = $data['reserve_create_id'];
-            $reserve->save();
-            $reserve_id = $reserve->id;
 
-            if($data['reserve_option']){
+            if($request->has('reserve_option')){
+                $data = $request->all();
+                $reserve = new Reserve();
+                $reserve->user_id = $data['user_id'];
+                $reserve->reserve_create_id = $data['reserve_create_id'];
+                $reserve->save();
+                $reserve_id = $reserve->id;
+
                 foreach($data['reserve_option'] as $reserve_option){
                     $reserve_option_list = new ReserveOptionList();
                     $reserve_option_list->user_id = $data['user_id'];
@@ -82,15 +82,21 @@ class ReserveController extends Controller
                     $reserve_option_list->reserve_option_id = $reserve_option;
                     $reserve_option_list->save();
                 }
+            }else{
+                $data = $request->all();
+                $reserve = new Reserve();
+                $reserve->user_id = $data['user_id'];
+                $reserve->reserve_create_id = $data['reserve_create_id'];
+                $reserve->save();
             }
 
             $reserve_create = ReserveCreate::find($data['reserve_create_id']);
             $reserve_create->status = config('reserve_create.reserved');
             $reserve_create->save();
-            $message = 'ok'; 
-            // $message = $reserve->reserve_create->date. ' ' .$reserve->reserve_create->time. ' ' .$reserve->reserve_create->course->course_name;
-
             DB::commit();
+
+            $time = Carbon::createFromFormat('H:i:s', $reserve->reserve_create->time)->format('H:i');
+            $message = $reserve->reserve_create->date. '   ' .$time. '   ' .$reserve->reserve_create->course->course_name;
             return redirect()->route('dashboard')->with(['message' => '「'.$message.'」の予約が確定されました。', 'type' => 'green']);
         } catch (\Throwable $th) {
             DB::rollBack();
