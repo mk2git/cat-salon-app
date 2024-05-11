@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Reserve;
 use App\Models\ReserveCreate;
+use App\Models\ReserveOption;
+use App\Models\ReserveOptionList;
 
 class DashboardController extends Controller
 {
@@ -15,19 +17,31 @@ class DashboardController extends Controller
     public function index()
     {
         $reserves = Reserve::where('status', config('reserve.not yet'))->get();
+        $options = ReserveOptionList::where('status', config('reserve_option_list.not yet'))->get();
         $reserve_lists = [];
-        
-        foreach($reserves as $reserve){
+    
+        foreach ($reserves as $reserve) {
+            $reserve_options = $options->where('reserve_id', $reserve->id);
             $timeFormatted = Carbon::createFromFormat('H:i:s', $reserve->reserve_create->time)->format('H:i');
+            $course_name = $reserve->reserve_create->course->course_name;
+    
+            $option_names = $reserve_options->pluck('reserve_option.name')->implode(', ');
+    
             $reserve_lists[] = [
                 'user_id' => $reserve->user_id,
                 'date' => $reserve->reserve_create->date,
                 'time' => $timeFormatted,
-                'course_name' => $reserve->reserve_create->course->course_name,
+                'course_name' => $course_name,
+                'option_names' => $option_names,
             ];
         }
-// dd($reserve_lists);
-        return view('dashboard', compact('reserve_lists'));
+    
+        // 重複を削除して結果をまとめる
+        $unique_reserve_lists = collect($reserve_lists)->unique(function ($item) {
+            return $item['date'].$item['time'].$item['course_name'].$item['option_names'];
+        })->values()->all();
+    
+        return view('dashboard', compact('unique_reserve_lists'));
     }
 
     /**
