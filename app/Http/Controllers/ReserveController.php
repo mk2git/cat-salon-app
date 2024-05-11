@@ -66,19 +66,23 @@ class ReserveController extends Controller
         try {
             DB::beginTransaction();
             $data = $request->all();
-            if($data['reserve_option']){
-                foreach($data['reserve_option'] as $reserve_option){
-                    $reserve_option_list = new ReserveOptionList();
-                    $reserve_option_list->user_id = $data['user_id'];
-                    $reserve_option_list->reserve_option_id = $reserve_option;
-                    $reserve_option_list->save();
-                }
-            }
+            
             
             $reserve = new Reserve();
             $reserve->user_id = $data['user_id'];
             $reserve->reserve_create_id = $data['reserve_create_id'];
             $reserve->save();
+            $reserve_id = $reserve->id;
+
+            if($data['reserve_option']){
+                foreach($data['reserve_option'] as $reserve_option){
+                    $reserve_option_list = new ReserveOptionList();
+                    $reserve_option_list->user_id = $data['user_id'];
+                    $reserve_option_list->reserve_id = $reserve_id;
+                    $reserve_option_list->reserve_option_id = $reserve_option;
+                    $reserve_option_list->save();
+                }
+            }
 
             $reserve_create = ReserveCreate::find($data['reserve_create_id']);
             $reserve_create->status = config('reserve_create.reserved');
