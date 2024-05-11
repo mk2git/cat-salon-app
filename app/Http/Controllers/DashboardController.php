@@ -39,7 +39,7 @@ class DashboardController extends Controller
         // 重複を削除して結果をまとめる
         $unique_reserve_lists = collect($reserve_lists)->unique(function ($item) {
             return $item['date'].$item['time'].$item['course_name'].$item['option_names'];
-        })->values()->all();
+        })->sortBy('date')->values()->all();
     
         return view('dashboard', compact('unique_reserve_lists'));
     }
