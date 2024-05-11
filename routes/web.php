@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReserveOptionController;
 use App\Http\Controllers\ReserveCreateController;
 use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,9 +13,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function(){
+    Route::controller(DashboardController::class)->group(function(){
+        Route::get('/dashboard', 'index')->name('dashboard');
+    });
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -49,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(ReserveController::class)->group(function(){
         Route::get('reserve', 'index')->name('reserve.index');
         Route::get('reserve/{id}', 'create')->name('reserve.create');
+        Route::post('reserve', 'store')->name('reserve.store');
     });
     
 
