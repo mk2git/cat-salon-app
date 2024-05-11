@@ -10,11 +10,18 @@
                 @else
                   <p class="mb-3">予約一覧</p>
                   <ul class="list-disc list-inside">
+                    @php $hasReservations = false; @endphp
                     @foreach ($reserve_lists as $reserve_list)
-                        @if($reserve_list['user_id'] == Auth::user()->id)
-                            <li class="mb-3"><a href="" class="hover:text-teal-400">{{$reserve_list['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['course_name']}}</a></li>
+                        @if($reserve_list['user_id'] == Auth::user()->id)   
+                        @php $hasReservations = true; @endphp                      
+                            <li class="mb-3">
+                                <a href="" class="hover:text-teal-400">{{$reserve_list['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['course_name']}} @if (($reserve_list['option_names']))（オプション：{{$reserve_list['option_names']}}） @endif</a>
+                            </li>
                         @endif
                     @endforeach
+                    @if (!$hasReservations)
+                      <p>現在予約はありません</p>
+                    @endif
                   </ul>               
                 @endcan
             </div>
