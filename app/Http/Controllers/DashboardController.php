@@ -28,6 +28,7 @@ class DashboardController extends Controller
             $option_names = $reserve_options->pluck('reserve_option.name')->implode(', ');
     
             $reserve_lists[] = [
+                'id' => $reserve->id,
                 'user_id' => $reserve->user_id,
                 'date' => $reserve->reserve_create->date,
                 'time' => $timeFormatted,
