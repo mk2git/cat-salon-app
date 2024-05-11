@@ -11,6 +11,7 @@ class ReserveOptionList extends Model
 
     protected $fillable = [
         'user_id',
+        'reserve_id',
         'reserve_option_id'
     ];
 
