@@ -11,7 +11,7 @@
                   <p class="mb-3">予約一覧</p>
                   <ul class="list-disc list-inside">
                     @php $hasReservations = false; @endphp
-                    @foreach ($reserve_lists as $reserve_list)
+                    @foreach ($unique_reserve_lists as $reserve_list)
                         @if($reserve_list['user_id'] == Auth::user()->id)   
                         @php $hasReservations = true; @endphp                      
                             <li class="mb-3">
