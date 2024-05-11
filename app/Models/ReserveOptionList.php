@@ -18,4 +18,8 @@ class ReserveOptionList extends Model
     public function reserve_option(){
         return $this->belongsTo(ReserveOption::class);
     }
+
+    public function reserve(){
+        return $this->belongsTo(Reserve::class);
+    }
 }
