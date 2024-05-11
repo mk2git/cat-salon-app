@@ -116,9 +116,26 @@ class ReserveController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Reserve $reserve)
-    {
-        //
+    public function edit(Reserve $reserve_id)
+    {   
+        $reserve_create = ReserveCreate::find($reserve_id->reserve_create_id);
+        $time = Carbon::createFromFormat('H:i:s', $reserve_create->time)->format('H:i');
+        $options = ReserveOptionList::where('reserve_id' , $reserve_id->id)->get();
+        $option_names = $options->pluck('reserve_option.name')->implode(', ');
+        $option_prices = $options->pluck('reserve_option.fee')->toArray();
+        $option_price = array_sum($option_prices);
+
+        $price = number_format($reserve_create->course->fee + $option_price);
+
+        $reserve = [
+            'date' => $reserve_create->date,
+            'time' => $time,
+            'course_name' => $reserve_create->course->course_name,
+            'option' => $option_names,
+            'price' => $price
+        ];
+
+        return view('reserve.edit', compact('reserve'));
     }
 
     /**
