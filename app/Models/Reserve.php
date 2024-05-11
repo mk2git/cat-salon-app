@@ -14,7 +14,7 @@ class Reserve extends Model
         'reserve_create_id'
     ];
 
-    public function reserveCreate(){
-        return $this->hasOne(ReserveCreate::class);
+    public function reserve_create(){
+        return $this->belongsTo(ReserveCreate::class, 'reserve_create_id');
     }
 }
