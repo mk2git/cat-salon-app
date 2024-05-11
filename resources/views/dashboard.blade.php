@@ -15,7 +15,7 @@
                         @if($reserve_list['user_id'] == Auth::user()->id)   
                         @php $hasReservations = true; @endphp                      
                             <li class="mb-3">
-                                <a href="" class="hover:text-teal-400">{{$reserve_list['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['course_name']}} @if (($reserve_list['option_names']))（オプション：{{$reserve_list['option_names']}}） @endif</a>
+                                <a href="{{route('reserve.edit', $reserve_list['id'])}}" class="hover:text-teal-400">{{$reserve_list['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve_list['course_name']}} @if (($reserve_list['option_names']))（オプション：{{$reserve_list['option_names']}}） @endif</a>
                             </li>
                         @endif
                     @endforeach
