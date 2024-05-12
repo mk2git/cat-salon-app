@@ -110,7 +110,8 @@ class ReserveCreateController extends Controller
                     'time'        => $reserve->time,
                     'course_id' => $reserve->course_id,
                     'course_name' => $reserve->course->course_name,
-                    'color' => $reserve->course->color
+                    'color' => $reserve->course->color,
+                    'status' => $reserve->status
                 ];
             } else {
                 $events[$reserve->unix_timestamp] = [];
@@ -120,7 +121,8 @@ class ReserveCreateController extends Controller
                     'time'        => $reserve->time,
                     'course_id' => $reserve->course_id,
                     'course_name' => $reserve->course->course_name,
-                    'color' => $reserve->course->color
+                    'color' => $reserve->course->color,
+                    'status' => $reserve->status
                 ];
             }
         }
