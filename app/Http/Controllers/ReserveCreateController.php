@@ -147,6 +147,9 @@ class ReserveCreateController extends Controller
         $reserve_id = Reserve::where('reserve_create_id', $reserve_create->id)->value('id');
         $options = ReserveOptionList::where('reserve_id', $reserve_id)->get();
         $option_names = $options->pluck('reserve_option.name')->implode(', ');
+        $option_prices = $options->pluck('reserve_option.fee')->toArray();
+        $option_price = array_sum($option_prices);
+        $price = number_format($reserve_create->course->fee + $option_price);
 
         $reserve = [
             'id' => $reserve_id,
@@ -154,7 +157,8 @@ class ReserveCreateController extends Controller
             'time' => $time,
             'user_name' => $user_name,
             'course_name' => $course_name,
-            'option' => $option_names
+            'option' => $option_names,
+            'price' => $price
         ];
 
         return view('reserve-create.reserve-status-detail', compact('reserve'));
