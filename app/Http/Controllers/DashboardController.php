@@ -26,13 +26,15 @@ class DashboardController extends Controller
             $reserve_id = Reserve::where('reserve_create_id', $todayReserve->id)->value('id');
             $options = ReserveOptionList::where('reserve_id', $reserve_id)->get();
             $option_names = $options->pluck('reserve_option.name')->implode(', ');
+            $status = Reserve::where('reserve_create_id', $todayReserve->id)->value('status');
 
             $todayReserveLists[] = [
                 'id' => $reserve_id,
                 'time' => $time,
                 'user_name' => $user_name,
                 'course_name' => $todayReserve->course->course_name,
-                'option_names' => $option_names
+                'option_names' => $option_names,
+                'status' => $status
             ];
         }
 
