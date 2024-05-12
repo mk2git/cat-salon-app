@@ -12,9 +12,15 @@
 </div>
 <div class=" grid grid-cols-2 gap-6">
   <div class="text-end">オプション：</div>
-  <div>@if ($reserve['option'] == '')
-    なし
-  @else
-    {{$reserve['option']}}
-  @endif  </div>
+  <div>
+    @if ($reserve['option'] == '')
+      なし
+    @else
+      {{$reserve['option']}}
+    @endif  
+  </div>
+</div>
+<div class=" grid grid-cols-2 gap-6">
+  <div class="text-end">合計金額：</div>
+  <div>&yen;{{$reserve['price']}}</div>
 </div>
