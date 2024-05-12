@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Models\Reserve;
+use App\Models\User;
 use App\Models\ReserveCreate;
 use App\Models\ReserveOption;
 use App\Models\ReserveOptionList;
@@ -16,6 +17,25 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $todayReserves = ReserveCreate::where('date', today())->get();
+        $todayReserveLists = [];
+        foreach($todayReserves as $todayReserve){
+            $time = Carbon::createFromFormat('H:i:s', $todayReserve->time)->format('H:i');
+            $user_id = Reserve::where('reserve_create_id', $todayReserve->id)->value('user_id');
+            $user_name = User::find($user_id)->name;
+            $reserve_id = Reserve::where('reserve_create_id', $todayReserve->id)->value('id');
+            $options = ReserveOptionList::where('reserve_id', $reserve_id)->get();
+            $option_names = $options->pluck('reserve_option.name')->implode(', ');
+
+            $todayReserveLists[] = [
+                'id' => $reserve_id,
+                'time' => $time,
+                'user_name' => $user_name,
+                'course_name' => $todayReserve->course->course_name,
+                'option_names' => $option_names
+            ];
+        }
+
         $reserves = Reserve::where('status', config('reserve.not yet'))->get();
         $options = ReserveOptionList::where('status', config('reserve_option_list.not yet'))->get();
         $reserve_lists = [];
@@ -42,7 +62,7 @@ class DashboardController extends Controller
             return $item['date'].$item['time'].$item['course_name'].$item['option_names'];
         })->sortBy('date')->values()->all();
     
-        return view('dashboard', compact('unique_reserve_lists'));
+        return view('dashboard', compact('unique_reserve_lists', 'todayReserveLists'));
     }
 
     /**
