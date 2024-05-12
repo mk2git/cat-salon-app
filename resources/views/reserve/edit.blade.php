@@ -28,14 +28,14 @@
       </div>
       <div class=" grid grid-cols-2 gap-6">
         <div class="text-end">合計金額：</div>
-        <div>{{$reserve['price']}}</div>
+        <div>&yen;{{$reserve['price']}}</div>
       </div>
     </div>
     <hr class="w-2/4 mx-auto">
     <form action="{{route('reserve.cancel', $reserve['id'])}}" method="post">
       @csrf
       @method('put')
-      <button type="submit" class="bg-red-600 hover:bg-red-700 text-white p-3 rounded block mx-auto mt-6">キャンセル</button>
+      <button type="submit" class="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded block mx-auto mt-6">キャンセル</button>
     </form>
     
   </div>
