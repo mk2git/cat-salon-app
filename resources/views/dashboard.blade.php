@@ -4,9 +4,23 @@
     @endif
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
+            <div class="bg-white border border-orange-600 drop-shadow-xl w-3/4 mx-auto overflow-hidden shadow-sm sm:rounded-lg p-5">
                 @can('admin')
-                  <p>今日の予定</p>
+                  <p class="mb-3">本日の予約一覧</p>
+                  <ul class="list-disc list-inside">
+                    @php $hasTodayReservations = false; @endphp
+                    @foreach ($todayReserveLists as $reserve)
+                        @php $hasTodayReservations = true; @endphp
+                        <li class="mb-3">
+                            <a href="" class="hover:text-teal-500">
+                                {{$reserve['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['user_name']}} <small>様</small>&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['course_name']}} @if (($reserve['option_names']))（オプション：{{$reserve['option_names']}}） @endif
+                            </a>
+                        </li>
+                    @endforeach
+                    @if (!$hasTodayReservations)
+                      <p>本日の予約は入っておりません</p>
+                    @endif
+                  </ul>
                 @else
                   <p class="mb-3">予約一覧</p>
                   <ul class="list-disc list-inside">
