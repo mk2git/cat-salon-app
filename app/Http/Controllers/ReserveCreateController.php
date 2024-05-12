@@ -154,7 +154,7 @@ class ReserveCreateController extends Controller
             'time' => $time,
             'user_name' => $user_name,
             'course_name' => $course_name,
-            'options' => $option_names
+            'option' => $option_names
         ];
 
         return view('reserve-create.reserve-status-detail', compact('reserve'));
