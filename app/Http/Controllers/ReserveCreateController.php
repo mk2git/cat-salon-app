@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReserveCreate;
+use App\Models\ReserveOptionList;
+use App\Models\Reserve;
+use App\Models\User;
 use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
@@ -130,6 +134,30 @@ class ReserveCreateController extends Controller
 
 
         return view('reserve-create.reserve-status', compact('events'));
+    }
+
+    public function showStatusDetail(ReserveCreate $id)
+    {
+        $reserve_create = $id;
+        $date = $reserve_create->date;
+        $time = Carbon::createFromFormat('H:i:s', $reserve_create->time)->format('H:i');
+        $user_id = Reserve::where('reserve_create_id', $reserve_create->id)->value('user_id');
+        $user_name = User::find($user_id)->name;
+        $course_name = $reserve_create->course->course_name;
+        $reserve_id = Reserve::where('reserve_create_id', $reserve_create->id)->value('id');
+        $options = ReserveOptionList::where('reserve_id', $reserve_id)->get();
+        $option_names = $options->pluck('reserve_option.name')->implode(', ');
+
+        $reserve = [
+            'id' => $reserve_id,
+            'date' => $date,
+            'time' => $time,
+            'user_name' => $user_name,
+            'course_name' => $course_name,
+            'options' => $option_names
+        ];
+
+        return view('reserve-create.reserve-status-detail', compact('reserve'));
     }
 
     /**
