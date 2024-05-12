@@ -147,6 +147,10 @@ class ReserveController extends Controller
             $reserve->status = config('reserve.cancel');
             $reserve->save();
 
+            $reserve_create = ReserveCreate::find($reserve->reserve_create_id);
+            $reserve_create->status = config('reserve_create.not reserved yet');
+            $reserve_create->save();
+
             $reserve_option_lists = ReserveOptionList::where('reserve_id', $reserve_id->id)->get();
             foreach($reserve_option_lists as $reserve_option_list){
                 $reserve_option_list->status = config('reserve_option_list.cancel');
