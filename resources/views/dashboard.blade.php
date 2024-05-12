@@ -11,11 +11,21 @@
                     @php $hasTodayReservations = false; @endphp
                     @foreach ($todayReserveLists as $reserve)
                         @php $hasTodayReservations = true; @endphp
-                        <li class="mb-3">
-                            <a href="" class="hover:text-teal-500">
-                                {{$reserve['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['user_name']}} <small>様</small>&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['course_name']}} @if (($reserve['option_names']))（オプション：{{$reserve['option_names']}}） @endif
-                            </a>
-                        </li>
+                        @if ($reserve['status'] == config('reserve.cancel'))
+                            <li class="mb-3">
+                                <a href="" class="hover:text-teal-500 line-through decoration-red-500">
+                                    {{$reserve['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['user_name']}} <small>様</small>&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['course_name']}} @if (($reserve['option_names']))（オプション：{{$reserve['option_names']}}） @endif
+                                </a>
+                                <span class="text-red-500 ms-3">キャンセル済み</span>
+                            </li>
+                        @else
+                            <li class="mb-3">
+                                <a href="" class="hover:text-teal-500">
+                                    {{$reserve['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['user_name']}} <small>様</small>&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['course_name']}} @if (($reserve['option_names']))（オプション：{{$reserve['option_names']}}） @endif
+                                </a>
+                            </li>
+                        @endif
+                        
                     @endforeach
                     @if (!$hasTodayReservations)
                       <p>本日の予約は入っておりません</p>
