@@ -103,9 +103,13 @@ function createCalendar(year, month, events, reserved_status) {
               let color = reserve.color;     
               let status = reserve.status;     
               let formattedTime = time.replace(":00", "");
-              let editUrlTemplate = "{{ route('reserveCreate.showDetail', ['id' => ':id']) }}";
+              let editUrlTemplate;
+              if(status == reserved_status){
+                  editUrlTemplate = "{{ route('reserveCreate.showDetail', ['id' => ':id']) }}";
+              }else{
+                  editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";                
+              }
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-              
               reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1">';
               if(status == reserved_status){
                 reservesHTML += '<span class="p-1 text-red-700"><i class="fa-solid fa-check"></i></span>';
@@ -130,9 +134,14 @@ function createCalendar(year, month, events, reserved_status) {
               let color = reserve.color;
               let status = reserve.status; 
               let formattedTime = time.replace(":00", "");
-              let editUrlTemplate = "{{ route('reserveCreate.showDetail', ['id' => ':id']) }}";
+              let editUrlTemplate;
+              if(status == reserved_status){
+                  editUrlTemplate = "{{ route('reserveCreate.showDetail', ['id' => ':id']) }}";
+              }else{
+                  editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";                
+              }
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
-
+              
               reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1">';     
               if(status == reserved_status){
                 reservesHTML += '<span class="p-1 text-red-700"><i class="fa-solid fa-check"></i></span>';
