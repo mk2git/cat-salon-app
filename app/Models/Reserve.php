@@ -21,4 +21,8 @@ class Reserve extends Model
     public function reserve_option_lists(){
         return $this->hasMany(ReserveOptionList::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
