@@ -128,6 +128,7 @@ class ReserveController extends Controller
         $price = number_format($reserve_create->course->fee + $option_price);
 
         $reserve = [
+            'id' => $reserve_id->id,
             'date' => $reserve_create->date,
             'time' => $time,
             'course_name' => $reserve_create->course->course_name,
@@ -136,6 +137,31 @@ class ReserveController extends Controller
         ];
 
         return view('reserve.edit', compact('reserve'));
+    }
+
+    public function cancel(Reserve $reserve_id)
+    {
+        try{
+            DB::beginTransaction();
+            $reserve = $reserve_id;
+            $reserve->status = config('reserve.cancel');
+            $reserve->save();
+
+            $reserve_option_lists = ReserveOptionList::where('reserve_id', $reserve_id->id)->get();
+            foreach($reserve_option_lists as $reserve_option_list){
+                $reserve_option_list->status = config('reserve_option_list.cancel');
+                $reserve_option_list->save();
+            }
+            DB::commit();
+
+            $message = $reserve->reserve_create->date;
+            return redirect()->route('dashboard')->with(['message' => '「' .$message. '」の予約をキャンセルしました。', 'type' => 'red']);
+
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Reserve Cancel', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '予約のキャンセルに失敗しました');
+        }
     }
 
     /**
