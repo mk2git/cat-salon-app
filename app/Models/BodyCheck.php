@@ -13,4 +13,8 @@ class BodyCheck extends Model
         'user_id',
         'cat_name'
     ];
+
+    public function record(){
+        return $this->belongsTo(Record::class);
+    }
 }

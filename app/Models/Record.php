@@ -17,4 +17,8 @@ class Record extends Model
         'weight',
         'message'
     ];
+
+    public function body_check(){
+        return $this->hasOne(BodyCheck::class);
+    }
 }
