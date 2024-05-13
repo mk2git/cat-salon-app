@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('reserve_option_lists', function (Blueprint $table) {
-            $table->foreignId('reserve_id')->constrained()->after('user_id');
+            $table->foreignId('reserve_id')->constrained()->after('reserve_option_id');
         });
     }
 
@@ -22,7 +22,8 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('reserve_option_lists', function (Blueprint $table) {
-            $table->dropColumn('reserve_id');
+            $table->dropForeign(['reserve_id']);  // 外部キー制約を削除
+            $table->dropColumn('reserve_id');     // その後カラムを削除
         });
     }
 };
