@@ -44,6 +44,9 @@
                             <x-dropdown-link :href="route('reserveCreate.status')">
                                 現在の予約状況
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('user.index')">
+                                会員一覧
+                            </x-dropdown-link>
                         @else
                             <x-dropdown-link :href="route('reserve.index')">
                                 予約する
