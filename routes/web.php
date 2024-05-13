@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReserveOptionController;
 use App\Http\Controllers\ReserveCreateController;
 use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,6 +57,10 @@ Route::middleware('auth')->group(function () {
         Route::post('reserve', 'store')->name('reserve.store');
         Route::get('reserve/edit/{reserve_id}', 'edit')->name('reserve.edit');
         Route::put('reserve/edit/{reserve_id}', 'cancel')->name('reserve.cancel');
+    });
+
+    Route::controller(UserController::class)->group(function(){
+        Route::get('user', 'index')->name('user.index');
     });
     
 
