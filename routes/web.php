@@ -5,6 +5,7 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ReserveOptionController;
 use App\Http\Controllers\ReserveCreateController;
 use App\Http\Controllers\ReserveController;
+use App\Http\Controllers\RecordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,10 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(UserController::class)->group(function(){
         Route::get('user', 'index')->name('user.index');
+    });
+
+    Route::controller(RecordController::class)->group(function(){
+        Route::get('record/{id}', 'create')->name('record.create');
     });
     
 
