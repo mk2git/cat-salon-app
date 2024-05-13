@@ -8,9 +8,13 @@
     <div class="border col-span-2 w-3/4 mx-auto px-6">
       <p class="text-center mt-6 font-bold">カルテ</p>
       <hr class="w-1/4 mx-auto">
+      @if ($errors->any())
+        <x-error-message />
+      @endif
       <form action="{{route('record.store')}}" method="post">
         @csrf
         <input type="hidden" name="user_id" value="{{$reserve['user_id']}}">
+        <input type="hidden" name="reserve_id" value="{{$reserve['id']}}">
         <div class="grid grid-rows-8 m-6">
           <div class="grid grid-cols-2 gap-5 mb-6">
             <div>
@@ -29,7 +33,7 @@
           <div class="">
             <p>
               <i class="fa-solid fa-paw"></i>&nbsp;&nbsp;本日の体重：
-              <input type="number" name="weight" class="w-1/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">&nbsp;&nbsp;kg
+              <input type="text" name="weight" class="w-1/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" min="1">&nbsp;&nbsp;kg
             </p>
           </div>
           <div class="">
