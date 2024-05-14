@@ -34,16 +34,16 @@
                 </p>
               </div>
             </div>
-            <div class="">
+            <div>
               <p>
                 <i class="fa-solid fa-paw"></i>&nbsp;&nbsp;本日の体重：
                 <input type="text" name="weight" class="w-1/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" min="1">&nbsp;&nbsp;kg
               </p>
             </div>
-            <div class="">
+            <div>
               <i class="fa-solid fa-paw"></i>&nbsp;&nbsp;ボディチェック内容：
             </div>
-            <div class="">
+            <div>
               <p>
                 ⚪︎耳：
                 <input type="text" name="ear" class="w-3/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
