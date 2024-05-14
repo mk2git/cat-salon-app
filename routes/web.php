@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(RecordController::class)->group(function(){
         Route::get('record/{reserve_id}', 'create')->name('record.create');
         Route::post('record', 'store')->name('record.store');
+        Route::put('record', 'update')->name('record.update');
     });
     
 
