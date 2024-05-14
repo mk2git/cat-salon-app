@@ -124,8 +124,9 @@ class RecordController extends Controller
             $record->save();
 
             DB::commit();
+            $user_name = User::where('id', $request->user_id)->value('name');
             $message = $request->cat_name;
-            return redirect()->route('dashboard')->with(['message' => '「'.$message.'ちゃん」のカルテが登録されました。', 'type' => 'orange']);
+            return redirect()->route('dashboard')->with(['message' => $user_name.'様の「'.$message.'ちゃん」のカルテが登録されました。', 'type' => 'orange']);
             
         }catch(\Throwable $th){
             DB::rollBack();
@@ -154,9 +155,60 @@ class RecordController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Record $record)
+    public function update(Request $request)
     {
-        //
+        // dd($request->user_id);
+        $rules = [
+            'cat_name' => 'required',
+            'cat_species' => 'required',
+            'weight' => 'required',
+            'message' => 'required',
+        ];
+
+        $messages = [
+            'cat_name.required' => '猫の名前は必須です',
+            'cat_species.required' => '猫種は必須です',
+            'weight.required' => '体重の入力は必須です',
+            'message.required' => 'メッセージは必須です'
+        ];
+
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('record/' .$request->reserve_id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        try{
+            DB::beginTransaction();
+            $record = Record::where('reserve_id', $request->reserve_id)->first();
+            $record->cat_name = $request->input('cat_name');
+            $record->cat_species = $request->input('cat_species');
+            $record->weight = $request->input('weight');
+            $record->message = $request->input('message');
+            $record->save();
+
+            $body_check = BodyCheck::find($record->body_check_id);
+            $body_check->cat_name = $request->input('cat_name');
+            $body_check->ear = $request->input('ear');
+            $body_check->eye = $request->input('eye');
+            $body_check->hair_loss = $request->input('hair_loss');
+            $body_check->hair_ball =$request->input('hair_ball');
+            $body_check->others =  $request->input('others');
+            $body_check->save();
+
+            DB::commit();
+            $user_name = User::where('id', $request->user_id)->value('name');
+            $message = $request->cat_name;
+            return redirect()->route('dashboard')->with(['message' =>  $user_name.'様の「'.$message.'ちゃん」のカルテが更新されました。', 'type' => 'orange']);
+            
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Record Update', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', 'カルテの更新に失敗しました');
+        }
     }
 
     /**
