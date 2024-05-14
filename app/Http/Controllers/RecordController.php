@@ -50,7 +50,27 @@ class RecordController extends Controller
             'price' => $price
         ];
 
-        return view('record.create', compact('reserve'));
+        // カルテが登録されている場合
+        $record_list = null;
+        $record = Record::where('reserve_id', $reserve_id->id)->first();
+        if($record){
+            // $record = Record::where('reserve_id', $reserve_id->id)->first();
+            $body_check = BodyCheck::find($record->body_check_id);
+            $record_list = [
+                'cat_name' => $record->cat_name,
+                'cat_species' => $record->cat_species,
+                'weight' => $record->weight,
+                'ear' => $body_check->ear,
+                'eye' => $body_check->eye,
+                'hair_loss' => $body_check->hair_loss,
+                'hair_ball' => $body_check->hair_ball,
+                'others' => $body_check->others,
+                'message' => $record->message
+            ];
+        }
+        
+
+        return view('record.create', compact('reserve', 'record_list'));
     }
 
     /**
