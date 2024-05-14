@@ -20,6 +20,6 @@ class ReserveCreate extends Model
     }
 
     public function reserve(){
-        return $this->belongsTo(Reserve::class);
+        return $this->hasOne(Reserve::class);
     }
 }
