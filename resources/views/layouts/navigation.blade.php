@@ -41,9 +41,6 @@
                             <x-dropdown-link :href="route('reserveCreate.index')">
                             予約を作成
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('reserveCreate.status')">
-                                現在の予約状況
-                            </x-dropdown-link>
                             <x-dropdown-link :href="route('user.index')">
                                 会員一覧
                             </x-dropdown-link>
