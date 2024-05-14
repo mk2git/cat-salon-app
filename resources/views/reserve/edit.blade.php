@@ -12,9 +12,6 @@
       @csrf
       @method('put')
       <button type="submit" class="bg-red-600 hover:bg-red-700 text-white py-3 px-6 rounded block mx-auto mt-6">キャンセル</button>
-    </form>
-    
+    </form>  
   </div>
-  
- 
 </x-app-layout>
