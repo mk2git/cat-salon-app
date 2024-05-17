@@ -123,6 +123,11 @@ class RecordController extends Controller
             $record->message = $request->input('message');
             $record->save();
 
+            $reserve_id = $request->input('reserve_id');
+            $reserve = Reserve::find($reserve_id);
+            $reserve->status = config('reserve.done');
+            $reserve->save();
+
             DB::commit();
             $user_name = User::where('id', $request->user_id)->value('name');
             $message = $request->cat_name;
