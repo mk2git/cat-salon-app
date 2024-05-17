@@ -6,6 +6,7 @@ use App\Models\Reserve;
 use App\Models\ReserveCreate;
 use App\Models\ReserveOption;
 use App\Models\ReserveOptionList;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -55,8 +56,9 @@ class ReserveController extends Controller
     {
         $reserve = ReserveCreate::find($id);
         $reserve_options = ReserveOption::all();
+        $users = User::where('role', 'general')->get();
 
-        return view('reserve.create', compact('reserve', 'reserve_options'));
+        return view('reserve.create', compact('reserve', 'reserve_options', 'users'));
     }
 
     /**
@@ -64,6 +66,7 @@ class ReserveController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request);
         try {
             DB::beginTransaction();
 
