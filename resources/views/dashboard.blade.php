@@ -59,7 +59,7 @@
             <div class="flex flex-wrap justify-center mt-16">
                 <a href="{{route('reserve.index')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl">予約受付</a>
                 <a href="{{route('reserveCreate.status')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl">予約状況</a>
-                <a href="" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl checkout-button"><span class="count">{{$checkout_count}}</span>お会計</a>
+                <a href="{{route('checkout.index')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl checkout-button"><span class="count">{{$checkout_count}}</span>お会計</a>
             </div>
         @endcan
     </div>
