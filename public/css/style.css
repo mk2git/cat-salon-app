@@ -1,0 +1,15 @@
+.checkout-button{
+  position: relative;
+}
+.count{
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background-color: rgb(221, 45, 45);
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+}
