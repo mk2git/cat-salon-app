@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(CheckoutController::class)->group(function(){
         Route::get('checkout', 'index')->name('checkout.index');
-        Route::get('checkout/{reserve_id}', 'show')->name('checkout.show');
+        Route::get('checkout/{reserve_id}', 'edit')->name('checkout.edit');
     });
     
 

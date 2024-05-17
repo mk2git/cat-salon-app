@@ -51,21 +51,16 @@ class CheckoutController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Reserve $reserve_id)
-    {
-        dd($reserve_id);
-        return view('checkout.show');
-    }
+   
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Reserve $reserve_id)
     {
-        //
+        dd($reserve_id);
+        
+        return view('checkout.edit');
     }
 
     /**
