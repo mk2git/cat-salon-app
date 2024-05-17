@@ -18,7 +18,7 @@ class DashboardController extends Controller
     public function index()
     {
         $todayReserves = null;
-        $todayReserves = ReserveCreate::where('date', today())->where('status', config('reserve_create.reserved'))->get();
+        $todayReserves = ReserveCreate::where('date', today())->where('status', config('reserve_create.reserved'))->orderBy('time', 'Asc')->get();
         $todayReserveLists = [];
         foreach($todayReserves as $todayReserve){
             $time = Carbon::createFromFormat('H:i:s', $todayReserve->time)->format('H:i');
