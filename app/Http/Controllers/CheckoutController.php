@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Reserve;
 use App\Models\ReserveCreate;
+use App\Models\ReserveOption;
+use App\Models\ReserveOptionList;
+use App\Models\Course;
 use Carbon\Carbon;
 
 class CheckoutController extends Controller
@@ -58,9 +61,19 @@ class CheckoutController extends Controller
      */
     public function edit(Reserve $reserve_id)
     {
-        dd($reserve_id);
+        // dd($reserve_id);
+        $options = ReserveOption::all();
+        $courses = Course::all();
+        $reserve_create = ReserveCreate::find($reserve_id->reserve_create_id);
+        $reserve_options = ReserveOptionList::where('reserve_id', $reserve_id->id)->get();
+        $reserve_content = [
+            'reserve_id' => $reserve_id->id,
+            'user_name' => $reserve_create->reserve->user->name,
+            'course_id' => $reserve_create->course_id,
+            'options' => $reserve_options
+        ];
         
-        return view('checkout.edit');
+        return view('checkout.edit', compact('options', 'courses' , 'reserve_content'));
     }
 
     /**
