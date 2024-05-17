@@ -74,6 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::controller(CheckoutController::class)->group(function(){
         Route::get('checkout', 'index')->name('checkout.index');
         Route::get('checkout/{reserve_id}', 'edit')->name('checkout.edit');
+        Route::put('checkout', 'update')->name('checkout.update');
     });
     
 
