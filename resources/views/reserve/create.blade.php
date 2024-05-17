@@ -23,10 +23,28 @@
             @endforeach
           </div>
         </label>
+        @can('admin')       
+        <hr>
+          <label class="block mx-auto mb-6 mt-5">
+            <p class="font-medium my-2">どの会員様の予約でしょうか？</p>
+            <div class="flex justify-center">
+              @foreach ($users as $user)
+              <div class="me-4">
+                <input type="radio" id="user_{{$user->id}}" name="user_id" value="{{$user->id}}" class="mt-1 border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
+              "/>
+                <label for="user_{{$user->id}}">{{$user->name}}</label>
+              </div>              
+              @endforeach
+            </div>
+          </label>
+        @endcan
          <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">予約確定</button>
       </div>
       <input type="hidden" name="reserve_create_id" value="{{$reserve->id}}">
-      <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+      @can('general')
+        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
+      @endcan
+      
     </form>
   </div>
 </x-app-layout>
