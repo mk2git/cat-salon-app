@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Reserve;
+use App\Models\ReserveCreate;
+use Carbon\Carbon;
 
 class CheckoutController extends Controller
 {
@@ -11,7 +14,25 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        return view('checkout.index');
+        $todayReserves = ReserveCreate::where('date', today())->get();
+        $checkouts = [];
+        foreach($todayReserves as $todayReserve){
+            $todayReserveLists = Reserve::where('reserve_create_id', $todayReserve->id)
+                                ->where('status', config('reserve.done'))
+                                ->where('checkout_status', config('reserve.not yet'))->get();
+            if($todayReserveLists->isNotEmpty()){
+                $time = Carbon::createFromFormat('H:i:s', $todayReserve->time)->format('H:i');
+                $checkouts[] = [
+                    'reserve_id' => $todayReserve->reserve->id,
+                    'user_name' => $todayReserve->reserve->user->name,
+                    'date' => $todayReserve->date,
+                    'time' => $time,
+                    'course_name' =>$todayReserve->course->course_name,
+                ];
+            }
+        }
+
+        return view('checkout.index', compact('checkouts'));
     }
 
     /**
@@ -33,9 +54,10 @@ class CheckoutController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Reserve $reserve_id)
     {
-        //
+        dd($reserve_id);
+        return view('checkout.show');
     }
 
     /**
