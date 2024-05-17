@@ -64,8 +64,15 @@ class DashboardController extends Controller
         $unique_reserve_lists = collect($reserve_lists)->unique(function ($item) {
             return $item['date'].$item['time'].$item['course_name'].$item['option_names'];
         })->sortBy('date')->values()->all();
-    
-        return view('dashboard', compact('unique_reserve_lists', 'todayReserveLists'));
+
+         // 会計カウント
+         $todayReserveCreateIds = ReserveCreate::where('date', today())->select('id')->get();
+         $checkout_count = 0;
+         foreach($todayReserveCreateIds as $todayReserveCreateId){
+            $checkout_count += Reserve::where('reserve_create_id', $todayReserveCreateId->id)->where('status', config('reserve.done'))->where('checkout_status', config('reserve.not yet'))->count();
+         }
+          
+        return view('dashboard', compact('unique_reserve_lists', 'todayReserveLists', 'checkout_count'));
     }
 
     /**
