@@ -7,6 +7,7 @@
         @csrf
         @method('put')
         <input type="hidden" name="reserve_id" value="{{$reserve_content['reserve_id']}}">
+        <input type="hidden" name="user_id" value="{{$reserve_content['user_id']}}">
         <label class="block mx-auto mb-6">
           <span class="block text-sm font-medium text-slate-700">コース選択</span>
           <select name="course_id" id="" class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
