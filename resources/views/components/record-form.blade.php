@@ -1,5 +1,3 @@
-<input type="hidden" name="user_id" value="{{ $reserve['user_id'] }}">
-<input type="hidden" name="reserve_id" value="{{ $reserve['id'] }}">
 <div class="grid grid-rows-8 m-6">
   <div class="grid grid-cols-2 gap-5 mb-6">
     <div>
