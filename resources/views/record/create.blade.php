@@ -19,14 +19,18 @@
         @if ($record_list == null)
           <form action="{{route('record.store')}}" method="post">
             @csrf
-            <x-record-form :record-list="$record_list" :reserve="$reserve" />
+            <input type="hidden" name="user_id" value="{{ $reserve['user_id'] }}">
+            <input type="hidden" name="reserve_id" value="{{ $reserve['id'] }}">
+            <x-record-form :record-list="$record_list" />
             <button type="submit" class="block mx-auto bg-teal-600 hover:bg-teal-700 rounded py-3 px-8 text-white font-bold m-6">登録</button>
           </form>
         @else
           <form action="{{route('record.update')}}" method="post">
             @csrf
             @method('put')
-            <x-record-form :record-list="$record_list" :reserve="$reserve" />
+            <input type="hidden" name="user_id" value="{{ $reserve['user_id'] }}">
+            <input type="hidden" name="reserve_id" value="{{ $reserve['id'] }}">
+            <x-record-form :record-list="$record_list" />
             <button type="submit" class="block mx-auto bg-teal-600 hover:bg-teal-700 rounded py-3 px-8 text-white font-bold m-6">更新</button>
           </form>
         @endif
