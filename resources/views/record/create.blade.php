@@ -8,7 +8,7 @@
       </div>
        
     </div>
-    <div class="col-span-2 w-3/4 mx-auto border-2 rounded border-amber-400 bg-amber-400 p-6">
+    <div class="col-span-2 w-3/4 mx-auto border-2 rounded border-amber-600 bg-amber-600 p-6">
       <div class="rounded bg-white p-6">
         <p class="text-center mt-6 font-bold">カルテ</p>
         <hr class="w-1/4 mx-auto">
