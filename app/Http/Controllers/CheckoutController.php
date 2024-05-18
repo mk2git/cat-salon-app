@@ -111,13 +111,19 @@ class CheckoutController extends Controller
                 }
             }
             DB::commit();
+            $reserve_id = $request->reserve_id;
+            $user_id = $request->user_id;
             $message = '本日のサロン内容が更新されました。';
-            return view('checkout.checkout-form')->with(['message' => $message, 'type' => 'green']);
+            return redirect()->route('checkout.showCheckout', ['reserve_id' => $reserve_id, 'user_id' => $user_id])->with(['message' => $message, 'type' => 'green']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Checkout Update', ['message' => $th->getMessage()]);
             return redirect()->back()->with('error', 'サロン内容の更新に失敗しました');
         }
+    }
+
+    public function showCheckout(Reserve $reserve_id, $user_id){
+
         return view('checkout.checkout-form');
     }
 
