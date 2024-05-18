@@ -8,6 +8,8 @@ use App\Models\ReserveCreate;
 use App\Models\ReserveOption;
 use App\Models\ReserveOptionList;
 use App\Models\Course;
+use App\Models\Record;
+use App\Models\BodyCheck;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -122,9 +124,43 @@ class CheckoutController extends Controller
         }
     }
 
-    public function showCheckout(Reserve $reserve_id, $user_id){
+    public function showCheckout(Reserve $reserve_id, $user_id)
+    {
+        $reserve = $reserve_id;
+        $record = Record::where('reserve_id', $reserve->id)->first();
+        $body_check_id = Record::where('reserve_id', $reserve->id)->value('body_check_id');
+        $body_check = BodyCheck::find($body_check_id);
+        $course_fee = number_format($reserve->reserve_create->course->fee);
+        $options = ReserveOptionList::where('reserve_id', $reserve->id)->get();
+        $option_prices = $options->pluck('reserve_option.fee')->toArray();
+        $option_price = array_sum($option_prices);
+        $totalFee = $reserve->reserve_create->course->fee + $option_price;
 
-        return view('checkout.checkout-form');
+        $subTotal = number_format($totalFee);
+        $tax = 0.1;
+
+        $onlyTax = number_format($totalFee * $tax);
+        $total = number_format($totalFee + ($totalFee * $tax));
+        $content = [
+            'date' => $reserve->reserve_create->date,
+            'cat_name' => $record->cat_name,
+            'cat_species' => $record->cat_species,
+            'weight' => $record->weight,
+            'ear' => $body_check->ear,
+            'eye' => $body_check->eye,
+            'hair_loss' => $body_check->hair_loss,
+            'hair_ball' => $body_check->hair_ball,
+            'others' => $body_check->others,
+            'message' => $record->message,
+            'course_name' => $reserve->reserve_create->course->course_name,
+            'course_fee' => $course_fee,
+            'options' => $options,
+            'subTotal' => $subTotal,
+            'onlyTax' => $onlyTax,
+            'total' => $total
+        ];
+
+        return view('checkout.checkout-form', compact('content'));
     }
 
     /**
