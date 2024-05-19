@@ -20,7 +20,7 @@ class ReserveCreateController extends Controller
     public function index()
     {
         $courses  = Course::all();
-        $reserves = ReserveCreate::all();
+        $reserves = ReserveCreate::orderBy('time', 'asc')->get();
         $events   = [];
 
         foreach ($reserves as $reserve) {
@@ -102,7 +102,7 @@ class ReserveCreateController extends Controller
      */
     public function showStatus(ReserveCreate $reserveCreate)
     {
-        $reserves = ReserveCreate::all();
+        $reserves = ReserveCreate::orderBy('time', 'asc')->get();
         $events   = [];
 
         foreach ($reserves as $reserve) {
