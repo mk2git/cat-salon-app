@@ -76,6 +76,8 @@ Route::middleware('auth')->group(function () {
         Route::get('checkout/{reserve_id}', 'edit')->name('checkout.edit');
         Route::put('checkout', 'update')->name('checkout.update');
         Route::get('checkout/{reserve_id}/{user_id}', 'showCheckout')->name('checkout.showCheckout');
+        Route::put('checkout/updateCheckout', 'updateCheckout')->name('checkout.updateCheckout');
+
     });
     
 
