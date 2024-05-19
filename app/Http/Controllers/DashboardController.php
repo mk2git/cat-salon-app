@@ -17,28 +17,37 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        $todayReserves = null;
-        $todayReserves = ReserveCreate::where('date', today())->where('status', config('reserve_create.reserved'))->orderBy('time', 'Asc')->get();
+        // roleがadminの場合に使用するデータ
+        $todayReserves = [];
+        $todayReserveCreates = ReserveCreate::where('date', today())->orderBy('time', 'Asc')->get();
+        foreach($todayReserveCreates as $todayReserveCreate){
+            $reserves = Reserve::where('reserve_create_id', $todayReserveCreate->id)->get();
+            $todayReserves = array_merge($todayReserves, $reserves->toArray());
+        }
+
         $todayReserveLists = [];
         foreach($todayReserves as $todayReserve){
-            $time = Carbon::createFromFormat('H:i:s', $todayReserve->time)->format('H:i');
-            $user_id = Reserve::where('reserve_create_id', $todayReserve->id)->value('user_id');
-            $user_name = User::find($user_id)->name;
-            $reserve_id = Reserve::where('reserve_create_id', $todayReserve->id)->value('id');
-            $options = ReserveOptionList::where('reserve_id', $reserve_id)->get();
+            $reserve_create = ReserveCreate::find($todayReserve['reserve_create_id']);
+            $time = Carbon::createFromFormat('H:i:s', $reserve_create->time)->format('H:i');
+            $user_name = User::find($todayReserve['user_id'])->name;
+            $reserve_id = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->value('id');
+            $options = ReserveOptionList::where('reserve_id', $todayReserve['id'])->get();
             $option_names = $options->pluck('reserve_option.name')->implode(', ');
-            $status = Reserve::where('reserve_create_id', $todayReserve->id)->value('status');
+            $status = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->value('status');
+            $checkout_status = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->value('checkout_status');
 
             $todayReserveLists[] = [
                 'id' => $reserve_id,
                 'time' => $time,
                 'user_name' => $user_name,
-                'course_name' => $todayReserve->course->course_name,
+                'course_name' => $reserve_create->course->course_name,
                 'option_names' => $option_names,
-                'status' => $status
+                'status' => $status,
+                'checkout_status' => $checkout_status
             ];
         }
-
+  
+        // roleがgeneralで使用するデータ
         $reserves = Reserve::where('status', config('reserve.not yet'))->get();
         $options = ReserveOptionList::where('status', config('reserve_option_list.not yet'))->get();
         $reserve_lists = [];
