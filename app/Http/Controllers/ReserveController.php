@@ -18,7 +18,7 @@ class ReserveController extends Controller
      */
     public function index()
     {
-        $reserves = ReserveCreate::where('status', config('reserve_create.not reserved yet'))->get();
+        $reserves = ReserveCreate::where('status', config('reserve_create.not reserved yet'))->orderBy('time', 'asc')->get();
         $events   = [];
 
         foreach ($reserves as $reserve) {
