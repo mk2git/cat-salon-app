@@ -12,6 +12,7 @@ use App\Models\Record;
 use App\Models\BodyCheck;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class CheckoutController extends Controller
 {
@@ -142,6 +143,7 @@ class CheckoutController extends Controller
         $onlyTax = number_format($totalFee * $tax);
         $total = number_format($totalFee + ($totalFee * $tax));
         $content = [
+            'user_id' => $reserve->user_id,
             'reserve_id' => $reserve->id,
             'date' => $reserve->reserve_create->date,
             'cat_name' => $record->cat_name,
@@ -162,6 +164,47 @@ class CheckoutController extends Controller
         ];
 
         return view('checkout.checkout-form', compact('content'));
+    }
+
+    public function updateCheckout(Request $request)
+    {
+        $rule = [
+            'payment' => 'required'
+        ];
+        $message = [
+            'payment.required' => '支払い方法の選択は必須です'
+        ];
+        // バリデータの作成
+        $validator = Validator::make($request->all(), $rule, $message);
+
+        // バリデーションエラー時の処理
+        if ($validator->fails()) {
+            return redirect('checkout/' . $request->reserve_id . '/' .$request->user_id)
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        try{
+            DB::beginTransaction();
+            $reserve = Reserve::find($request->reserve_id);
+
+            $reserve->checkout_status = config('reserve.done');
+            $reserve->payment = $request->input('payment');
+            $reserve->save();
+
+            $reserve_option_lists = ReserveOptionList::where('reserve_id', $request->reserve_id)->get();
+            foreach($reserve_option_lists as $reserve_option_list){
+                $reserve_option_list->status = config('reserve_option_list.done');
+                $reserve_option_list->save();
+            }
+            
+            DB::commit();
+            return redirect()->route('dashboard')->with(['message' => $reserve->user->name.' 様のお会計ができました。', 'type' => 'orange']);
+        }catch(\Throwable $th){
+            DB::rollBack();
+            logger('Error Checkout updateCheckout', ['message' => $th->getMessage()]);
+            return redirect()->back()->with('error', '支払い方法の更新に失敗しました');
+        }
+
     }
 
     /**
