@@ -12,9 +12,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('role', 'general')->get();
+        $count = User::where('role', 'general')->count();
 
-        return view('user.index', compact('users'));
+        return view('user.index', compact('users', 'count'));
     }
 
     /**
