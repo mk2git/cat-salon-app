@@ -63,6 +63,7 @@ Route::middleware('auth')->group(function () {
 
     Route::controller(UserController::class)->group(function(){
         Route::get('user', 'index')->name('user.index');
+        Route::get('user/{id}', 'show')->name('user.show');
     });
 
     Route::controller(RecordController::class)->group(function(){
