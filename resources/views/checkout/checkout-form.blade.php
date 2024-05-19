@@ -2,6 +2,9 @@
   @if (session('message'))
     <x-alert-message :message="session('message')" :type="session('type')" />
   @endif
+  @if ($errors->any())
+    <x-error-message />
+  @endif
   
   <div class="border-8 my-10 w-3/4 mx-auto py-6 px-10">
     <h2 class="text-center text-4xl mt-6 mb-4">Cat Salon</h2>
@@ -66,9 +69,11 @@
     </div>
 
     <div class="text-center mx-auto">
-      <form action="" method="post">
+      <form action="{{route('checkout.updateCheckout')}}" method="post">
         @csrf
         @method('put')
+        <input type="hidden" name="reserve_id" value="{{$content['reserve_id']}}">
+        <input type="hidden" name="user_id" value="{{$content['user_id']}}">
         <p class="mt-6 mb-3">支払い方法</p>
         <input type="radio" name="payment" value="cash" id="cash">
         <label for="cash" class="mr-6">現金</label>
