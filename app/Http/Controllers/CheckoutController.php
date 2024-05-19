@@ -142,6 +142,7 @@ class CheckoutController extends Controller
         $onlyTax = number_format($totalFee * $tax);
         $total = number_format($totalFee + ($totalFee * $tax));
         $content = [
+            'reserve_id' => $reserve->id,
             'date' => $reserve->reserve_create->date,
             'cat_name' => $record->cat_name,
             'cat_species' => $record->cat_species,
