@@ -30,11 +30,11 @@ class DashboardController extends Controller
             $reserve_create = ReserveCreate::find($todayReserve['reserve_create_id']);
             $time = Carbon::createFromFormat('H:i:s', $reserve_create->time)->format('H:i');
             $user_name = User::find($todayReserve['user_id'])->name;
-            $reserve_id = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->value('id');
+            $reserve_id = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->where('user_id', $todayReserve['user_id'])->value('id');
             $options = ReserveOptionList::where('reserve_id', $todayReserve['id'])->get();
             $option_names = $options->pluck('reserve_option.name')->implode(', ');
-            $status = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->value('status');
-            $checkout_status = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->value('checkout_status');
+            $status = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->where('user_id', $todayReserve['user_id'])->value('status');
+            $checkout_status = Reserve::where('reserve_create_id', $todayReserve['reserve_create_id'])->where('user_id', $todayReserve['user_id'])->value('checkout_status');
 
             $todayReserveLists[] = [
                 'id' => $reserve_id,
