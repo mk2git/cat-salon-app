@@ -65,7 +65,7 @@ class UserController extends Controller
         ];
         }
 
-        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->select('id', 'reserve_create_id')->get();
+        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'desc')->select('id', 'reserve_create_id')->get();
         $done_reserve_records = [];
         foreach($done_reserves as $done_reserve){
             $reserve_create = ReserveCreate::find($done_reserve->reserve_create_id);
