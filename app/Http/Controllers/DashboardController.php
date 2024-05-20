@@ -21,7 +21,7 @@ class DashboardController extends Controller
         $todayReserves = [];
         $todayReserveCreates = ReserveCreate::where('date', today())->orderBy('time', 'Asc')->get();
         foreach($todayReserveCreates as $todayReserveCreate){
-            $reserves = Reserve::where('reserve_create_id', $todayReserveCreate->id)->get();
+            $reserves = Reserve::where('reserve_create_id', $todayReserveCreate->id)->latest('created_at')->get();
             $todayReserves = array_merge($todayReserves, $reserves->toArray());
         }
 
