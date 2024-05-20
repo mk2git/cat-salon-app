@@ -48,8 +48,8 @@
                             <x-dropdown-link :href="route('reserve.index')">
                                 予約する
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('reserveCreate.status')">
-                                予約履歴
+                            <x-dropdown-link :href="route('record.userRecords', Auth::user()->id)">
+                                サロン履歴
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('reserveCreate.status')">
                                 スタンプカード
