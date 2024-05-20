@@ -15,7 +15,7 @@
     </div>
     <div class="col-span-2">
       <div class="border rounded p-8 mb-10">
-        <p class="mb-2 text-bold">予約一覧</p>
+        <p class="mb-2 text-bold"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;予約一覧</p>
         <ul>
           @php $hasReservations = false; @endphp
           @foreach ($reserves as $reserve)
@@ -33,7 +33,21 @@
         </ul>
       </div>
       <div class="border rounded p-10">
-        <p>予約履歴</p>
+        <p class="mb-2 text-bold"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;サロン履歴</p>
+        <ul>
+          @php $hasReservationRecords = false; @endphp
+          @foreach ($done_reserve_records as $done_reserve_record)
+            @php $hasReservationRecords = true; @endphp
+            <li class="mb-2">
+              <a href="{{route('user.showRecord', $done_reserve_record['reserve_id'])}}" class="hover:text-blue-500 underline decoration-blue-500 hover:decoration-2">
+                {{$done_reserve_record['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$done_reserve_record['course_name']}}
+              </a>
+            </li>
+          @endforeach
+          @if (!$hasReservationRecords)
+            <p>サロン履歴はまだありません</p>
+          @endif
+        </ul>
       </div>
     </div>
   </div>
