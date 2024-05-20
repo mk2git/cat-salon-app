@@ -29,7 +29,7 @@ class RecordController extends Controller
     public function create(Reserve $reserve_id)
     {
         $reserve_create = ReserveCreate::find($reserve_id->reserve_create_id);
-        $user_id = Reserve::where('reserve_create_id', $reserve_create->id)->value('user_id');
+        $user_id = $reserve_id->user_id;
         $user_name = User::find($user_id)->name;
         $time = Carbon::createFromFormat('H:i:s', $reserve_create->time)->format('H:i');
         $options = ReserveOptionList::where('reserve_id' , $reserve_id->id)->get();
