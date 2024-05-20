@@ -9,6 +9,7 @@ use App\Models\Record;
 use App\Models\Reserve;
 use App\Models\BodyCheck;
 use App\Models\ReserveOptionList;
+use App\Models\ReserveCreate;
 
 class UserController extends Controller
 {
@@ -64,10 +65,18 @@ class UserController extends Controller
         ];
         }
 
-        $records = Record::where('user_id', $id)->get();
-        // $data = 
+        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->select('id', 'reserve_create_id')->get();
+        $done_reserve_records = [];
+        foreach($done_reserves as $done_reserve){
+            $reserve_create = ReserveCreate::find($done_reserve->reserve_create_id);
+            $done_reserve_records[] = [
+                'reserve_id' => $done_reserve->id,
+                'date' => $reserve_create->date,
+                'course_name' => $reserve_create->course->course_name
+            ];
+        }
 
-        return view('user.show', compact('user_name', 'cats', 'reserves'));
+        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records'));
     }
 
     /**
