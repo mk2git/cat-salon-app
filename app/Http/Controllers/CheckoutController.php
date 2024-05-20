@@ -21,21 +21,25 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        $todayReserves = ReserveCreate::where('date', today())->get();
+        $todayReserves = ReserveCreate::where('date', today())->where('status', config('reserve_create.reserved'))->get();
         $checkouts = [];
         foreach($todayReserves as $todayReserve){
             $todayReserveLists = Reserve::where('reserve_create_id', $todayReserve->id)
                                 ->where('status', config('reserve.done'))
                                 ->where('checkout_status', config('reserve.not yet'))->get();
+
             if($todayReserveLists->isNotEmpty()){
-                $time = Carbon::createFromFormat('H:i:s', $todayReserve->time)->format('H:i');
+                foreach($todayReserveLists as $todayReserveList){
+                     $time = Carbon::createFromFormat('H:i:s', $todayReserve->time)->format('H:i');
                 $checkouts[] = [
-                    'reserve_id' => $todayReserve->reserve->id,
-                    'user_name' => $todayReserve->reserve->user->name,
+                    'reserve_id' => $todayReserveList->id,
+                    'user_name' => $todayReserveList->user->name,
                     'date' => $todayReserve->date,
                     'time' => $time,
                     'course_name' =>$todayReserve->course->course_name,
                 ];
+                }
+               
             }
         }
 
@@ -65,19 +69,17 @@ class CheckoutController extends Controller
      */
     public function edit(Reserve $reserve_id)
     {
-        // dd($reserve_id);
         $options = ReserveOption::all();
         $courses = Course::all();
-        $reserve_create = ReserveCreate::find($reserve_id->reserve_create_id);
         $reserve_options = ReserveOptionList::where('reserve_id', $reserve_id->id)->get();
         $reserve_content = [
             'reserve_id' => $reserve_id->id,
-            'user_id' => $reserve_create->reserve->user_id,
-            'user_name' => $reserve_create->reserve->user->name,
-            'course_id' => $reserve_create->course_id,
+            'user_id' => $reserve_id->user_id,
+            'user_name' => $reserve_id->user->name,
+            'course_id' => $reserve_id->reserve_create->course_id,
             'options' => $reserve_options
         ];
-        
+
         return view('checkout.edit', compact('options', 'courses' , 'reserve_content'));
     }
 
