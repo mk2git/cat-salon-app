@@ -10,6 +10,7 @@ use App\Models\Reserve;
 use App\Models\BodyCheck;
 use App\Models\ReserveOptionList;
 use App\Models\ReserveCreate;
+// use \Illuminate\Pagination\LengthAwarePaginator;
 
 class UserController extends Controller
 {
@@ -65,7 +66,7 @@ class UserController extends Controller
         ];
         }
 
-        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'desc')->select('id', 'reserve_create_id')->get();
+        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'desc')->select('id', 'reserve_create_id')->paginate(5);
         $done_reserve_records = [];
         foreach($done_reserves as $done_reserve){
             $reserve_create = ReserveCreate::find($done_reserve->reserve_create_id);
@@ -76,7 +77,7 @@ class UserController extends Controller
             ];
         }
 
-        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records'));
+        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records', 'done_reserves'));
     }
 
     public function showRecord($reserve_id)

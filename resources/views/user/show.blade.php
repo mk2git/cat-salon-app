@@ -44,6 +44,7 @@
               </a>
             </li>
           @endforeach
+          {{$done_reserves->links()}}       
           @if (!$hasReservationRecords)
             <p>サロン履歴はまだありません</p>
           @endif
