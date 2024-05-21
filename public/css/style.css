@@ -20,3 +20,16 @@
 .course-name-size{
   font-size: 10px;
 }
+.stamp{
+  position: relative;
+}
+.fa-paw{
+  position: absolute;
+  font-size: 80px;
+  z-index: 2;
+  color: rgb(226, 93, 93);
+}
+.date{
+  position: absolute;
+  z-index: 20;
+}
