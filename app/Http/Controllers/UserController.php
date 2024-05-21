@@ -76,7 +76,17 @@ class UserController extends Controller
             ];
         }
 
-        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records', 'done_reserves'));
+        $stamp_done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->get();
+        $dates = [];
+        foreach($stamp_done_reserves as $stamp_done_reserve){
+            $get_date = ReserveCreate::where('id', $stamp_done_reserve->reserve_create_id)->value('date');
+            $date = \Carbon\Carbon::parse($get_date)->format('Y/m/d');
+            $dates[] = [
+                'date' => $date
+            ];
+        }
+
+        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records', 'done_reserves', 'dates'));
     }
 
     public function showRecord($reserve_id)
