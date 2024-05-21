@@ -23,9 +23,8 @@
 .stamp{
   position: relative;
 }
-.fa-paw{
+.paw{
   position: absolute;
-  font-size: 80px;
   z-index: 2;
   color: rgb(226, 93, 93);
 }
