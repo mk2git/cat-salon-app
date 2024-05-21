@@ -13,3 +13,10 @@
   line-height: 30px;
   font-size: 20px;
 }
+.event-container{
+  height: 100px; /* 一定の高さに調整 */
+  overflow-y: auto; /* イベントが多い場合はスクロールバーを表示 */
+}
+.course-name-size{
+  font-size: 10px;
+}

@@ -104,14 +104,14 @@ function createCalendar(year, month, events) {
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
               
-              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1">';
-              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
-              reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
+              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1 text-center">';
+              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
+              reservesHTML += '<small class="p-1 course-name-size">' + reserve.course_name + '</small>';
               reservesHTML += '</a>';
             });
           }
           calendarHtml += '<td class = "border" id="' + unixTime + '"><span class="font-bold underline decoration-double decoration-red-600">' + dayCount + '</span>';
-          calendarHtml += '<div style="height:100px;">' + reservesHTML+ '</div>';
+          calendarHtml += '<div class="event-container">' + reservesHTML+ '</div>';
           calendarHtml += '</td>';
           dayCount++;
         } else {
@@ -127,14 +127,14 @@ function createCalendar(year, month, events) {
               let editUrlTemplate = "{{ route('reserveCreate.edit', ['id' => ':id']) }}";
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
 
-              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1">';             
-              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
-              reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
+              reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1 text-center">';             
+              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
+              reservesHTML += '<small class="p-1 course-name-size">' + reserve.course_name + '</small>';
               reservesHTML += '</a>';
             });
           }
           calendarHtml += '<td class = "border" id="' + unixTime + '">' + dayCount;
-          calendarHtml += '<div style="height:100px;">' + reservesHTML + '</div>';
+          calendarHtml += '<div class="event-container">' + reservesHTML + '</div>';
           calendarHtml += '</td>';
           dayCount++;
         } 
