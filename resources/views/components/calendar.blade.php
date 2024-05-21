@@ -110,7 +110,7 @@ function createCalendar(year, month, events) {
               reservesHTML += '</a>';
             });
           }
-          calendarHtml += '<td class = "border w-12 h-12" id="' + unixTime + '"><span class="font-bold underline decoration-double decoration-red-600">' + dayCount + '</span>';
+          calendarHtml += '<td class = "border" id="' + unixTime + '"><span class="font-bold underline decoration-double decoration-red-600">' + dayCount + '</span>';
           calendarHtml += '<div style="height:100px;">' + reservesHTML+ '</div>';
           calendarHtml += '</td>';
           dayCount++;
@@ -133,7 +133,7 @@ function createCalendar(year, month, events) {
               reservesHTML += '</a>';
             });
           }
-          calendarHtml += '<td class = "w-12 h-12 border" id="' + unixTime + '">' + dayCount;
+          calendarHtml += '<td class = "border" id="' + unixTime + '">' + dayCount;
           calendarHtml += '<div style="height:100px;">' + reservesHTML + '</div>';
           calendarHtml += '</td>';
           dayCount++;
