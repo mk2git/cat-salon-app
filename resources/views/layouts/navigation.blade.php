@@ -51,7 +51,7 @@
                             <x-dropdown-link :href="route('record.userRecords', Auth::user()->id)">
                                 サロン履歴
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('reserveCreate.status')">
+                            <x-dropdown-link :href="route('stamp.show', Auth::user()->id)">
                                 スタンプカード
                             </x-dropdown-link>
                         @endcan   
