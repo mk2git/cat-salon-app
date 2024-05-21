@@ -37,7 +37,7 @@
         <div class="text-right">その他：</div>
         <div class="col-span-2 border-b text-center">{{$content['others']}}</div>
       </div>
-      <p><i class="fa-solid fa-paw"></i>&nbsp;&nbsp;担当グルーマーからのメッセージ</p>
+      <p class="mt-3"><i class="fa-solid fa-paw"></i>&nbsp;&nbsp;担当グルーマーからのメッセージ</p>
       <p class="border-2 m-2 p-3">{{$content['message']}}</p>
     </div>
     <div class="mt-6">
