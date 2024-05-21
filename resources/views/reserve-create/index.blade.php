@@ -7,8 +7,8 @@
     @if ($errors->any())
            <x-error-message />
     @endif
-    <div class="flex mb-8">
-      <div class="flex-2 me-8">
+    <div class="grid grid-cols-3 mb-8">
+      <div class="">
           <p class="text-lg text-center">予約可能日の追加</p>
           <form action="{{route('reserveCreate.store')}}" method="post" class="block w-80 mx-auto mt-3">
             @csrf
@@ -46,16 +46,16 @@
             <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">追加</button>
           </form>
       </div>
-      <div class="flex-1 ms-8">
+      <div class="col-span-2">
           {{-- FullCalendarを利用する場合は51行目のコードが必要 --}}
           {{-- <div id='calendar' data-events='@json($events)'></div> --}}
 
           <div class="flex justify-between">
-            <button id="prev" type="button" class="py-2 px-5 bg-green-500 rouded text-white">前の月</button>
-            <button id="next" type="button" class="py-2 px-5 bg-green-500 rouded text-white">次の月</button>
+            <button id="prev" type="button" class="py-2 px-5 bg-green-700 rouded text-white">前の月</button>
+            <button id="next" type="button" class="py-2 px-5 bg-green-700 rouded text-white">次の月</button>
           </div>
           <hr>
-          <div id="calendar"></div>
+          <div id="calendar" class="mx-6"></div>
           <x-calendar :events="$events" />
       </div>
     </div>
