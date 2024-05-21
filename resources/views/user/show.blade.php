@@ -1,5 +1,5 @@
 <x-app-layout>
-  <div class="mt-10 p-10 grid grid-cols-3 gap-2">
+  <div class="mt-10 p-10 grid grid-cols-2 gap-2">
     <div class="">
       <div class="border-8 p-6 w-3/4 mx-auto">
         <p class="mb-4 text-2xl">
@@ -8,12 +8,19 @@
         <p>飼い猫：</p>
         <ul class="ml-5">
           @foreach ($cats as $cat)
-            <li>{{$cat->cat_name}}（{{$cat->cat_species}}）</li>
+            <li>
+              <small>{{$cat->cat_name}}（{{$cat->cat_species}}）</small>
+            </li>
           @endforeach
           </ul>
       </div>
+      <div class="border-4 m-6 px-4 pt-4 pb-20 w-11/12 mx-auto">
+        <p class="text-center"><i class="fa-solid fa-stamp"></i>&nbsp;&nbsp;スタンプカード</p>
+        <x-stamp-card :dates="$dates" />
+        <p class="float-end mt-5">{{count($dates)}} / 20</p>
+      </div>
     </div>
-    <div class="col-span-2">
+    <div class="">
       <div class="border rounded p-8 mb-10">
         <p class="mb-2 text-bold"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;予約一覧</p>
         <ul>
