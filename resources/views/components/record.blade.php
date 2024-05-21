@@ -41,7 +41,7 @@
       <p class="border-2 m-2 p-3">{{$content['message']}}</p>
     </div>
     <div class="mt-6">
-      <p class="text-right me-10">{{$content['date']}}</p>
+      <p class="text-right me-10 text-xl">{{$content['date']}}</p>
       <hr>
       <p class="text-center border-b-4 mt-4">料金詳細</p>
       <div class="grid grid-cols-2 mt-4 text-center border-b">
