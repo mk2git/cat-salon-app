@@ -9,6 +9,7 @@ use App\Http\Controllers\RecordController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\StampController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -81,6 +82,10 @@ Route::middleware('auth')->group(function () {
         Route::get('checkout/{reserve_id}/{user_id}', 'showCheckout')->name('checkout.showCheckout');
         Route::put('checkout/updateCheckout', 'updateCheckout')->name('checkout.updateCheckout');
 
+    });
+
+    Route::controller(StampController::class)->group(function(){
+        Route::get('stamp/{user_id}', 'show')->name('stamp.show');
     });
     
 
