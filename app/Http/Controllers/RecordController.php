@@ -143,7 +143,7 @@ class RecordController extends Controller
 
     public function userRecords($user_id)
     {
-        $reserves = Reserve::where('user_id', $user_id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'desc')->get();
+        $reserves = Reserve::where('user_id', $user_id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'desc')->paginate(5);
         $contents = [];
 
         foreach($reserves as $reserve){
@@ -184,7 +184,7 @@ class RecordController extends Controller
             ];
         }
         
-        return view('record.user-records', compact('contents'));
+        return view('record.user-records', compact('contents', 'reserves'));
     }
 
     /**

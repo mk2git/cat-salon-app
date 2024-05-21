@@ -3,4 +3,6 @@
   @foreach ($contents as $content)
     <x-record :content="$content" />
   @endforeach
+  {{$reserves->links()}}
+  <br>
 </x-app-layout>
