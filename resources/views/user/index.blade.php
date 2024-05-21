@@ -6,8 +6,8 @@
     </p>
     <div class="flex mt-6">
       @foreach ($users as $user)
-        <a href="{{route('user.show', $user->id)}}" class="block px-6 py-2 m-6 hover:bg-teal-300 shadow-xl">
-          {{$user->name}}<small>様</small>
+        <a href="{{route('user.show', $user->id)}}" class="border-4 block px-8 py-4 m-6 shadow-md hover:shadow-xl">
+          <i class="fa-solid fa-user"></i>&nbsp;&nbsp;{{$user->name}}<small>様</small>
         </a>
       @endforeach
     </div>
