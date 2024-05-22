@@ -23,11 +23,11 @@
            <div class="col-span-2 sm:col-span-1">
             <label for="color" class="form-label">色</label>
             <select name="color" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-              <option value="green" @if($course->color == 'green') selected @endif>green</option>
-              <option value="yellow" @if($course->color == 'yellow') selected @endif>yellow</option>
-              <option value="blue" @if($course->color == 'blue') selected @endif>blue</option>
-              <option value="teal" @if($course->color == 'teal') selected @endif>teal</option>
-              <option value="orange" @if($course->color == 'orange') selected @endif>orange</option>
+              <option value="green" {{ in_array('green', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($course->color == 'green') selected @endif>green</option>
+              <option value="yellow" {{ in_array('yellow', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($course->color == 'yellow') selected @endif>yellow</option>
+              <option value="blue" {{ in_array('blue', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($course->color == 'blue') selected @endif>blue</option>
+              <option value="teal" {{ in_array('teal', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($course->color == 'teal') selected @endif>teal</option>
+              <option value="orange" {{ in_array('orange', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($course->color == 'orange') selected @endif>orange</option>
             </select>
         </div>
        </div>
