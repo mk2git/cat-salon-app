@@ -44,11 +44,11 @@
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
             ">
               <option disabled selected>色を選択してください</option>
-              <option value="green">green</option>
-              <option value="yellow">yellow</option>
-              <option value="blue">blue</option>
-              <option value="teal">teal</option>
-              <option value="orange">orange</option>
+              <option value="green" {{ in_array('green', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>green</option>
+              <option value="yellow" {{ in_array('yellow', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>yellow</option>
+              <option value="blue" {{ in_array('blue', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>blue</option>
+              <option value="teal" {{ in_array('teal', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>teal</option>
+              <option value="orange" {{ in_array('orange', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>orange</option>
             </select>
           </label>
           <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">登録</button>
