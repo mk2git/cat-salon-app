@@ -75,12 +75,12 @@ class CourseController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($id)
-    {
-        $course = Course::findOrFail($id); // 指定されたIDに基づいてコースを取得します。存在しない場合は404エラーを返します。
+    // public function show($id)
+    // {
+    //     $course = Course::findOrFail($id); // 指定されたIDに基づいてコースを取得します。存在しない場合は404エラーを返します。
 
-    return view('courses.show', compact('course')); 
-    }
+    // return view('courses.show', compact('course')); 
+    // }
 
     /**
      * Show the form for editing the specified resource.
@@ -88,7 +88,15 @@ class CourseController extends Controller
     public function edit(Course $id)
     {
         $course = $id;   
-        return view('course.edit', compact('course'));
+        $courses = Course::all();
+        $selected_colors = [];
+        foreach($courses as $course){
+            $selected_colors[] = [
+                'color' => $course->color
+            ];
+        }
+
+        return view('course.edit', compact('course', 'selected_colors'));
     }
 
     /**
