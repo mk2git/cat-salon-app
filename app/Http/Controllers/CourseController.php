@@ -15,7 +15,14 @@ class CourseController extends Controller
     public function index()
     {
         $courses = Course::all();
-        return view('course.index', compact('courses'));
+        $selected_colors = [];
+        foreach($courses as $course){
+            $selected_colors[] = [
+                'color' => $course->color
+            ];
+        }
+
+        return view('course.index', compact('courses', 'selected_colors'));
     }
 
     /**
