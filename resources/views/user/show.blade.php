@@ -40,8 +40,12 @@
         </ul>
       </div>
       <div class="border rounded p-10">
-        <p class="mb-2 text-bold"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;サロン履歴</p>
-        <ul>
+        <p class="mb-2 text-bold">
+          <i class="fa-solid fa-list"></i>&nbsp;&nbsp;サロン履歴
+          <a href="" class="float-right hover:text-gray-500"><small>その他の履歴 ＞＞</small></a>
+        </p>
+        <hr>
+        <ul class="mt-6">
           @php $hasReservationRecords = false; @endphp
           @foreach ($done_reserve_records as $done_reserve_record)
             @php $hasReservationRecords = true; @endphp
@@ -51,7 +55,6 @@
               </a>
             </li>
           @endforeach
-          {{$done_reserves->links()}}       
           @if (!$hasReservationRecords)
             <p>サロン履歴はまだありません</p>
           @endif
