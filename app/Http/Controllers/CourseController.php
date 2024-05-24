@@ -77,16 +77,18 @@ class CourseController extends Controller
      */
     public function edit(Course $id)
     {
-        $course = $id;   
+        $one_course = $id;   
         $courses = Course::all();
         $selected_colors = [];
         foreach($courses as $course){
-            $selected_colors[] = [
-                'color' => $course->color
-            ];
+            if($course->id != $one_course->id){
+                $selected_colors[] = [
+                    'color' => $course->color
+                ];
+            }        
         }
 
-        return view('course.edit', compact('course', 'selected_colors'));
+        return view('course.edit', compact('one_course', 'selected_colors'));
     }
 
     /**
