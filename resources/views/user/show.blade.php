@@ -45,7 +45,7 @@
       <div class="border rounded p-10">
         <p class="mb-2 text-bold">
           <i class="fa-solid fa-list"></i>&nbsp;&nbsp;サロン履歴
-          <a href="" class="float-right hover:text-gray-500"><small>その他の履歴 ＞＞</small></a>
+          <a href="{{route('record.userRecords', $user_id)}}" class="float-right hover:text-gray-500"><small>その他の履歴 ＞＞</small></a>
         </p>
         <hr>
         <ul class="mt-6">
