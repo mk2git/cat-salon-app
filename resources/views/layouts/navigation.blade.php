@@ -44,16 +44,6 @@
                             <x-dropdown-link :href="route('user.index')">
                                 会員一覧
                             </x-dropdown-link>
-                        @else
-                            <x-dropdown-link :href="route('reserve.index')">
-                                予約する
-                            </x-dropdown-link>
-                            <x-dropdown-link :href="route('record.userRecords', Auth::user()->id)">
-                                サロン履歴
-                            </x-dropdown-link>
-                            <x-dropdown-link :href="route('stamp.show', Auth::user()->id)">
-                                スタンプカード
-                            </x-dropdown-link>
                         @endcan   
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
