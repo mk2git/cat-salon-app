@@ -66,7 +66,6 @@ class ReserveController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
         try {
             DB::beginTransaction();
 
