@@ -133,50 +133,24 @@ class RecordController extends Controller
 
     }
 
-    public function userRecords($user_id)
+    public function getUserRecords($user_id)
     {
-        $reserves = Reserve::where('user_id', $user_id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'desc')->paginate(5);
-        $contents = [];
-
-        foreach($reserves as $reserve){
-            $record = Record::where('reserve_id', $reserve->id)->first();
-            $body_check_id = Record::where('reserve_id', $reserve->id)->value('body_check_id');
-            $body_check = BodyCheck::find($body_check_id);
-            $course_fee = number_format($reserve->reserve_create->course->fee);
-            $options = ReserveOptionList::where('reserve_id', $reserve->id)->get();
-            $option_prices = $options->pluck('reserve_option.fee')->toArray();
-            $option_price = array_sum($option_prices);
-            $totalFee = $reserve->reserve_create->course->fee + $option_price;
-
-            $subTotal = number_format($totalFee);
-            $tax = 0.1;
-
-            $onlyTax = number_format($totalFee * $tax);
-            $total = number_format($totalFee + ($totalFee * $tax));
-
-            $contents[] = [
-                'user_id' => $reserve->user_id,
-                'reserve_id' => $reserve->id,
-                'date' => $reserve->reserve_create->date,
-                'cat_name' => $record->cat_name,
-                'cat_species' => $record->cat_species,
-                'weight' => $record->weight,
-                'ear' => $body_check->ear,
-                'eye' => $body_check->eye,
-                'hair_loss' => $body_check->hair_loss,
-                'hair_ball' => $body_check->hair_ball,
-                'others' => $body_check->others,
-                'message' => $record->message,
-                'course_name' => $reserve->reserve_create->course->course_name,
-                'course_fee' => $course_fee,
-                'options' => $options,
-                'subTotal' => $subTotal,
-                'onlyTax' => $onlyTax,
-                'total' => $total
+        $done_reserves = Reserve::where('user_id', $user_id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'asc')->select('id', 'reserve_create_id')->paginate(10);
+        $done_reserve_records = [];
+        foreach($done_reserves as $done_reserve){
+            $reserve_create = ReserveCreate::find($done_reserve->reserve_create_id);
+            $options = ReserveOptionList::where('reserve_id' , $done_reserve->id)->get();
+            $option_names = $options->pluck('reserve_option.name')->implode(', ');
+            $done_reserve_records[] = [
+                'user_id' => $user_id,
+                'reserve_id' => $done_reserve->id,
+                'date' => $reserve_create->date,
+                'course_name' => $reserve_create->course->course_name,
+                'options' => $option_names
             ];
         }
-        
-        return view('record.user-records', compact('contents', 'reserves'));
+
+        return view('record.user-records', compact('done_reserve_records', 'done_reserves'));
     }
 
     /**
