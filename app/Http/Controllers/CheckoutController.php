@@ -180,6 +180,10 @@ class CheckoutController extends Controller
                 $reserve_option_list->status = config('reserve_option_list.done');
                 $reserve_option_list->save();
             }
+
+            $reserve_create = ReserveCreate::find($reserve->reserve_create_id);
+            $reserve_create->status = config('reserve_create.done');
+            $reserve_create->save();
             
             DB::commit();
             return redirect()->route('dashboard')->with(['message' => $reserve->user->name.' 様のお会計ができました。', 'type' => 'orange']);
