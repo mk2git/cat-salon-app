@@ -102,33 +102,39 @@ class ReserveCreateController extends Controller
      */
     public function showStatus(ReserveCreate $reserveCreate)
     {
-        $reserves = ReserveCreate::orderBy('time', 'asc')->get();
+        $reserve_creates = ReserveCreate::orderBy('time', 'asc')->get();
         $events   = [];
 
-        foreach ($reserves as $reserve) {
-            $reserve->unix_timestamp = strtotime($reserve->date);
-            if (isset($events[$reserve->unix_timestamp])) {
-                $events[$reserve->unix_timestamp][] = [
-                    'id'          => $reserve->id,
-                    'date'        => $reserve->date,
-                    'time'        => $reserve->time,
-                    'course_id' => $reserve->course_id,
-                    'course_name' => $reserve->course->course_name,
-                    'color' => $reserve->course->color,
-                    'status' => $reserve->status
-                ];
-            } else {
-                $events[$reserve->unix_timestamp] = [];
-                $events[$reserve->unix_timestamp][] = [
-                    'id'          => $reserve->id,
-                    'date'        => $reserve->date,
-                    'time'        => $reserve->time,
-                    'course_id' => $reserve->course_id,
-                    'course_name' => $reserve->course->course_name,
-                    'color' => $reserve->course->color,
-                    'status' => $reserve->status
-                ];
+        foreach ($reserve_creates as $reserve_create) {
+            $reserves = Reserve::where('reserve_create_id', $reserve_create->id)->get();
+            foreach($reserves as $reserve){
+                if($reserve->checkout_status == config('reserve.not yet')){
+                    $reserve_create->unix_timestamp = strtotime($reserve_create->date);
+                    if (isset($events[$reserve_create->unix_timestamp])) {
+                        $events[$reserve_create->unix_timestamp][] = [
+                            'id'          => $reserve_create->id,
+                            'date'        => $reserve_create->date,
+                            'time'        => $reserve_create->time,
+                            'course_id' => $reserve_create->course_id,
+                            'course_name' => $reserve_create->course->course_name,
+                            'color' => $reserve_create->course->color,
+                            'status' => $reserve_create->status
+                        ];
+                    } else {
+                        $events[$reserve_create->unix_timestamp] = [];
+                        $events[$reserve_create->unix_timestamp][] = [
+                            'id'          => $reserve_create->id,
+                            'date'        => $reserve_create->date,
+                            'time'        => $reserve_create->time,
+                            'course_id' => $reserve_create->course_id,
+                            'course_name' => $reserve_create->course->course_name,
+                            'color' => $reserve_create->course->color,
+                            'status' => $reserve_create->status
+                        ];
+                    }
+                }
             }
+            
         }
         $events = json_encode($events);
 
