@@ -14,10 +14,13 @@
           @endforeach
           </ul>
       </div>
-      <div class="border-4 m-6 px-4 pt-4 pb-20 w-11/12 mx-auto">
+      <div class="border-4 m-6 px-4 pt-4 pb-18 w-11/12 mx-auto">
         <p class="text-center"><i class="fa-solid fa-stamp"></i>&nbsp;&nbsp;スタンプカード</p>
         <x-stamp-card :dates="$dates" />
         <p class="float-end mt-5">{{count($dates)}} / 20</p>
+        <br>
+        <br>
+        {{ $stamp_done_reserves->links() }}
       </div>
     </div>
     <div class="">
