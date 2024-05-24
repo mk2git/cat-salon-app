@@ -55,6 +55,7 @@
             <li class="mb-2">
               <a href="{{route('user.showRecord', $done_reserve_record['reserve_id'])}}" class="hover:text-blue-500 underline decoration-blue-500 hover:decoration-2">
                 {{$done_reserve_record['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$done_reserve_record['course_name']}}
+                @if (($done_reserve_record['options']))（オプション：{{$done_reserve_record['options']}}） @endif
               </a>
             </li>
           @endforeach
