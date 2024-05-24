@@ -102,13 +102,10 @@ class ReserveCreateController extends Controller
      */
     public function showStatus(ReserveCreate $reserveCreate)
     {
-        $reserve_creates = ReserveCreate::orderBy('time', 'asc')->get();
+        $reserve_creates = ReserveCreate::where('status', config('reserve_create.not reserved yet'))->orwhere('status', config('reserve_create.reserved'))->orderBy('time', 'asc')->get();
         $events   = [];
 
         foreach ($reserve_creates as $reserve_create) {
-            $reserves = Reserve::where('reserve_create_id', $reserve_create->id)->get();
-            foreach($reserves as $reserve){
-                if($reserve->checkout_status == config('reserve.not yet')){
                     $reserve_create->unix_timestamp = strtotime($reserve_create->date);
                     if (isset($events[$reserve_create->unix_timestamp])) {
                         $events[$reserve_create->unix_timestamp][] = [
@@ -131,10 +128,7 @@ class ReserveCreateController extends Controller
                             'color' => $reserve_create->course->color,
                             'status' => $reserve_create->status
                         ];
-                    }
-                }
-            }
-            
+                    }            
         }
         $events = json_encode($events);
 
