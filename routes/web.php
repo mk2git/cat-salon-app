@@ -72,7 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::get('record/{reserve_id}', 'create')->name('record.create');
         Route::post('record', 'store')->name('record.store');
         Route::put('record', 'update')->name('record.update');
-        Route::get('records/{user_id}' , 'userRecords')->name('record.userRecords');
+        Route::get('records/{user_id}' , 'getUserRecords')->name('record.userRecords');
     });
 
     Route::controller(CheckoutController::class)->group(function(){
