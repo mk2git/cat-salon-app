@@ -64,22 +64,6 @@ class ReserveOptionController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(ReserveOption $reserveOption)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ReserveOption $reserveOption)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(ReserveOption $id, Request $request)
