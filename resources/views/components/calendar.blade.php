@@ -86,7 +86,7 @@ function createCalendar(year, month, events) {
         let num = dayCount - endDayCount
         let unixTime = new Date(year, month-1, num).getTime()/1000
         calendarHtml += '<td class="text-gray-300" id="' + unixTime + '">' + num 
-        calendarHtml += '<div style="height:100px;"></div>'
+        calendarHtml += '<div style="height:100px; width: 130px;"></div>'
         calendarHtml += '</td>'
         dayCount++
       } else {
