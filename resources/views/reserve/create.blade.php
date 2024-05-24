@@ -24,7 +24,7 @@
           </div>
         </label>
         @can('admin')       
-        <hr>
+          <hr>
           <label class="block mx-auto mb-6 mt-5">
             <p class="font-medium my-2">どの会員様の予約でしょうか？</p>
             <div class="flex justify-center">
@@ -37,14 +37,12 @@
               @endforeach
             </div>
           </label>
+        @else
+          <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
         @endcan
          <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">予約確定</button>
       </div>
       <input type="hidden" name="reserve_create_id" value="{{$reserve->id}}">
-      @can('general')
-        <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
-      @endcan
-      
     </form>
   </div>
 </x-app-layout>
