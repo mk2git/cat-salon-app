@@ -58,12 +58,18 @@
         <div>
      </div>
 
-        @can('admin')    
-            <div class="flex flex-wrap justify-center mt-16">
-                <a href="{{route('reserve.index')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl">予約受付</a>
-                <a href="{{route('reserveCreate.status')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl">予約状況</a>
-                <a href="{{route('checkout.index')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl checkout-button"><span class="count">{{$checkout_count}}</span>お会計</a>
-            </div>
-        @endcan
+    @can('admin')    
+        <div class="flex flex-wrap justify-center mt-16">
+            <a href="{{route('reserve.index')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl">予約受付</a>
+            <a href="{{route('reserveCreate.status')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl">予約状況</a>
+            <a href="{{route('checkout.index')}}" class="block bg-teal-500 hover:bg-teal-600 text-white py-5 px-10 rounded mx-12 text-2xl checkout-button"><span class="count">{{$checkout_count}}</span>お会計</a>
+        </div>
+    @else
+        <div class="flex flex-wrap justify-center mt-16">
+            <a href="{{route('reserve.index')}}" class="block bg-rose-600 hover:bg-rose-700 text-white py-5 px-10 rounded mx-12 text-2xl">予約受付</a>
+            <a href="{{route('record.userRecords', Auth::user()->id)}}" class="block bg-rose-600 hover:bg-rose-700 text-white py-5 px-10 rounded mx-12 text-2xl"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;サロン履歴</a>
+            <a href="{{route('stamp.show', Auth::user()->id)}}" class="block bg-rose-600 hover:bg-rose-700 text-white py-5 px-10 rounded mx-12 text-2xl"><i class="fa-solid fa-stamp"></i>&nbsp;&nbsp;スタンプ</a>
+        </div>
+    @endcan
     </div>
 </x-app-layout>
