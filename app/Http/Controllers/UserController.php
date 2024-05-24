@@ -45,6 +45,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
+        $user_id = $id;
         $user_name = User::where('id',$id)->value('name');
         $cats = Record::where('user_id', $id)->select('cat_name', 'cat_species')->distinct()->get();
 
@@ -89,7 +90,7 @@ class UserController extends Controller
             ];
         }
 
-        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records', 'done_reserves', 'dates', 'stamp_done_reserves'));
+        return view('user.show', compact('user_id', 'user_name', 'cats', 'reserves', 'done_reserve_records', 'done_reserves', 'dates', 'stamp_done_reserves'));
     }
 
     public function showRecord($reserve_id)
