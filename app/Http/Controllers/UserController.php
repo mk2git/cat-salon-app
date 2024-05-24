@@ -76,7 +76,7 @@ class UserController extends Controller
             ];
         }
 
-        $stamp_done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->get();
+        $stamp_done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->orderBy('updated_at', 'asc')->paginate(20);
         $dates = [];
         foreach($stamp_done_reserves as $stamp_done_reserve){
             $get_date = ReserveCreate::where('id', $stamp_done_reserve->reserve_create_id)->value('date');
@@ -86,7 +86,7 @@ class UserController extends Controller
             ];
         }
 
-        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records', 'done_reserves', 'dates'));
+        return view('user.show', compact('user_name', 'cats', 'reserves', 'done_reserve_records', 'done_reserves', 'dates', 'stamp_done_reserves'));
     }
 
     public function showRecord($reserve_id)
