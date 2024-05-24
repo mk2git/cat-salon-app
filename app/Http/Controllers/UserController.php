@@ -65,14 +65,17 @@ class UserController extends Controller
         ];
         }
 
-        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->latest('created_at')->select('id', 'reserve_create_id')->take(5)->get();
+        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'asc')->select('id', 'reserve_create_id')->take(5)->get();
         $done_reserve_records = [];
         foreach($done_reserves as $done_reserve){
             $reserve_create = ReserveCreate::find($done_reserve->reserve_create_id);
+            $options = ReserveOptionList::where('reserve_id' , $done_reserve->id)->get();
+            $option_names = $options->pluck('reserve_option.name')->implode(', ');
             $done_reserve_records[] = [
                 'reserve_id' => $done_reserve->id,
                 'date' => $reserve_create->date,
-                'course_name' => $reserve_create->course->course_name
+                'course_name' => $reserve_create->course->course_name,
+                'options' => $option_names
             ];
         }
 
