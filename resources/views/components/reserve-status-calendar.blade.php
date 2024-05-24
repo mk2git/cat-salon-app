@@ -80,14 +80,14 @@ function createCalendar(year, month, events, reserved_status) {
         let num = lastMonthendDayCount - startDay + d + 1
         let unixTime = new Date(year, month-1, num).getTime()/1000
         calendarHtml += '<td class="text-gray-300" id="' + unixTime + '">' + num
-        calendarHtml += '<div style="height:100px;"></div>'
+        calendarHtml += '<div class="calendar"></div>'
         calendarHtml += '</td>'
       } else if (dayCount > endDayCount) {
         // 末尾の日数を超えた
         let num = dayCount - endDayCount
         let unixTime = new Date(year, month-1, num).getTime()/1000
         calendarHtml += '<td class="text-gray-300" id="' + unixTime + '">' + num 
-        calendarHtml += '<div style="height:100px;"></div>'
+        calendarHtml += '<div class="calendar"></div>'
         calendarHtml += '</td>'
         dayCount++
       } else {
@@ -114,8 +114,8 @@ function createCalendar(year, month, events, reserved_status) {
               if(status == reserved_status){
                 reservesHTML += '<span class="p-1 text-red-700"><i class="fa-solid fa-check"></i></span>';
               }
-              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
-              reservesHTML += '<small class="p-1">' + reserve.course_name + '</small>';
+              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
+              reservesHTML += '<small class="p-1 text-xs">' + reserve.course_name + '</small>';
               reservesHTML += '</a>';
             });
           }
@@ -146,8 +146,8 @@ function createCalendar(year, month, events, reserved_status) {
               if(status == reserved_status){
                 reservesHTML += '<span class="p-1 text-red-700"><i class="fa-solid fa-check"></i></span>';
               }        
-              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
-              reservesHTML += '<small class="p-1">' + reserve.course_name + '</small>';
+              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
+              reservesHTML += '<small class="p-1 text-xs">' + reserve.course_name + '</small>';
               reservesHTML += '</a>';
             });
           }
