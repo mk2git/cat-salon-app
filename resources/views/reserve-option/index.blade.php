@@ -7,7 +7,7 @@
     @if ($errors->any())
            <x-error-message />
     @endif
-
+    <a href="{{route('dashboard')}}" class="block mt-6"><i class="fa-solid fa-house"></i></a>
     <div class="grid gap-6 grid-cols-2 mb-5">
       <div>
         <p class="text-center">オプションの新規登録</p>

@@ -1,4 +1,5 @@
 <x-app-layout>
+  <a href="{{route('dashboard')}}" class="block mt-6 ms-5"><i class="fa-solid fa-house"></i></a>
   <div class="container mt-10 mx-auto">
     <p class="text-center text-2xl">
       <i class="fa-solid fa-user"></i>&nbsp;&nbsp;会員一覧
