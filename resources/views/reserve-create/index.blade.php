@@ -7,6 +7,7 @@
     @if ($errors->any())
            <x-error-message />
     @endif
+    <a href="{{route('dashboard')}}" class="block mt-6"><i class="fa-solid fa-house"></i></a>
     <div class="grid grid-cols-3 mb-8">
       <div class="">
           <p class="text-lg text-center">予約可能日の追加</p>

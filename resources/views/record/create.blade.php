@@ -1,4 +1,5 @@
 <x-app-layout>
+  <a href="{{route('dashboard')}}" class="block mt-6 ms-5"><i class="fa-solid fa-house"></i></a>
   <p class="m-6 text-2xl border-b w-1/4 text-center">{{$reserve['user_name']}}&nbsp;&nbsp;<small>様</small></p>
   <div class="grid grid-cols-3 gap-2 mb-8">
     <div class="mx-auto p-2 drop-shadow-2xl">

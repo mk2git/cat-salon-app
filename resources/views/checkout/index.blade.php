@@ -1,4 +1,5 @@
 <x-app-layout>
+  <a href="{{route('dashboard')}}" class="block mt-6 ms-5"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
   <div class="container my-10 mx-auto">
     <h2 class="text-center text-2xl mb-2">どのお会計を行いますか？</h2>
     <hr class="w-3/4 mx-auto">
