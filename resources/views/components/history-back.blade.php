@@ -1,0 +1,1 @@
+<a href="javascript:history.back()" class="block mt-6 ms-5"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
