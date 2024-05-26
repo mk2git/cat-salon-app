@@ -1,5 +1,5 @@
 <x-app-layout>
-  <a href="javascript:history.back()" class="block mt-6 ms-5"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
+  <x-history-back />
   <div class="container mt-8 mx-auto">
     <h2 class="text-center text-2xl">どの予約をしますか？</h2>
     <div class="flex justify-between">
