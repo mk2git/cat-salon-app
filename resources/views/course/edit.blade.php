@@ -1,6 +1,6 @@
 <x-app-layout>
   <div class="m-4">
-    <a href="{{route('course.index')}}"><i class="fa-solid fa-angles-left"></i>&nbsp;&nbsp;戻る</a>
+    <a href="javascript:history.back()" class="block mt-6 ms-5"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
   </div>
   <div class="m-8 w-2/4 mx-auto">
     <p class="text-center"><i class="fa-solid fa-pencil"></i>「 {{$one_course->course_name}} 」の内容の修正</p>

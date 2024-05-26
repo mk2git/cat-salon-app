@@ -1,4 +1,5 @@
 <x-app-layout>
+  <a href="javascript:history.back()" class="block mt-6 ms-5"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
   <div class="mt-10 p-10 grid grid-cols-2 gap-2">
     <div class="">
       <div class="border-8 p-6 w-3/4 mx-auto">
