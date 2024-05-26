@@ -12,7 +12,7 @@ class StampController extends Controller
      */
     public function show($id)
     {
-        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->get();
+        $done_reserves = Reserve::where('user_id', $id)->where('checkout_status', config('reserve.done'))->paginate(20);
         $dates = [];
         foreach($done_reserves as $done_reserve){
             $dates[] = [
@@ -20,7 +20,7 @@ class StampController extends Controller
             ];
         }
 
-        return view('stamp.show', compact('dates'));
+        return view('stamp.show', compact('dates', 'done_reserves'));
     }
 
 }
