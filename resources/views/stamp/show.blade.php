@@ -1,4 +1,5 @@
 <x-app-layout>
+  <x-to-dashboard />
   <div class="container mt-10 w-1/2 mx-auto">
     <p class="text-center text-2xl"><i class="fa-solid fa-stamp"></i>&nbsp;&nbsp;スタンプカード</p>
     <div class="border-4 m-6 px-4 pt-4 pb-20">

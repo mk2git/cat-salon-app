@@ -1,5 +1,5 @@
 <x-app-layout>
-  <a href="{{route('dashboard')}}" class="block mt-6 ms-5"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
+  <x-to-dashboard />
   <div class="container m-8 mx-auto">
     <h2 class="text-center mt-6 text-2xl">現在の予約状況</h2>
     <p class="text-end my-3">

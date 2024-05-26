@@ -8,7 +8,7 @@
     @if ($errors->any())
            <x-error-message />
     @endif
-    <a href="{{route('dashboard')}}" class="block mt-6"><i class="fa-solid fa-house"></i></a>
+    <x-to-dashboard />
     <div class="grid gap-6 grid-cols-2">
       <div>
         <form action="{{route('course.store')}}" method="post" class="block w-80 mx-auto mt-3">
