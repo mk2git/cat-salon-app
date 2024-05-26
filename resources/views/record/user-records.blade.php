@@ -1,4 +1,5 @@
 <x-app-layout>
+  <x-to-dashboard />
   <p class="mt-10 text-2xl text-center mb-6"><i class="fa-regular fa-clipboard"></i>&nbsp;&nbsp;サロン履歴一覧</p>
   <div class="border rounded p-10 w-1/2 mx-auto">
     <ul class="mt-6">
