@@ -1,1 +1,0 @@
-<a href="{{route('dashboard')}}" class="block mt-6 ms-5"><i class="fa-solid fa-house"></i></a>
