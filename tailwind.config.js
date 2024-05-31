@@ -14,6 +14,24 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'emerald': {
+                    '300': 'rgb(110 231 183)',
+                    '400': 'rgb(52 211 153)'
+                },
+                'yellow': {
+                    '300': 'rgb(110 231 183)',
+                    '400': 'rgb(52 211 153)'
+                },
+                'blue': {
+                    '300': 'rgb(110 231 183)',
+                    '400': 'rgb(52 211 153)'
+                },
+                'teal': {
+                    '300': 'rgb(110 231 183)',
+                    '400': 'rgb(52 211 153)'
+                },
+            },
         },
     },
 
