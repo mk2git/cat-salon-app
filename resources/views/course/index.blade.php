@@ -44,7 +44,7 @@
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500
             ">
               <option disabled selected>色を選択してください</option>
-              <option value="lime" {{ in_array('lime', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>lime</option>
+              <option value="emerald" {{ in_array('emerald', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>emerald</option>
               <option value="yellow" {{ in_array('yellow', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>yellow</option>
               <option value="blue" {{ in_array('blue', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>blue</option>
               <option value="teal" {{ in_array('teal', array_column($selected_colors, 'color')) ? 'disabled' : '' }}>teal</option>
