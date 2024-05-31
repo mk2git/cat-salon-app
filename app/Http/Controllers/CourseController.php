@@ -129,7 +129,7 @@ class CourseController extends Controller
             $course->color = $request->input('color');
             $course->save();
             DB::commit();
-            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の変更ができました。', 'type' => 'green']);
+            return redirect()->route('course.index')->with(['message' => '「'.$course->course_name.'」の変更ができました。', 'type' => 'orange']);
         }catch(\Throwable $th){
             DB::rollBack();
             logger('Error Course Update', ['message' => $th->getMessage()]);
