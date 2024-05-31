@@ -23,7 +23,7 @@
            <div class="col-span-2 sm:col-span-1">
             <label for="color" class="form-label">色</label>
             <select name="color" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-              <option value="green" {{ in_array('green', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'green') selected @endif>green</option>
+              <option value="lime" {{ in_array('lime', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'lime') selected @endif>lime</option>
               <option value="yellow" {{ in_array('yellow', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'yellow') selected @endif>yellow</option>
               <option value="blue" {{ in_array('blue', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'blue') selected @endif>blue</option>
               <option value="teal" {{ in_array('teal', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'teal') selected @endif>teal</option>
