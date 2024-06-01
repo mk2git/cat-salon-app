@@ -1,3 +1,41 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.checkout-button{
+  position: relative;
+}
+.count{
+  position: absolute;
+  right: -10px;
+  top: -10px;
+  background-color: rgb(221, 45, 45);
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 30px;
+  font-size: 20px;
+}
+.event-container{
+  height: 100px; /* 一定の高さに調整 */
+  overflow-y: auto; /* イベントが多い場合はスクロールバーを表示 */
+}
+.course-name-size{
+  font-size: 10px;
+}
+.stamp{
+  position: relative;
+}
+.paw{
+  position: absolute;
+  z-index: 2;
+  color: rgb(226, 93, 93);
+}
+.date{
+  position: absolute;
+  z-index: 20;
+}
+.calendar{
+  height: 100px;
+  width: 130px;
+}
