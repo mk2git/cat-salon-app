@@ -105,8 +105,8 @@ function createCalendar(year, month, events) {
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
               
               reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1 text-center">';
-              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
-              reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
+              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
+              reservesHTML += '<small class="p-1 text-xs">' + reserve.course_name + '</small>';
               reservesHTML += '</a>';
             });
           }
@@ -128,8 +128,8 @@ function createCalendar(year, month, events) {
               let editUrl = editUrlTemplate.replace(':id', id); // IDをURLに埋め込む
 
               reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1 text-center">';             
-              reservesHTML += '<span class="p-1">' + formattedTime + '</span>';
-              reservesHTML += '<span class="p-1">' + reserve.course_name + '</span>';
+              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
+              reservesHTML += '<small class="p-1 text-xs">' + reserve.course_name + '</small>';
               reservesHTML += '</a>';
             });
           }
