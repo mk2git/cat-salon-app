@@ -21,20 +21,35 @@
                <textarea id="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500" name="description">{{$one_course->description}}</textarea>                    
            </div>
            <div class="col-span-2 sm:col-span-1">
-            <label for="color" class="form-label">色</label>
-            <select name="color" class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5">
-              <option value="emerald" {{ in_array('emerald', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'emerald') selected @endif>emerald</option>
-              <option value="yellow" {{ in_array('yellow', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'yellow') selected @endif>yellow</option>
-              <option value="blue" {{ in_array('blue', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'blue') selected @endif>blue</option>
-              <option value="teal" {{ in_array('teal', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'teal') selected @endif>teal</option>
-              <option value="orange" {{ in_array('orange', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'orange') selected @endif>orange</option>
-            </select>
-        </div>
-       </div>
-       <button type="submit" class="py-2 px-5 bg-green-700 text-white font-semibold rounded-full shadow-md hover:bg-green-800 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto w-2/4 my-4">
+              <label for="color" class="form-label">色分け</label>
+              <div class="grid grid-cols-3 gap-3">         
+                <div>
+                  <input type="radio" name="color" id="emerald" value="emerald"{{ in_array('emerald', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'emerald') checked @endif>
+                  <label for="emerald" class="bg-emerald-300 p-1 rounded">emerald</label>
+                </div>
+                <div>
+                    <input type="radio" name="color" id="yellow" value="yellow"{{ in_array('yellow', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'yellow') checked @endif>
+                    <label for="yellow" class="bg-yellow-300 p-1 rounded">yellow</label>
+                </div>
+                <div>
+                    <input type="radio" name="color" id="blue" value="blue"{{ in_array('blue', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'blue') checked @endif>
+                    <label for="blue" class="bg-blue-300 p-1 rounded">blue</label>
+                </div>
+                <div>
+                    <input type="radio" name="color" id="teal" value="teal"{{ in_array('teal', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'teal') checked @endif>
+                    <label for="teal" class="bg-teal-300 p-1 rounded">teal</label>
+                </div>
+                <div>
+                    <input type="radio" name="color" id="orange" value="orange"{{ in_array('orange', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'orange') checked @endif>
+                    <label for="orange" class="bg-orange-300 p-1 rounded">orange</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        <button type="submit" class="py-2 px-5 bg-green-700 text-white font-semibold rounded-full shadow-md hover:bg-green-800 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto w-2/4 my-4">
            更新
-       </button>
-   </form>
+        </button>
+      </form>
 
    <hr>
    <form action="{{route('course.destroy', $one_course->id)}}" method="post">
