@@ -40,3 +40,30 @@
   height: 100px;
   width: 130px;
 }
+
+/* スマホ */
+@media (max-width: 576px) {
+  .course-desc{
+    font-size: 12px;
+  }
+  .course-block{
+    width: 95%;
+  }
+}
+
+/* タブレット */
+@media (min-width: 577px) and (max-width: 768px) {
+  .course-desc{
+    font-size: 12px;
+  }
+  .course-block{
+    width: 90%;
+  }
+}
+
+/* ラップトップ以上 */
+@media (min-width: 769px) {
+  .course-block{
+    width: 80%;
+  }
+}

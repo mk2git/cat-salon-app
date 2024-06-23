@@ -9,7 +9,7 @@
            <x-error-message />
     @endif
     <x-to-dashboard />
-    <div class="grid gap-6 grid-cols-2">
+    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
       <div>
         <form action="{{route('course.store')}}" method="post" class="block w-80 mx-auto mt-3">
           @csrf
@@ -63,12 +63,17 @@
           <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">登録</button>
         </form>
       </div>
-      <div class="container mx-auto mt-6">
+      <div class="container mt-6">
         @foreach ($courses as $course)
-          <a href="{{route('course.edit', $course->id)}}" class="block bg-{{$course->color}}-300 font-medium rounded-lg shadow-lg hover:drop-shadow-xl m-3 p-5 text-center w-full">
+          <a href="{{route('course.edit', $course->id)}}" class="block bg-{{$course->color}}-300 font-medium rounded-lg shadow-lg hover:drop-shadow-xl m-3 p-5 text-center mx-auto mx-2 course-block">
               <p class="text-2xl">{{$course->course_name}}</p>
-              <p class="mt-3"><small>料金：</small>&yen;{{number_format($course->fee)}}</p>
-              <p><small>コース内容：</small>{{$course->description}}</p>
+              <p class="mt-3">
+                <small>料金：</small>&yen;{{number_format($course->fee)}}
+              </p>
+              <p>
+                <small>コース内容：</small>
+                <span class="course-desc">{{$course->description}}</span>
+              </p>
           </a>
         @endforeach
       </div>
