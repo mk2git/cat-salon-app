@@ -18,7 +18,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans text-gray-900 antialiased bg-amber-300">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 ">
+        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 m-4">
             <div>
                 <a href="/" class="text-2xl">
                     <i class="fa-solid fa-cat"></i> &nbsp;Cat-Salon
