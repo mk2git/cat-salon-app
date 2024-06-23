@@ -9,7 +9,7 @@
            <x-error-message />
     @endif
     <x-to-dashboard />
-    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2">
+    <div class="grid gap-3 sm:grid-cols-1 md:grid-cols-2">
       <div>
         <form action="{{route('course.store')}}" method="post" class="block w-80 mx-auto mt-3">
           @csrf
