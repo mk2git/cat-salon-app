@@ -5,10 +5,10 @@
     @endif
 
     @if ($errors->any())
-           <x-error-message />
+         <x-error-message />
     @endif
-    <a href="{{route('dashboard')}}" class="block mt-6"><i class="fa-solid fa-house"></i></a>
-    <div class="grid gap-6 grid-cols-2 mb-5">
+    <a href="{{route('dashboard')}}" class="block mt-6 ms-3"><i class="fa-solid fa-house"></i></a>
+    <div class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 mb-5">
       <div>
         <p class="text-center">オプションの新規登録</p>
         <form action="{{route('reserve-option.store')}}" method="post" class="block w-80 mx-auto mt-3">
@@ -20,7 +20,7 @@
       <div>
         <p class="text-center mb-3">オプションの編集</p>
         @foreach ($options as $option)
-          <div class="border rounded p-4 mb-3">
+          <div class="border rounded p-4 mb-3 option-edit mx-auto">
             <form action="{{route('reserve-option.update', $option->id)}}" method="post" class="block mb-3">
               @csrf
               @method('put')

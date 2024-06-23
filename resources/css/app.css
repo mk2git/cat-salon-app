@@ -46,7 +46,7 @@
   .course-desc{
     font-size: 12px;
   }
-  .course-block{
+  .course-block, .option-edit{
     width: 95%;
   }
 }
@@ -56,14 +56,14 @@
   .course-desc{
     font-size: 12px;
   }
-  .course-block{
+  .course-block, .option-edit{
     width: 90%;
   }
 }
 
 /* ラップトップ以上 */
 @media (min-width: 769px) {
-  .course-block{
+  .course-block, .option-edit{
     width: 80%;
   }
 }
