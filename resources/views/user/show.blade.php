@@ -25,7 +25,7 @@
       </div>
     </div>
     <div class="">
-      <div class="border rounded p-8 mb-10">
+      <div class="border rounded p-8 mb-10 m-2">
         <p class="mb-2 text-bold"><i class="fa-solid fa-list"></i>&nbsp;&nbsp;予約一覧</p>
         <ul>
           @php $hasReservations = false; @endphp
@@ -45,7 +45,7 @@
           @endif
         </ul>
       </div>
-      <div class="border rounded p-10">
+      <div class="border rounded p-10 m-2">
         <p class="mb-2 text-bold">
           <i class="fa-solid fa-list"></i>&nbsp;&nbsp;サロン履歴
           <a href="{{route('record.userRecords', $user_id)}}" class="float-right hover:text-gray-500"><small>その他の履歴 ＞＞</small></a>
