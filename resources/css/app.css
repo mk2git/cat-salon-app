@@ -58,6 +58,15 @@
   .stamp-date{
     font-size: 8px;
   }
+  .course-color{
+    width: 30px;
+    height: 10px;
+    border-radius: 40%;
+    
+  }
+  .course-name-font{
+    font-size: 9px;
+  }
 }
 
 /* タブレット */
@@ -77,11 +86,21 @@
   .stamp-date{
     font-size: 8px;
   }
+  .course-color{
+    width: 30px;
+    height: 10px;
+    border-radius: 40%;
+  }
 }
 
 /* ラップトップ以上 */
 @media (min-width: 769px) {
   .course-block, .option-edit{
     width: 80%;
+  }
+  .course-color{
+    width: 30px;
+    height: 10px;
+    border-radius: 40%;
   }
 }
