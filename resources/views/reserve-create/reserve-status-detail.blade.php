@@ -5,11 +5,11 @@
 
   <div class="container mx-auto">
     <p class="text-center text-2xl mb-6"><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;予約確認</p>
-    <div class="border my-10 w-2/4 mx-auto p-7 grid grid-cols-1 gap-6">
+    <div class="border my-10 w-11/12 md:w-1/2 mx-auto p-7 grid grid-cols-1 gap-6">
       <p class=" border-b-2 mb-1"><span class="font-bold">{{$reserve['user_name']}}</span>&nbsp;&nbsp;様の予約内容</p>
       <x-reserve-confirm :reserve="$reserve" />
     </div>
-    <hr class="w-2/4 mx-auto">
+
     <form action="{{route('reserve.cancel', $reserve['id'])}}" method="post">
       @csrf
       @method('put')

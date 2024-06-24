@@ -2,7 +2,7 @@
   <div class="m-4">
     <x-history-back />
   </div>
-  <div class="m-8 w-2/4 mx-auto">
+  <div class="m-8 sm:w-11/12 md:w-3/4 lg:w-2/4 mx-auto">
     <p class="text-center"><i class="fa-solid fa-pencil"></i>「 {{$one_course->course_name}} 」の内容の修正</p>
     <form action="{{route('course.update', $one_course->id)}}" method="post" class="p-4 md:p-5">
       @csrf
@@ -22,7 +22,7 @@
            </div>
            <div class="col-span-2 sm:col-span-1">
               <label for="color" class="form-label">色分け</label>
-              <div class="grid grid-cols-3 gap-3">         
+              <div class="grid grid-cols-3 gap-3 md:flex md:gap-6">         
                 <div>
                   <input type="radio" name="color" id="emerald" value="emerald"{{ in_array('emerald', array_column($selected_colors, 'color')) ? 'disabled' : '' }} @if($one_course->color == 'emerald') checked @endif>
                   <label for="emerald" class="bg-emerald-300 p-1 rounded">emerald</label>
@@ -51,7 +51,7 @@
         </button>
       </form>
 
-   <hr>
+   <hr class="w-3/4 mx-auto">
    <form action="{{route('course.destroy', $one_course->id)}}" method="post">
       @csrf
       @method('delete')

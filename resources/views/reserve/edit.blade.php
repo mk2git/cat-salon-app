@@ -4,10 +4,10 @@
   </div>
   <div class="container my-8 mx-auto">
     <p class="text-center text-2xl">予約内容の確認</p>
-    <div class="border my-8 w-2/4 mx-auto p-7 grid grid-cols-1 gap-6">
+    <div class="border my-8 md:w-1/2 mx-auto p-7 grid grid-cols-1 gap-6">
       <x-reserve-confirm :reserve="$reserve" />
     </div>
-    <hr class="w-2/4 mx-auto">
+
     <form action="{{route('reserve.cancel', $reserve['id'])}}" method="post">
       @csrf
       @method('put')
