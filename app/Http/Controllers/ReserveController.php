@@ -7,6 +7,7 @@ use App\Models\ReserveCreate;
 use App\Models\ReserveOption;
 use App\Models\ReserveOptionList;
 use App\Models\User;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -45,8 +46,9 @@ class ReserveController extends Controller
             }
         }
         $events = json_encode($events);
+        $courses = Course::select('course_name', 'color')->get();
 
-        return view('reserve.index', compact('events'));
+        return view('reserve.index', compact('events', 'courses'));
     }
 
     /**
