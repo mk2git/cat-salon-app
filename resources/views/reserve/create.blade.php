@@ -3,14 +3,14 @@
     <x-history-back />
   </div>
   <div class="container mt-8 mx-auto">
-    <h2 class="text-center text-2xl mb-5">予約内容</h2>
+    <h2 class="text-center text-xl md:text-2xl mb-5">予約内容</h2>
     <form action="{{route('reserve.store')}}" method="post">
       @csrf
-      <div class="border w-2/4 mx-auto p-5 text-center">
+      <div class="border border-4 sm:w-3/4 lg:w-2/4 sm:m-1 md:mx-auto p-5 text-center">
         <p class="mb-4">日付：{{$reserve->date}}</p>
         <p class="mb-4">時間：{{$reserve->time}}</p>
         <p class="mb-8">コース内容：{{$reserve->course->course_name}}</p>
-        <small>ご希望のオプションがありましたら、下記から選択してください。（複数選択可）</small>
+        <small class="sm:text-xs md:text-sm">ご希望のオプションがありましたら、下記から選択してください。<span class="block">（複数選択可）</span></small>
         <label class="block mx-auto mb-6">
           <p class="font-medium my-2">オプション</p>
           <div class="flex justify-center">
