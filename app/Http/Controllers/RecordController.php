@@ -135,7 +135,11 @@ class RecordController extends Controller
 
     public function getUserRecords($user_id)
     {
-        $done_reserves = Reserve::where('user_id', $user_id)->where('checkout_status', config('reserve.done'))->orderBy('created_at', 'asc')->select('id', 'reserve_create_id')->paginate(10);
+        $done_reserves = Reserve::where('user_id', $user_id)
+        ->where('checkout_status', config('reserve.done'))
+        ->join('reserve_creates', 'reserves.reserve_create_id', '=', 'reserve_creates.id')
+        ->orderBy('date', 'desc')
+        ->select('reserves.id', 'reserves.reserve_create_id')->paginate(10);
         $done_reserve_records = [];
         foreach($done_reserves as $done_reserve){
             $reserve_create = ReserveCreate::find($done_reserve->reserve_create_id);
