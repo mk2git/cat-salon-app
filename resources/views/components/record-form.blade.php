@@ -24,30 +24,30 @@
   </div>
   <div>
     <p>
-      ⚪︎耳：
+      <span class="text-sm md:text-base">⚪︎耳：</span>
       <input type="text" name="ear" class="w-3/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{ $recordList['ear'] ?? '' }}">
     </p>
   </div>
   <div>
     <p>
-      ⚪︎目：
+      <span class="text-sm md:text-base">⚪︎目：</span>
       <input type="text" name="eye" class="w-3/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{ $recordList['eye'] ?? '' }}">
     </p>
   </div>
   <div>
     <p>
-      ⚪︎抜け毛：
+      <span class="record-font">⚪︎抜け毛：</span>
       <input type="text" name="hair_loss" class="w-3/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{ $recordList['hair_loss'] ?? '' }}">
     </p>
   </div>
   <div>
     <p>
-      ⚪︎毛玉：
+      <span class="record-font">⚪︎毛玉：</span>
       <input type="text" name="hair_ball" class="w-3/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{ $recordList['hair_ball'] ?? '' }}">
     </p>
   </div>
   <div>
-    ⚪︎その他：
+    <span class="record-font">⚪︎その他：</span>
     <input type="text" name="others" class="w-3/4 rounded-md border-b border-gray-300 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" value="{{ $recordList['others'] ?? '' }}">
   </div>
   <div>
