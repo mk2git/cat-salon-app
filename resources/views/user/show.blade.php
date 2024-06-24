@@ -1,6 +1,6 @@
 <x-app-layout>
-  <a href="javascript:history.back()" class="block mt-6 ms-5"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
-  <div class="mt-10 p-10 grid grid-cols-2 gap-2">
+  <a href="javascript:history.back()" class="block mt-6 ms-5 text-sm"><i class="fa-solid fa-angles-left"></i>&nbsp;戻る</a>
+  <div class="mt-2 mb-6 md:p-5 lg:p-8 grid sm:grid-cols-1 md:grid-cols-2 gap-4">
     <div class="">
       <div class="border-8 p-6 w-3/4 mx-auto">
         <p class="mb-4 text-2xl">
@@ -15,7 +15,7 @@
           @endforeach
           </ul>
       </div>
-      <div class="border-4 m-6 px-4 pt-4 pb-18 w-11/12 mx-auto">
+      <div class="border-4 m-2 md:mx-auto lg:m-6 px-4 pt-4 pb-18 ">
         <p class="text-center"><i class="fa-solid fa-stamp"></i>&nbsp;&nbsp;スタンプカード</p>
         <x-stamp-card :dates="$dates" />
         <p class="float-end mt-5">{{count($dates)}} / 20</p>
@@ -34,7 +34,9 @@
             <li class="mb-2">
               <a href="{{route('reserveCreate.showDetail', $reserve['reserve_create_id'])}}" class="hover:text-teal-500 underline decoration-teal-500 hover:decoration-2">
                 {{$reserve['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['time']}}〜&nbsp;&nbsp;&nbsp;&nbsp;{{$reserve['course_name']}}
-                @if (($reserve['option_names']))（オプション：{{$reserve['option_names']}}） @endif
+                @if (($reserve['option_names']))
+                  <small>（オプション：{{$reserve['option_names']}}）</small> 
+                @endif
               </a>
             </li>
           @endforeach
@@ -56,7 +58,9 @@
             <li class="mb-2">
               <a href="{{route('user.showRecord', $done_reserve_record['reserve_id'])}}" class="hover:text-blue-500 underline decoration-blue-500 hover:decoration-2">
                 {{$done_reserve_record['date']}}&nbsp;&nbsp;&nbsp;&nbsp;{{$done_reserve_record['course_name']}}
-                @if (($done_reserve_record['options']))（オプション：{{$done_reserve_record['options']}}） @endif
+                  @if(($done_reserve_record['options']))
+                    <small>（オプション：{{$done_reserve_record['options']}}）</small> 
+                  @endif
               </a>
             </li>
           @endforeach

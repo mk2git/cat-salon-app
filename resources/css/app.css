@@ -49,6 +49,15 @@
   .course-block, .option-edit{
     width: 95%;
   }
+  .paw{
+    position: absolute;
+    z-index: 2;
+    color: rgb(226, 93, 93);
+    font-size: 50px;
+  }
+  .stamp-date{
+    font-size: 10px;
+  }
 }
 
 /* タブレット */
@@ -58,6 +67,15 @@
   }
   .course-block, .option-edit{
     width: 90%;
+  }
+  .paw{
+    position: absolute;
+    z-index: 2;
+    color: rgb(226, 93, 93);
+    font-size: 50px;
+  }
+  .stamp-date{
+    font-size: 8px;
   }
 }
 
