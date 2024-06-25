@@ -48,6 +48,20 @@
           </form>
       </div>
       <div class="col-span-2">
+        @if ($courses->isEmpty())
+      
+        @else
+        <div class="flex justify-center">
+          <div class="grid grid-cols-3 sm:w-9/12 md:w-9/12 lg:w-3/4">
+            @foreach ($courses as $course)
+              <p class="mb-2 text-center">
+                <span class="inline-block course-color w-3 h-3 mr-1 bg-{{$course->color}}-300 hover:bg-{{$course->color}}-500"></span>
+                <small class="course-name-font">{{$course->course_name}}</small>
+              </p>
+            @endforeach
+          </div>
+        </div>
+        @endif
           {{-- FullCalendarを利用する場合は51行目のコードが必要 --}}
           {{-- <div id='calendar' data-events='@json($events)'></div> --}}
 
