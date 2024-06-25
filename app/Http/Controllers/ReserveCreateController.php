@@ -131,9 +131,9 @@ class ReserveCreateController extends Controller
                     }            
         }
         $events = json_encode($events);
+        $courses = Course::all();
 
-
-        return view('reserve-create.reserve-status', compact('events'));
+        return view('reserve-create.reserve-status', compact('events', 'courses'));
     }
 
     public function showStatusDetail(ReserveCreate $id)
