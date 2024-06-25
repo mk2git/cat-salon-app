@@ -79,14 +79,14 @@ function createCalendar(year, month, events) {
         let num = lastMonthendDayCount - startDay + d + 1
         let unixTime = new Date(year, month-1, num).getTime()/1000
         calendarHtml += '<td class="text-gray-300" id="' + unixTime + '">' + num
-        calendarHtml += '<div style="height:100px;"></div>'
+        calendarHtml += '<div class="calendar"></div>'
         calendarHtml += '</td>'
       } else if (dayCount > endDayCount) {
         // 末尾の日数を超えた
         let num = dayCount - endDayCount
         let unixTime = new Date(year, month-1, num).getTime()/1000
         calendarHtml += '<td class="text-gray-300" id="' + unixTime + '">' + num 
-        calendarHtml += '<div style="height:100px;"></div>'
+        calendarHtml += '<div class="calendar"></div>'
         calendarHtml += '</td>'
         dayCount++
       } else {

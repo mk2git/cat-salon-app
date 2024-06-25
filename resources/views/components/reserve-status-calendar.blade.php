@@ -114,8 +114,7 @@ function createCalendar(year, month, events, reserved_status) {
               if(status == reserved_status){
                 reservesHTML += '<span class="p-1 text-red-700"><i class="fa-solid fa-check"></i></span>';
               }
-              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
-              reservesHTML += '<small class="p-1 text-xs">' + reserve.course_name + '</small>';
+              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '〜</small>';
               reservesHTML += '</a>';
             });
           }
@@ -144,10 +143,9 @@ function createCalendar(year, month, events, reserved_status) {
               
               reservesHTML += '<a href="' + editUrl + '" class="bg-'+ color +'-300 hover:bg-'+ color +'-500 rounded-full block mb-1 text-center">';     
               if(status == reserved_status){
-                reservesHTML += '<span class="p-1 text-red-700"><i class="fa-solid fa-check"></i></span>';
+                reservesHTML += '<span class="text-red-700"><i class="fa-solid fa-check text-xs"></i></span>';
               }        
-              reservesHTML += '<small class="p-1 text-xs">' + formattedTime + '</small>';
-              reservesHTML += '<small class="p-1 text-xs">' + reserve.course_name + '</small>';
+              reservesHTML += '<small class="text-xs">' + formattedTime + '〜</small>';
               reservesHTML += '</a>';
             });
           }
