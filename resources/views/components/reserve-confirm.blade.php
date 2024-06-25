@@ -16,7 +16,7 @@
     @if ($reserve['option'] == '')
       なし
     @else
-      {{$reserve['option']}}
+     <span class="text-sm md:text-base"> {{$reserve['option']}}</span>
     @endif  
   </div>
 </div>
