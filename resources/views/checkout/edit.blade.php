@@ -1,8 +1,8 @@
 <x-app-layout>
   <div class="container my-10 mx-auto">
-    <h2 class="text-center text-2xl">{{$reserve_content['user_name']}}<small>様</small>&nbsp;の本日のサロン内容</h2>
-    <hr class="w-1/2 mx-auto">
-    <div class="mt-10 p-6 w-1/2 shadow-xl mx-auto">
+    <h2 class="text-center text-base md:text-2xl">{{$reserve_content['user_name']}}<small>様</small>&nbsp;の本日のサロン内容</h2>
+    <hr class="w-3/4 mx-auto">
+    <div class="mt-8 p-6 w-10/12 md:w-1/2 shadow-xl mx-auto">
       <form action="{{route('checkout.update')}}" method="post">
         @csrf
         @method('put')
