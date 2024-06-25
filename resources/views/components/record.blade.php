@@ -55,9 +55,9 @@
           <div>&yen;{{number_format($option->reserve_option->fee)}}</div>
         </div>
       @endforeach
-      <p class="mt-6 text-center w-full"><span class="border-b-2 border-solid border-black inline-block w-1/2 float-right me-10">subTotal：&nbsp;&nbsp;&nbsp;&nbsp;&yen;{{$content['subTotal']}}</span></p><br>
-      <p class="mt-6 text-center w-full"><span class="border-b-2 border-solid border-black inline-block w-1/3 float-right me-10">Tax：&nbsp;&nbsp;&nbsp;&nbsp;&yen;{{$content['onlyTax']}}</span></p><br>
-      <p class="mt-8 text-center w-full"><span class="border-b-4 border-double border-black inline-block w-3/4 float-right text-2xl mb-2 me-2">Total：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&yen;{{$content['total']}}</span></p>
+      <p class="mt-6 text-center"><span class="border-b-2 border-solid border-black inline-block w-1/2 float-right me-10">subTotal：&nbsp;&nbsp;&nbsp;&nbsp;&yen;{{$content['subTotal']}}</span></p><br>
+      <p class="mt-6 text-center"><span class="border-b-2 border-solid border-black inline-block w-1/3 float-right me-10">Tax：&nbsp;&nbsp;&nbsp;&nbsp;&yen;{{$content['onlyTax']}}</span></p><br>
+      <p class="mt-8 text-center"><span class="border-b-4 border-double border-black inline-block w-3/4 float-right text-2xl mb-2 me-2">Total：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&yen;{{$content['total']}}</span></p>
    </div>
   </div>
 </div>
