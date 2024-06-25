@@ -6,7 +6,7 @@
     <h2 class="text-center text-xl md:text-2xl mb-5">予約内容</h2>
     <form action="{{route('reserve.store')}}" method="post">
       @csrf
-      <div class="border border-4 sm:w-3/4 lg:w-2/4 sm:m-1 md:mx-auto p-5 text-center">
+      <div class="border border-4 sm:w-3/4 lg:w-2/4 m-2 md:mx-auto p-5 text-center">
         <p class="mb-4">日付：{{$reserve->date}}</p>
         <p class="mb-4">時間：{{$reserve->time}}</p>
         <p class="mb-8">コース内容：{{$reserve->course->course_name}}</p>
