@@ -1,5 +1,5 @@
 <p class="text-right me-10 md:text-base lg:text-xl">{{$content['date']}}</p>
-<div class="border-8 border-teal-700 my-8 sm:w-11/12 md:w-10/12 lg:w-3/4 mx-auto py-md-3 px-md-4 py-lg-6 px-lg-10">
+<div class="border-8 border-teal-700 my-8 md:w-10/12 lg:w-3/4 mx-2 md:mx-auto py-md-3 px-md-4 py-lg-6 px-lg-10">
   <h2 class="text-center text-4xl mt-6 mb-4">Cat Salon</h2>
   <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:text-sm lg:text-base">
     
