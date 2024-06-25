@@ -8,10 +8,10 @@
            <x-error-message />
     @endif
     <x-to-dashboard />
-    <div class="grid grid-cols-3 mb-8">
-      <div class="">
-          <p class="text-lg text-center">予約可能日の追加</p>
-          <form action="{{route('reserveCreate.store')}}" method="post" class="block w-80 mx-auto mt-3">
+    <div class="grid mb-8 grid-cols-1 md:grid-cols-3 gap-7 md:gap-0">
+      <div class="mx-3 mx-md-2">
+          <p class="text-base lg:text-lg text-center">予約可能日の追加</p>
+          <form action="{{route('reserveCreate.store')}}" method="post" class="block w-full mx-auto mt-3">
             @csrf
             <label class="block mx-auto mb-3">
               <span class="block text-sm font-medium text-slate-700">日付</span>
@@ -40,18 +40,18 @@
               focus:invalid:border-pink-500 focus:invalid:ring-pink-500">
                 <option value="" disabled selected>コースを選択してください</option>
                 @foreach ($courses as $course)
-                  <option value="{{$course->id}}">{{$course->course_name}}</option>
+                  <option value="{{$course->id}}">{{$course->course_name}}（{{$course->color}}）</option>
                 @endforeach
               </select>
             </label>
-            <button type="submit" class="py-2 px-5 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">追加</button>
+            <button type="submit" class="py-2 block w-5/12 bg-orange-500 text-white font-semibold rounded-full shadow-md hover:bg-orange-700 focus:outline-none focus:ring focus:ring-violet-400 focus:ring-opacity-75 block mx-auto">追加</button>
           </form>
       </div>
       <div class="col-span-2">
           {{-- FullCalendarを利用する場合は51行目のコードが必要 --}}
           {{-- <div id='calendar' data-events='@json($events)'></div> --}}
 
-          <div class="flex justify-between">
+          <div class="flex justify-between mx-2">
             <button id="prev" type="button" class="py-2 px-5 bg-green-700 rouded text-white">前の月</button>
             <button id="next" type="button" class="py-2 px-5 bg-green-700 rouded text-white">次の月</button>
           </div>

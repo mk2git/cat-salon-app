@@ -17,10 +17,6 @@
   line-height: 30px;
   font-size: 20px;
 }
-.event-container{
-  height: 100px; /* 一定の高さに調整 */
-  overflow-y: auto; /* イベントが多い場合はスクロールバーを表示 */
-}
 .course-name-size{
   font-size: 10px;
 }
@@ -35,10 +31,6 @@
 .date{
   position: absolute;
   z-index: 20;
-}
-.calendar{
-  height: 100px;
-  width: 130px;
 }
 
 /* スマホ */
@@ -68,7 +60,15 @@
     font-size: 9px;
   }
   .record-font{
-    font-size: 13px;
+    font-size: 13.5px;
+  }
+  .calendar{
+    height: 80px;
+    width: 42px;
+  }
+  .event-container{
+    height: 50px; /* 一定の高さに調整 */
+    overflow-y: auto; /* イベントが多い場合はスクロールバーを表示 */
   }
 }
 
@@ -94,6 +94,14 @@
     height: 10px;
     border-radius: 40%;
   }
+  .calendar{
+    height: 90px;
+    width: 67px;
+  }
+  .event-container{
+    height: 70px; /* 一定の高さに調整 */
+    overflow-y: auto; /* イベントが多い場合はスクロールバーを表示 */
+  }
 }
 
 /* ラップトップ以上 */
@@ -105,5 +113,13 @@
     width: 30px;
     height: 10px;
     border-radius: 40%;
+  }
+  .calendar{
+    height: 90px;
+    width: 90px;
+  }
+  .event-container{
+    height: 80px; /* 一定の高さに調整 */
+    overflow-y: auto; /* イベントが多い場合はスクロールバーを表示 */
   }
 }
